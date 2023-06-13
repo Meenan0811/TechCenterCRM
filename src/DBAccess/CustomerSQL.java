@@ -37,7 +37,7 @@ public abstract class CustomerSQL {
                 String custStreet = rs.getString(4);
                 String custCity = rs.getString(5);
                 String custState = rs.getString(6);
-                String custPostal = rs.getString(7);
+                int custPostal = rs.getInt(7);
                 LocalDateTime createDate = rs.getTimestamp(8).toLocalDateTime();
                 String createdBy = rs.getString(9);
                 LocalDateTime updateDate = rs.getTimestamp(10).toLocalDateTime();
@@ -61,22 +61,23 @@ public abstract class CustomerSQL {
      * @param phone
      * @param createBy
      * @param updateBy
-     * @param divId
+     * @param
      * @return integer
      */
 
-    public static int addCust(String custName, String custAddress, String postal, String phone, String createBy, String updateBy, int divId) {
+    public static int addCust(String custName, String custPhone, String custStreet, String custCity, String custState, int custPostal, String createdBy, String updateBy) {
 
         try {
-            String sql = "INSERT INTO customers (Customer_Name, Address, Postal_Code, Phone, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, now(), ?, now(), ?, ?)";
+            String sql = "INSERT INTO customers (Customer_Name, Phone, Street_Address, City, State, Zip_Code, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, now(), ?, now(), ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, custName);
-            ps.setString(2, custAddress);
-            ps.setString(3, postal);
-            ps.setString(4, phone);
-            ps.setString(5, createBy);
-            ps.setString(6, updateBy);
-            ps.setInt(7, divId);
+            ps.setString(2, custPhone);
+            ps.setString(3, custStreet);
+            ps.setString(4, custCity);
+            ps.setString(5,custState);
+            ps.setInt(6, custPostal);
+            ps.setString(7, createdBy);
+            ps.setString(8, updateBy);
 
             return ps.executeUpdate();
         }
@@ -91,18 +92,19 @@ public abstract class CustomerSQL {
      * Passes SQL command to update the current customer based on their ID with the new information provided by the user
      *
      */
-    public static int editCust(int custId, String custName, String custAddress, String postal, String phone, String updateBy, int divId) {
+    public static int editCust(int custId, String custName, String custPhone, String custStreet, String custCity, String custState, int custPostal, String updateBy) {
 
         try {
-            String sql = "UPDATE customers SET Customer_Name = ?, Address = ?, Postal_Code = ?, Phone = ?, Last_Update = now(), Last_Updated_By = ?, Division_ID = ? WHERE Customer_ID = ?";
+            String sql = "UPDATE customers SET Customer_Name = ?, Phone = ?, Street_Address = ?, City = ?, State = ?, Zip_Code = ?, Last_Update = now(), Last_Updated_By = ? WHERE Customer_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, custName);
-            ps.setString(2, custAddress);
-            ps.setString(3, postal);
-            ps.setString(4,phone);
-            ps.setString(5,updateBy);
-            ps.setInt(6,divId);
-            ps.setInt(7, custId);
+            ps.setString(2, custPhone);
+            ps.setString(3, custStreet);
+            ps.setString(4,custCity);
+            ps.setString(5,custState);
+            ps.setInt(6, custPostal);
+            ps.setString(7, updateBy);
+            ps.setInt(8, custId);
 
             return ps.executeUpdate();
         }

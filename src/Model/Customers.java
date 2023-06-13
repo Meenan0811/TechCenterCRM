@@ -1,5 +1,7 @@
 package Model;
 
+import java.time.LocalDateTime;
+
 public class Customers {
 
     private int custId;
@@ -9,12 +11,12 @@ public class Customers {
     private String custCity;
     private String custState;
     private int custZip;
-    private String createDate;
+    private LocalDateTime createDate;
     private String createdBy;
-    private String updateDate;
+    private LocalDateTime updateDate;
     private String updateBy;
 
-    public Customers(int custId, String custName, String custPhone, String custStreet, String custCity, String custState, int custZip, String createDate, String createdBy, String updateDate, String updateBy) {
+    public Customers(int custId, String custName, String custPhone, String custStreet, String custCity, String custState, int custZip, LocalDateTime createDate, String createdBy, LocalDateTime updateDate, String updateBy) {
         this.custId = custId;
         this.custName = custName;
         this.custPhone = custPhone;
@@ -84,11 +86,11 @@ public class Customers {
         this.custZip = custZip;
     }
 
-    public String getCreateDate() {
+    public LocalDateTime getCreateDate() {
         return createDate;
     }
 
-    public void setCreateDate(String createDate) {
+    public void setCreateDate(LocalDateTime createDate) {
         this.createDate = createDate;
     }
 
@@ -100,11 +102,11 @@ public class Customers {
         this.createdBy = createdBy;
     }
 
-    public String getUpdateDate() {
+    public LocalDateTime getUpdateDate() {
         return updateDate;
     }
 
-    public void setUpdateDate(String updateDate) {
+    public void setUpdateDate(LocalDateTime updateDate) {
         this.updateDate = updateDate;
     }
 

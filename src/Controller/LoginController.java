@@ -1,7 +1,6 @@
 package Controller;
 
 import DBAccess.EmployeeSQL;
-import Model.Appt;
 import Model.Employee;
 import Helper.Alerts;
 import Helper.Scenes;
@@ -106,8 +105,8 @@ public class LoginController implements Initializable {
                     pw.append("Login Attempt: " + curDate.format(DateTimeFormatter.ofPattern(dateTimeFormat)) + "\nBy:" + userName + " Succesfull.\n");
                     pw.close();
                 }
-                catch(FileNotFoundException e) {
-                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, e);
+                catch(FileNotFoundException ex) {
+                    Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
                     System.out.println("File Not Found");
                 }
                 break;
