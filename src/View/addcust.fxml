@@ -1,11 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/javafx/17" fx:controller="Controller.AddCustController" prefHeight="400.0" prefWidth="600.0">
 
+<AnchorPane prefHeight="418.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCustController">
+   <children>
+      <Button fx:id="custSave" layoutX="80.0" layoutY="373.0" mnemonicParsing="false" text="Save" />
+      <Button fx:id="custCancel" layoutX="314.0" layoutY="373.0" mnemonicParsing="false" text="Cancel" />
+      <Label fx:id="addCustLabel" layoutX="229.0" layoutY="28.0" text="Add Customer" />
+      <Label layoutX="90.0" layoutY="74.0" text="Name" />
+      <Label layoutX="90.0" layoutY="117.0" text="Phone" />
+      <Label layoutX="84.0" layoutY="167.0" text="Street" />
+      <Label layoutX="90.0" layoutY="217.0" text="City" />
+      <Label layoutX="84.0" layoutY="263.0" text="State" />
+      <Label layoutX="84.0" layoutY="319.0" text="Zip Code" />
+      <TextField fx:id="custNameText" layoutX="217.0" layoutY="70.0" />
+      <TextField fx:id="custPhoneText" layoutX="217.0" layoutY="113.0" />
+      <TextField fx:id="custStreetText" layoutX="217.0" layoutY="163.0" />
+      <TextField fx:id="custCityText" layoutX="217.0" layoutY="213.0" />
+      <TextField fx:id="custStateText" layoutX="217.0" layoutY="268.0" />
+      <TextField fx:id="custZipText" layoutX="217.0" layoutY="315.0" />
+   </children>
 </AnchorPane>
