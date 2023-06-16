@@ -61,12 +61,12 @@ public class LoginController implements Initializable {
         locTagLabel.setText(zoneId.toString());
 
         //Creates ResourceBundle Object and changes LoginController language based on System settings
-        ResourceBundle rb = ResourceBundle.getBundle("language");
+        /*ResourceBundle rb = ResourceBundle.getBundle("language");
         userNameLabel.setText(rb.getString("userLabel"));
         passLabel.setText(rb.getString("passLabel"));
         locLabel.setText(rb.getString("localLabel"));
         userText.setPromptText(rb.getString("userText"));
-        passWordPassField.setPromptText(rb.getString("passField"));
+        passWordPassField.setPromptText(rb.getString("passField"));*/
 
     }
 
