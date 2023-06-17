@@ -1,5 +1,6 @@
 package Controller;
 
+import DBAccess.CustomerSQL;
 import DBAccess.EmployeeSQL;
 import Model.Employee;
 import Helper.Alerts;
@@ -14,6 +15,7 @@ import javafx.scene.control.TextField;
 
 import java.io.*;
 import java.net.URL;
+import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -67,6 +69,10 @@ public class LoginController implements Initializable {
         locLabel.setText(rb.getString("localLabel"));
         userText.setPromptText(rb.getString("userText"));
         passWordPassField.setPromptText(rb.getString("passField"));*/
+        //CustomerSQL.addCust("Test Guy","(609)123-1234", "29 Black Oak Dr", "Ocean View", "NJ", 0, "Test Guy", "Test Guy");
+        EmployeeSQL.addEmployee("Test Guy", "admin", "admin");
+
+
 
     }
 

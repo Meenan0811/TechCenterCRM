@@ -23,15 +23,16 @@ public abstract class EmployeeSQL {
         ObservableList<Employee> userList = FXCollections.observableArrayList();
 
         try {
-            String sql = "SELECT * FROM users";
+            String sql = "SELECT * FROM employees";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
-                int userID = rs.getInt("User_ID");
-                String username = rs.getString("User_Name");
+                int userID = rs.getInt("Employee_ID");
+                String employeeName = rs.getString("Employee_Name");
+                String username = rs.getString("UserName");
                 String password = rs.getString("Password");
-                Model.Employee employee = new Model.Employee(userID, username, password);
+                Model.Employee employee = new Model.Employee(userID, employeeName, username, password);
                 userList.add(employee);
             }
 
@@ -40,5 +41,20 @@ public abstract class EmployeeSQL {
             e.printStackTrace();
         }
         return userList;
+    }
+
+    public static void addEmployee(String employeeName, String userName, String passWord) {
+        try {
+            String sql = "INSERT INTO employees (Employee_Name, UserName, Password) VALUES (?, ?, ?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, employeeName);
+            ps.setString(2, userName);
+            ps.setString(3, passWord);
+
+            ps.executeUpdate();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
     }
 }

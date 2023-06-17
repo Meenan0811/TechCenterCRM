@@ -68,7 +68,7 @@ public abstract class CustomerSQL {
     public static int addCust(String custName, String custPhone, String custStreet, String custCity, String custState, int custPostal, String createdBy, String updateBy) {
 
         try {
-            String sql = "INSERT INTO customers (Customer_Name, Phone, Street_Address, City, State, Zip_Code, Create_Date, Created_By, Last_Update, Last_Updated_By, Division_ID) VALUES (?, ?, ?, ?, now(), ?, now(), ?, ?)";
+            String sql = "INSERT INTO customers (Customer_Name, Phone, Street_Address, City, State, Zip_Code, Create_Date, Created_By, Last_Update, Last_Updated_By) VALUES (?, ?, ?, ?, ?, ?,  now(), ?, now(), ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, custName);
             ps.setString(2, custPhone);
