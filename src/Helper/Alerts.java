@@ -15,6 +15,10 @@ public abstract class Alerts {
             alert.showAndWait();
         }
         if (code == 2) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setContentText("This Username has already been used. Please try a different Username");
+            alert.setHeaderText("Username already selected");
+            alert.showAndWait();
 
         }
     }

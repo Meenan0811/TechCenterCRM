@@ -1,5 +1,6 @@
 package DBAccess;
 
+import Helper.Alerts;
 import Helper.JDBC;
 import Model.Employee;
 import javafx.collections.FXCollections;
@@ -44,16 +45,26 @@ public abstract class EmployeeSQL {
     }
 
     public static void addEmployee(String employeeName, String userName, String passWord) {
+        ObservableList<Employee> allEmp = getUsers();
+        int matchingId = 0;
         try {
-            String sql = "INSERT INTO employees (Employee_Name, UserName, Password) VALUES (?, ?, ?)";
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setString(1, employeeName);
-            ps.setString(2, userName);
-            ps.setString(3, passWord);
+            for (Employee e : allEmp) {
+                if (userName.equals(e.getUserName())) { matchingId = matchingId + 1; }
+            }
+            if (matchingId == 0) {
+                String sql = "INSERT INTO employees (Employee_Name, UserName, Password) VALUES (?, ?, ?)";
+                PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+                ps.setString(1, employeeName);
+                ps.setString(2, userName);
+                ps.setString(3, passWord);
 
-            ps.executeUpdate();
-        } catch (SQLException e) {
-            e.printStackTrace();
+                ps.executeUpdate();
+            }
+            else {
+                Alerts.alertMessage(2);
+            }
+        } catch (SQLException s) {
+            s.printStackTrace();
         }
 
     }

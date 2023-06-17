@@ -1,6 +1,9 @@
 package Controller;
 
+import DBAccess.CustomerSQL;
 import Model.Customers;
+import Model.Employee;
+import Model.Repair;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -26,57 +29,41 @@ public class MainWinController implements Initializable {
      */
 
         @FXML
-        private Button apptAddButton;
+        private Button addCustButton;
         @FXML
-        private Button apptUpdateButton;
+        private Button updateCustButton;
         @FXML
-        private Button apptDeleteButton;
+        private Button custDeleteButton;
         @FXML
         private Button reportButton;
         @FXML
         private Button logoutButton;
         @FXML
-        private TableColumn apptIdCol;
+        private TableColumn custNameCol;
         @FXML
-        private TableView apptTable;
+        private TableColumn custPhoneCol;
         @FXML
-        private TableColumn titleCol;
+        private TableColumn custRepairIdCol;
         @FXML
-        private TableColumn descriptionCol;
+        private TableColumn deviceCol;
         @FXML
-        private TableColumn locCol;
+        private TableColumn statusCol;
         @FXML
-        private TableColumn contactCol;
+        private TableColumn createDateCol;
         @FXML
-        private TableColumn typeCol;
+        private TableColumn dueDateCol;
         @FXML
-        private TableColumn startCol;
-        @FXML
-        private TableColumn endCol;
-        @FXML
-        private TableColumn apptCustIdCol;
-        @FXML
-        private TableColumn userIdCol;
-        @FXML
-        private TableView custTable;
+        private TableColumn assignedEmplCol;
         @FXML
         private TableColumn custIdCol;
         @FXML
-        private TableColumn nameCol;
+        private TableView custTable;
         @FXML
-        private TableColumn phoneCol;
+        private Button addEmployeeButton;
         @FXML
-        private TableColumn addressCol;
+        private Button updateEmployeeButton;
         @FXML
-        private TableColumn divIdCol;
-        @FXML
-        private TableColumn postalCol;
-        @FXML
-        private Button custAddButton;
-        @FXML
-        private Button custUpdateButton;
-        @FXML
-        private Button custDeleteButton;
+        private Button employeeDeleteButton;
         @FXML
         private RadioButton weekRadio;
         @FXML
@@ -101,6 +88,26 @@ public class MainWinController implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
+            allCust = CustomerSQL.getAllCust();
+            allSelected();
+
+
         }
+
+        public void setCustTable(ObservableList<Customers> all) {
+            custTable.setItems(all);
+            custIdCol.setCellValueFactory(new PropertyValueFactory<Customers, Integer> ("custId"));
+            custNameCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custName"));
+            custPhoneCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custPhone"));
+            custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("repairId"));
+        }
+
+    public void allSelected() {
+        monthRadio.setSelected(false);
+        weekRadio.setSelected(false);
+        allRadio.setSelected(true);
+
+        setCustTable(allCust);
+    }
 
 }
