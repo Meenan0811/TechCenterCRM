@@ -1,6 +1,7 @@
 package Controller;
 
 import DBAccess.CustomerSQL;
+import DBAccess.RepairSQL;
 import Model.Customers;
 import Model.Employee;
 import Model.Repair;
@@ -15,6 +16,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.Month;
 import java.util.ResourceBundle;
 
@@ -75,6 +77,7 @@ public class MainWinController implements Initializable {
         private LocalDate currDate = LocalDate.now();
         private ObservableList<Customers> allCust = FXCollections.observableArrayList();
         private ObservableList<Customers> tempCust = FXCollections.observableArrayList();
+        private ObservableList<Repair> allcustRepair = FXCollections.observableArrayList();
 
         public static Object passAppt;
         public static Object passCust;
@@ -89,17 +92,19 @@ public class MainWinController implements Initializable {
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
             allCust = CustomerSQL.getAllCust();
+            allcustRepair = RepairSQL.allCustomerRepairs();
             allSelected();
 
 
         }
 
-        public void setCustTable(ObservableList<Customers> all) {
+        public void setCustTable(ObservableList<Repair> all) {
             custTable.setItems(all);
-            custIdCol.setCellValueFactory(new PropertyValueFactory<Customers, Integer> ("custId"));
+            //custIdCol.setCellValueFactory(new PropertyValueFactory<Customers, Integer> ("custId"));
             custNameCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custName"));
             custPhoneCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custPhone"));
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("repairId"));
+            createDateCol.setCellValueFactory(new PropertyValueFactory<Repair, LocalDate>("createDate"));
         }
 
     public void allSelected() {
@@ -107,7 +112,7 @@ public class MainWinController implements Initializable {
         weekRadio.setSelected(false);
         allRadio.setSelected(true);
 
-        setCustTable(allCust);
+        setCustTable(allcustRepair);
     }
 
 }

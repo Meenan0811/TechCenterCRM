@@ -2,12 +2,14 @@ package DBAccess;
 
 import Helper.JDBC;
 import Model.Customers;
+import Model.Repair;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 /**
@@ -56,10 +58,6 @@ public abstract class CustomerSQL {
      * Passes SQL command to database and adds new Customer to customers table
      *
      * @param custName
-     * @param custAddress
-     * @param postal
-     * @param phone
-     * @param createBy
      * @param updateBy
      * @param
      * @return integer
@@ -135,5 +133,4 @@ public abstract class CustomerSQL {
 
         return -1;
     }
-
 }
