@@ -3,6 +3,8 @@ package Controller;
 import DBAccess.CustomerSQL;
 import DBAccess.EmployeeSQL;
 import DBAccess.RepairSQL;
+import Helper.Alerts;
+import Helper.Scenes;
 import Model.Customers;
 import Model.Employee;
 import Model.Repair;
@@ -14,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
@@ -103,7 +106,6 @@ public class MainWinController implements Initializable {
             allSelected();
             setEmployeeTable(allEmployee);
 
-
         }
 
         public void setCustTable(ObservableList<Repair> all) {
@@ -123,7 +125,7 @@ public class MainWinController implements Initializable {
         public void setEmployeeTable(ObservableList<Employee> allEmployee){
             emplTable.setItems(allEmployee);
 
-            emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
+            //emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
             emplNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
             employeeLocCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLoc"));
         }
@@ -135,6 +137,20 @@ public class MainWinController implements Initializable {
 
         setCustTable(allcustRepair);
     }
+
+     public void toAddCust(ActionEvent event) throws IOException {
+         Scenes.toAddCust(event);
+     }
+
+     public void toAddEmpl(ActionEvent event) throws IOException {
+            Scenes.toAddEmpl(event);
+     }
+
+     public void deleteRepair(ActionEvent event) throws IOException {
+            Repair repair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
+            Alerts.deleteRepair(repair);
+            Scenes.toMain(event);
+     }
 
 
 

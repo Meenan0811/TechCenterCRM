@@ -1,5 +1,7 @@
 package Helper;
 
+import Controller.AddCustController;
+import Controller.AddEmployeeController;
 import Controller.MainWinController;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +16,7 @@ public abstract class Scenes {
 
     /**
      * Calls the main window
+     *
      * @param event
      * @throws IOException
      */
@@ -26,5 +29,21 @@ public abstract class Scenes {
         stage.show();
     }
 
+    public static void toAddCust(ActionEvent event) throws IOException {
+        FXMLLoader addCust = new FXMLLoader(AddCustController.class.getResource("../View/addcust.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(addCust.load());
+        stage.setTitle("Customer Information");
+        stage.setScene(scene);
+        stage.show();
+    }
 
+    public static void toAddEmpl(ActionEvent event) throws IOException {
+        FXMLLoader addCust = new FXMLLoader(AddEmployeeController.class.getResource("../View/addemployee.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(addCust.load());
+        stage.setTitle("Customer Information");
+        stage.setScene(scene);
+        stage.show();
+    }
 }
