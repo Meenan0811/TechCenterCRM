@@ -72,7 +72,7 @@ public class LoginController implements Initializable {
         passWordPassField.setPromptText(rb.getString("passField"));*/
         //CustomerSQL.addCust("Test Guy","(609)123-1234", "29 Black Oak Dr", "Ocean View", "NJ", 0, "Test Guy", "Test Guy");
         //EmployeeSQL.addEmployee("Test Guy", "admin", "admin");
-        RepairSQL.addRepair(1, 1, 0, "Test TEst TEst TEst");
+        //RepairSQL.addRepair(1, 1, 0, "Test TEst TEst TEst");
 
 
 

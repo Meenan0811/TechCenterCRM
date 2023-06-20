@@ -5,7 +5,7 @@ import java.time.LocalDateTime;
 
 public class Repair {
     private int repairId;
-    private int productId;
+    private String device;
     private int customerId;
     private int partId;
     private String notes;
@@ -16,10 +16,12 @@ public class Repair {
     private LocalDateTime dueDate;
     private String createdBy;
     private String updateBy;
+    private String status;
+    private String assgnempl;
 
-    public Repair(int repairId, int productId, int customerId, int partId, LocalDateTime createDate, String createdBy, LocalDateTime updateDate, String updateBy, LocalDateTime dueDate, String notes) {
+    public Repair(int repairId, String device, int customerId, int partId, LocalDateTime createDate, String createdBy, LocalDateTime updateDate, String updateBy, LocalDateTime dueDate, String status, String assgnempl, String notes) {
         this.repairId = repairId;
-        this.productId = productId;
+        this.device = device;
         this.customerId = customerId;
         this.partId = partId;
         this.createDate = createDate;
@@ -27,14 +29,21 @@ public class Repair {
         this.updateDate = updateDate;
         this.updateBy = updateBy;
         this.dueDate = dueDate;
+        this.status = status;
+        this.assgnempl = assgnempl;
         this.notes = notes;
     }
 
-    public Repair(String custName, String custPhone, LocalDateTime createDate, int repairId, String notes){
+
+
+    public Repair(String custName, String custPhone, LocalDateTime createDate, int repairId, LocalDateTime dueDate, String status, String assgnempl, String notes){
         this.custName = custName;
         this.custPhone = custPhone;
         this.createDate = createDate;
         this.repairId = repairId;
+        this.dueDate = dueDate;
+        this.status = status;
+        this.assgnempl = assgnempl;
         this.notes = notes;
     }
 
@@ -46,12 +55,12 @@ public class Repair {
         this.repairId = repairId;
     }
 
-    public int getProductId() {
-        return productId;
+    public String getDevice() {
+        return device;
     }
 
-    public void setProductId(int productId) {
-        this.productId = productId;
+    public void setDevice(String device) {
+        this.device = device;
     }
 
     public int getCustomerId() {
@@ -102,5 +111,51 @@ public class Repair {
         this.createDate = createDate;
     }
 
+    public LocalDateTime getUpdateDate() {
+        return updateDate;
+    }
 
+    public void setUpdateDate(LocalDateTime updateDate) {
+        this.updateDate = updateDate;
+    }
+
+    public LocalDateTime getDueDate() {
+        return dueDate;
+    }
+
+    public void setDueDate(LocalDateTime dueDate) {
+        this.dueDate = dueDate;
+    }
+
+    public String getCreatedBy() {
+        return createdBy;
+    }
+
+    public void setCreatedBy(String createdBy) {
+        this.createdBy = createdBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getAssgnempl() {
+        return assgnempl;
+    }
+
+    public void setAssgnempl(String assgnempl) {
+        this.assgnempl = assgnempl;
+    }
 }
