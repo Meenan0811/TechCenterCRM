@@ -25,14 +25,11 @@
                 <TableColumn fx:id="custRepairIdCol" prefWidth="89.0" text="Repair ID" />
             </columns>
         </TableView>
-        <TableView fx:id="emplTable" layoutX="137.0" layoutY="365.0" prefHeight="200.0" prefWidth="606.0">
+        <TableView fx:id="emplTable" layoutX="137.0" layoutY="365.0" prefHeight="200.0" prefWidth="313.0">
             <columns>
                 <TableColumn fx:id="emplIdCol" prefWidth="55.0" text="ID" />
                 <TableColumn fx:id="emplNameCol" prefWidth="136.0" text="Name" />
-                <TableColumn fx:id="phoneCol" prefWidth="119.0" text="Phone" />
-                <TableColumn fx:id="addressCol" prefWidth="107.0" text="Address" />
-                <TableColumn fx:id="divIdCol" minWidth="0.0" prefWidth="98.0" text="Division ID" />
-                <TableColumn fx:id="postalCol" prefWidth="90.0" text="Postal Code" />
+                <TableColumn fx:id="employeeLocCol" prefWidth="119.0" text="Location" />
             </columns>
         </TableView>
         <Button fx:id="addEmployeeButton" layoutX="139.0" layoutY="605.0" mnemonicParsing="false" text="Add" />

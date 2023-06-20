@@ -71,7 +71,7 @@ public class LoginController implements Initializable {
         userText.setPromptText(rb.getString("userText"));
         passWordPassField.setPromptText(rb.getString("passField"));*/
         //CustomerSQL.addCust("Test Guy","(609)123-1234", "29 Black Oak Dr", "Ocean View", "NJ", 0, "Test Guy", "Test Guy");
-        //EmployeeSQL.addEmployee("Test Guy", "admin", "admin");
+        //EmployeeSQL.addEmployee("Test Guy", "admin", "admin", "Ocean View");
         LocalDateTime date = LocalDateTime.now();
         //RepairSQL.addRepair("Tablet", 1, 0, "Test Notes, test Notes", "Employee", date,  "In repair", "Employee", "Employee");
 
@@ -88,7 +88,7 @@ public class LoginController implements Initializable {
     public void setSubmitButton(javafx.event.ActionEvent actionEvent) throws IOException {
         String userName = userText.getText();
         String pass = passWordPassField.getText();
-        ObservableList<Model.Employee> userList = EmployeeSQL.getUsers();
+        ObservableList<Model.Employee> userList = EmployeeSQL.allEmployees();
         boolean valid = false;
         this.currUser = userName;
         LocalDateTime curDate = LocalDateTime.now();
@@ -101,7 +101,7 @@ public class LoginController implements Initializable {
 
             if(userName.contains(tempU) && pass.contains(tempP)) {
                 valid = true;
-                this.currUserId = e.getUserId();
+                this.currUserId = e.getemployeeID();
 
 
                 Scenes.toMain(actionEvent);

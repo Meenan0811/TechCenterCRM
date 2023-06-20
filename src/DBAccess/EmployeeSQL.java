@@ -20,7 +20,7 @@ public abstract class EmployeeSQL {
      * PAsses SQL commands to database to retrieve all User names and Passwords
      * @return ObservableList<user>
      */
-    public static ObservableList<Employee> getUsers() {
+    public static ObservableList<Employee> allEmployees() {
         ObservableList<Employee> userList = FXCollections.observableArrayList();
 
         try {
@@ -29,11 +29,12 @@ public abstract class EmployeeSQL {
             ResultSet rs = ps.executeQuery();
 
             while(rs.next()) {
-                int userID = rs.getInt("Employee_ID");
+                int employeeID = rs.getInt("Employee_ID");
                 String employeeName = rs.getString("Employee_Name");
                 String username = rs.getString("UserName");
                 String password = rs.getString("Password");
-                Model.Employee employee = new Model.Employee(userID, employeeName, username, password);
+                String location = rs.getString("Location");
+                Model.Employee employee = new Model.Employee(employeeID, employeeName, username, password, location);
                 userList.add(employee);
             }
 
@@ -44,19 +45,20 @@ public abstract class EmployeeSQL {
         return userList;
     }
 
-    public static void addEmployee(String employeeName, String userName, String passWord) {
-        ObservableList<Employee> allEmp = getUsers();
+    public static void addEmployee(String employeeName, String userName, String passWord, String location) {
+        ObservableList<Employee> allEmp = allEmployees();
         int matchingId = 0;
         try {
             for (Employee e : allEmp) {
                 if (userName.equals(e.getUserName())) { matchingId = matchingId + 1; }
             }
             if (matchingId == 0) {
-                String sql = "INSERT INTO employees (Employee_Name, UserName, Password) VALUES (?, ?, ?)";
+                String sql = "INSERT INTO employees (Employee_Name, UserName, Password, Location) VALUES (?, ?, ?, ?)";
                 PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
                 ps.setString(1, employeeName);
                 ps.setString(2, userName);
                 ps.setString(3, passWord);
+                ps.setString(4, location);
 
                 ps.executeUpdate();
             }
@@ -67,5 +69,34 @@ public abstract class EmployeeSQL {
             s.printStackTrace();
         }
 
+    }
+
+    public static int editEmployee(int employeeID, String employeeName, String userName, String passWord, String location) {
+        try {
+            String sql = " UPDATE employees SET Employee_Name = ?, UserName = ?, Password = ?, Location = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, employeeName);
+            ps.setString(2, userName);
+            ps.setString(3, passWord);
+            ps.setString(4, location);
+
+            return ps.executeUpdate();
+        }catch(SQLException se) {
+            se.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int deleteEmployee(int employeeID) {
+        try {
+            String sql = "DELETE FROM employees WHERE Employee_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setInt(1, employeeID);
+
+            return ps.executeUpdate();
+        }catch (SQLException se){
+            se.printStackTrace();
+        }
+        return -1;
     }
 }

@@ -1,6 +1,7 @@
 package Controller;
 
 import DBAccess.CustomerSQL;
+import DBAccess.EmployeeSQL;
 import DBAccess.RepairSQL;
 import Model.Customers;
 import Model.Employee;
@@ -21,6 +22,7 @@ import java.time.Month;
 import java.util.ResourceBundle;
 
 public class MainWinController implements Initializable {
+
 
     /**
      *MainWindow controller, populates Appointment and customer windows. Passes selected data from Main Controller to next screen
@@ -70,12 +72,19 @@ public class MainWinController implements Initializable {
         private RadioButton monthRadio;
         @FXML
         private RadioButton allRadio;
+        @FXML
+        private TableView emplTable;
+        @FXML
+        private TableColumn emplIdCol;
+        @FXML
+        private TableColumn emplNameCol;
+        @FXML
+        private TableColumn employeeLocCol;
 
 
         private LocalDate currDate = LocalDate.now();
-        private ObservableList<Customers> allCust = FXCollections.observableArrayList();
-        private ObservableList<Customers> tempCust = FXCollections.observableArrayList();
         private ObservableList<Repair> allcustRepair = FXCollections.observableArrayList();
+        private ObservableList<Employee> allEmployee = FXCollections.observableArrayList();
 
         public static Object passAppt;
         public static Object passCust;
@@ -89,18 +98,17 @@ public class MainWinController implements Initializable {
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
 
-            allCust = CustomerSQL.getAllCust();
+            allEmployee = EmployeeSQL.allEmployees();
             allcustRepair = RepairSQL.allCustomerRepairs();
             allSelected();
+            setEmployeeTable(allEmployee);
 
 
         }
 
         public void setCustTable(ObservableList<Repair> all) {
-
-
             repairTable.setItems(all);
-            //custIdCol.setCellValueFactory(new PropertyValueFactory<Customers, Integer> ("custId"));
+            
             custNameCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custName"));
             custPhoneCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custPhone"));
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("repairId"));
@@ -110,6 +118,14 @@ public class MainWinController implements Initializable {
             assignedEmplCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("assgnempl"));
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("repairId"));
             statusCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("status"));
+        }
+        
+        public void setEmployeeTable(ObservableList<Employee> allEmployee){
+            emplTable.setItems(allEmployee);
+
+            emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
+            emplNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
+            employeeLocCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLoc"));
         }
 
     public void allSelected() {
