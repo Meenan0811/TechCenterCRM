@@ -15,15 +15,14 @@
         <Button fx:id="logoutButton" layoutX="903.0" layoutY="540.0" mnemonicParsing="false" text="Logout" />
         <TableView fx:id="repairTable" layoutX="139.0" layoutY="63.0" prefHeight="200.0" prefWidth="818.0">
             <columns>
-                <TableColumn fx:id="custIdCol" prefWidth="60.0" text="ID" />
-                <TableColumn fx:id="custNameCol" prefWidth="90.0" text="Name" />
-                <TableColumn fx:id="custPhoneCol" prefWidth="75.0" text="Phone" />
-                <TableColumn fx:id="custRepairIdCol" prefWidth="75.0" text="Repair ID" />
-                <TableColumn fx:id="deviceCol" prefWidth="75.0" text="Device" />
-                <TableColumn fx:id="statusCol" prefWidth="75.0" text="Status" />
-                <TableColumn fx:id="createDateCol" prefWidth="107.0" text="Created" />
-                <TableColumn fx:id="dueDateCol" prefWidth="130.0" text="Quoted Due Date" />
-                <TableColumn fx:id="assignedEmplCol" prefWidth="130.0" text="Assigned Employee" />
+                <TableColumn fx:id="custNameCol" prefWidth="117.0" text="Name" />
+                <TableColumn fx:id="custPhoneCol" prefWidth="84.0" text="Phone" />
+                <TableColumn fx:id="deviceCol" prefWidth="79.0" text="Device" />
+                <TableColumn fx:id="statusCol" prefWidth="98.0" text="Status" />
+                <TableColumn fx:id="createDateCol" prefWidth="98.0" text="Created" />
+                <TableColumn fx:id="dueDateCol" prefWidth="112.0" text="Quoted Due Date" />
+                <TableColumn fx:id="assignedEmplCol" prefWidth="140.0" text="Assigned Employee" />
+                <TableColumn fx:id="custRepairIdCol" prefWidth="89.0" text="Repair ID" />
             </columns>
         </TableView>
         <TableView fx:id="emplTable" layoutX="137.0" layoutY="365.0" prefHeight="200.0" prefWidth="606.0">

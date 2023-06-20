@@ -52,17 +52,17 @@ public abstract class RepairSQL {
     public static int addRepair(String device, int customerID, int partID, String notes, String updateBy, LocalDateTime dueDate, String status, String assgnEmpl, String createBy)  {
 
         try {
-            String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee, Create_Date, Created_By) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, NOW(), ?)";
+            String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee, Create_Date, Created_By) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, NOW(), ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, device );
             ps.setInt(2, customerID);
             ps.setInt(3, partID);
             ps.setString(4, notes);
-            ps.setString(6, updateBy);
-            ps.setTimestamp(7, Timestamp.valueOf(dueDate));
-            ps.setString(8, status);
-            ps.setString(9, assgnEmpl);
-            ps.setString(10, createBy);
+            ps.setString(5, updateBy);
+            ps.setTimestamp(6, Timestamp.valueOf(dueDate));
+            ps.setString(7, status);
+            ps.setString(8, assgnEmpl);
+            ps.setString(9, createBy);
 
             return ps.executeUpdate();
 
@@ -114,11 +114,13 @@ public abstract class RepairSQL {
 
         try {
             System.out.println("Try Block Entered");
-            String sql = "SELECT customers.Customer_Name, customers.Phone, customers.Create_Date, repairs.Repair_ID, repairs.Device, repairs.Quoted_Due_Date, repairs.Assigned_Employee, repairs.Status, repairs.Notes\n" +
+            String sql = "SELECT customers.Customer_Name, customers.Phone, customers.Create_Date, repairs.Repair_ID, repairs.Device, repairs.Quoted_Due_Date, repairs.Status, repairs.Assigned_Employee, repairs.Notes\n" +
                     "FROM repairs\n" +
-                    "INNER JOIN customers on Repairs.Customer_ID = customers.Customer_ID";
+                    "INNER JOIN customers on repairs.Customer_ID = customers.Customer_ID";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
+
+            //FIXME: Delete print
 
             while (rs.next()) {
                 String custName = rs.getString(1);
@@ -126,12 +128,14 @@ public abstract class RepairSQL {
                 String custPhone = rs.getString(2);
                 LocalDateTime createDate = rs.getTimestamp(3).toLocalDateTime();
                 int repairID = rs.getInt(4);
-                LocalDateTime dueDate = rs.getTimestamp(5).toLocalDateTime();
-                String status = rs.getString(6);
-                String assgnEmpl = rs.getString(7);
-                String repairNotes = rs.getString(8);
+                String device = rs.getString(5);
+                LocalDateTime dueDate = rs.getTimestamp(6).toLocalDateTime();
+                String status = rs.getString(7);
+                String assgnEmpl = rs.getString(8);
+                String repairNotes = rs.getString(9);
+                System.out.println(status + " " + assgnEmpl + " " + repairID);
 
-                Repair repair = new Repair(custName, custPhone, createDate, repairID, dueDate, status, assgnEmpl, repairNotes);
+                Repair repair = new Repair(device, custName, custPhone, createDate, repairID, dueDate, status, assgnEmpl, repairNotes);
                 System.out.println(repair.getCustName() + " " + repair.getRepairId() + " Repair object created");
                 all.add(repair);
             }
