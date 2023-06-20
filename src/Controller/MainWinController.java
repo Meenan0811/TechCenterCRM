@@ -59,7 +59,7 @@ public class MainWinController implements Initializable {
         @FXML
         private TableColumn custIdCol;
         @FXML
-        private TableView custTable;
+        private TableView repairTable;
         @FXML
         private Button addEmployeeButton;
         @FXML
@@ -99,12 +99,15 @@ public class MainWinController implements Initializable {
         }
 
         public void setCustTable(ObservableList<Repair> all) {
-            custTable.setItems(all);
+            repairTable.setItems(all);
             //custIdCol.setCellValueFactory(new PropertyValueFactory<Customers, Integer> ("custId"));
             custNameCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custName"));
             custPhoneCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custPhone"));
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("repairId"));
             createDateCol.setCellValueFactory(new PropertyValueFactory<Repair, LocalDate>("createDate"));
+            deviceCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("device"));
+            dueDateCol.setCellValueFactory(new PropertyValueFactory<Repair, LocalDate>("dueDate"));
+            assignedEmplCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("assgnEmpl"));
         }
 
     public void allSelected() {

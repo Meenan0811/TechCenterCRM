@@ -13,7 +13,7 @@
         <Button fx:id="custDeleteButton" layoutX="319.0" layoutY="291.0" mnemonicParsing="false" text="Delete" />
         <Button fx:id="reportButton" layoutX="797.0" layoutY="540.0" mnemonicParsing="false" text="Reports" />
         <Button fx:id="logoutButton" layoutX="903.0" layoutY="540.0" mnemonicParsing="false" text="Logout" />
-        <TableView fx:id="custTable" layoutX="139.0" layoutY="63.0" prefHeight="200.0" prefWidth="818.0">
+        <TableView fx:id="repairTable" layoutX="139.0" layoutY="63.0" prefHeight="200.0" prefWidth="818.0">
             <columns>
                 <TableColumn fx:id="custIdCol" prefWidth="60.0" text="ID" />
                 <TableColumn fx:id="custNameCol" prefWidth="90.0" text="Name" />

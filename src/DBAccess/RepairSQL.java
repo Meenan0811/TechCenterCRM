@@ -49,10 +49,10 @@ public abstract class RepairSQL {
         return allrepair;
     }
 
-    public static int addRepair(String device, int customerID, int partID, String notes, String updateBy, LocalDateTime dueDate, String status, String assgnEmpl)  {
+    public static int addRepair(String device, int customerID, int partID, String notes, String updateBy, LocalDateTime dueDate, String status, String assgnEmpl, String createBy)  {
 
         try {
-            String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?)";
+            String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee, Create_Date, Created_By) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, ?, NOW(), ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, device );
             ps.setInt(2, customerID);
@@ -62,6 +62,7 @@ public abstract class RepairSQL {
             ps.setTimestamp(7, Timestamp.valueOf(dueDate));
             ps.setString(8, status);
             ps.setString(9, assgnEmpl);
+            ps.setString(10, createBy);
 
             return ps.executeUpdate();
 
