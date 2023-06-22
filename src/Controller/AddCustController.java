@@ -1,5 +1,7 @@
 package Controller;
 
+import Model.Customers;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -29,6 +31,12 @@ public class AddCustController implements Initializable {
     @FXML
     private Label addCustLabel;
     private int custID = -1;
+    private String custName;
+    private String custPhone;
+    private String custStreet;
+    private String custCity;
+    private int custZip;
+    private String custState;
 
 
     @Override
@@ -37,5 +45,17 @@ public class AddCustController implements Initializable {
             custNameText.setText(MainWinController.passRepair.getCustName());
             custPhoneText.setText(MainWinController.passRepair.getCustPhone());
         }
+    }
+
+    public void saveCust(ActionEvent event) {
+        custName = custNameText.getText();
+        custPhone = custPhoneText.getText();
+        custStreet = custStreetText.getText();
+        custCity = custCityText.getText();
+        custState = custStateText.getText();
+        custZip = Integer.valueOf(custZipText.getText());
+
+
+        //Customers customer = new Customers(1, custName, custPhone, custStreet, custCity, custState, custZip);
     }
 }
