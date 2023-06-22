@@ -27,9 +27,8 @@ public abstract class Alerts {
         }
         if (code == 3) {
             alert.setAlertType(Alert.AlertType.WARNING);
-
-            /*ButtonType ok = new ButtonType("Delete");
-            alert.getButtonTypes().add(ok);*/
+            alert.setHeaderText("Select Customer");
+            alert.setContentText("Please select a customer to edit.");
             alert.showAndWait();
         }
     }

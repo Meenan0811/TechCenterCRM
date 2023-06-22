@@ -4,6 +4,7 @@ import DBAccess.CustomerSQL;
 import DBAccess.EmployeeSQL;
 import DBAccess.RepairSQL;
 import Helper.Alerts;
+import Helper.JDBC;
 import Helper.Scenes;
 import Model.Customers;
 import Model.Employee;
@@ -90,7 +91,7 @@ public class MainWinController implements Initializable {
         private ObservableList<Employee> allEmployee = FXCollections.observableArrayList();
 
         public static Object passAppt;
-        public static Object passCust;
+        public static Repair passCust;
 
 
     /**
@@ -146,10 +147,26 @@ public class MainWinController implements Initializable {
             Scenes.toAddEmpl(event);
      }
 
-     public void deleteRepair(ActionEvent event) throws IOException {
+     public void deleteRepair(ActionEvent event) {
             Repair repair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
             Alerts.deleteRepair(repair);
-            Scenes.toMain(event);
+            try {
+                Scenes.toMain(event);
+            }catch(IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
+     public void editRepair(ActionEvent event) throws IOException {
+            passCust = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
+            Scenes.toAddCust(event);
+     }
+
+
+     public void logout(ActionEvent event) {
+         JDBC.closeConnection();
+         System.exit(0);
      }
 
 

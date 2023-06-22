@@ -9,10 +9,10 @@
 <AnchorPane fx:id="mainWindow" prefHeight="656.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainWinController">
     <children>
         <Button fx:id="addCustButton" layoutX="139.0" layoutY="291.0" mnemonicParsing="false" onAction="#toAddCust" text="Add" />
-        <Button fx:id="updateCustButton" layoutX="216.0" layoutY="291.0" mnemonicParsing="false" text="Update" />
+        <Button fx:id="updateCustButton" layoutX="216.0" layoutY="291.0" mnemonicParsing="false" onAction="#toEditCust" text="Update" />
         <Button fx:id="custDeleteButton" layoutX="319.0" layoutY="291.0" mnemonicParsing="false" onAction="#deleteRepair" text="Delete" />
         <Button fx:id="reportButton" layoutX="797.0" layoutY="540.0" mnemonicParsing="false" text="Reports" />
-        <Button fx:id="logoutButton" layoutX="903.0" layoutY="540.0" mnemonicParsing="false" text="Logout" />
+        <Button fx:id="logoutButton" layoutX="903.0" layoutY="540.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
         <TableView fx:id="repairTable" layoutX="139.0" layoutY="63.0" prefHeight="200.0" prefWidth="818.0">
             <columns>
                 <TableColumn fx:id="custNameCol" prefWidth="117.0" text="Name" />

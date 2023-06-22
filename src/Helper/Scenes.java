@@ -3,6 +3,8 @@ package Helper;
 import Controller.AddCustController;
 import Controller.AddEmployeeController;
 import Controller.MainWinController;
+import Model.Customers;
+import Model.Repair;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -10,6 +12,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 
+import javax.swing.*;
 import java.io.IOException;
 
 public abstract class Scenes {
@@ -38,7 +41,17 @@ public abstract class Scenes {
         stage.show();
     }
 
+
     public static void toAddEmpl(ActionEvent event) throws IOException {
+        FXMLLoader addCust = new FXMLLoader(AddEmployeeController.class.getResource("../View/addemployee.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(addCust.load());
+        stage.setTitle("Customer Information");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void toEditCust(ActionEvent event) throws IOException {
         FXMLLoader addCust = new FXMLLoader(AddEmployeeController.class.getResource("../View/addemployee.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(addCust.load());
