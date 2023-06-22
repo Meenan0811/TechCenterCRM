@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -90,8 +91,8 @@ public class MainWinController implements Initializable {
         private ObservableList<Repair> allcustRepair = FXCollections.observableArrayList();
         private ObservableList<Employee> allEmployee = FXCollections.observableArrayList();
 
-        public static Object passAppt;
-        public static Repair passCust;
+        public static Employee passEmployee;
+        public static Repair passRepair;
 
 
     /**
@@ -158,10 +159,11 @@ public class MainWinController implements Initializable {
         }
 
 
-     public void editRepair(ActionEvent event) throws IOException {
-            passCust = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
+     //FIXME: Delete if not needed
+        /*public void editRepair(ActionEvent event) throws IOException {
+            passRepair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
             Scenes.toAddCust(event);
-     }
+     }*/
 
 
      public void logout(ActionEvent event) {
@@ -169,8 +171,13 @@ public class MainWinController implements Initializable {
          System.exit(0);
      }
 
-     public void toNewRepair(ActionEvent event) {
+     public void toNewRepair(ActionEvent event) throws IOException {
+            Scenes.toAddRepair(event);
+     }
 
+     public void toEditRepair(ActionEvent event) throws IOException {
+         passRepair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
+         Scenes.toAddRepair(event);
      }
 
 

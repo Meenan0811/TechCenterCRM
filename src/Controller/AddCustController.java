@@ -33,9 +33,9 @@ public class AddCustController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        if (MainWinController.passCust != null) {
-            custNameText.setText(MainWinController.passCust.getCustName());
-            custPhoneText.setText(MainWinController.passCust.getCustPhone());
+        if (MainWinController.passRepair != null) {
+            custNameText.setText(MainWinController.passRepair.getCustName());
+            custPhoneText.setText(MainWinController.passRepair.getCustPhone());
         }
     }
 }

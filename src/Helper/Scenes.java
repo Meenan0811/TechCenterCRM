@@ -2,6 +2,7 @@ package Helper;
 
 import Controller.AddCustController;
 import Controller.AddEmployeeController;
+import Controller.AddRepairController;
 import Controller.MainWinController;
 import Model.Customers;
 import Model.Repair;
@@ -56,6 +57,15 @@ public abstract class Scenes {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(addCust.load());
         stage.setTitle("Customer Information");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void toAddRepair(ActionEvent event) throws IOException {
+        FXMLLoader addCust = new FXMLLoader(AddRepairController.class.getResource("../View/addrepair.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(addCust.load());
+        stage.setTitle("Repair");
         stage.setScene(scene);
         stage.show();
     }
