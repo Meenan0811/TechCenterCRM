@@ -8,8 +8,8 @@
 
 <AnchorPane fx:id="mainWindow" prefHeight="656.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainWinController">
     <children>
-        <Button fx:id="addCustButton" layoutX="139.0" layoutY="291.0" mnemonicParsing="false" onAction="#toAddCust" text="Add" />
-        <Button fx:id="updateCustButton" layoutX="216.0" layoutY="291.0" mnemonicParsing="false" onAction="#editRepair" text="Update" />
+        <Button fx:id="newRepairButton" layoutX="139.0" layoutY="291.0" mnemonicParsing="false" onAction="#toNewRepair" text="New Repair" />
+        <Button fx:id="updateCustButton" layoutX="239.0" layoutY="291.0" mnemonicParsing="false" onAction="#editRepair" text="Update" />
         <Button fx:id="custDeleteButton" layoutX="319.0" layoutY="291.0" mnemonicParsing="false" onAction="#deleteRepair" text="Delete" />
         <Button fx:id="reportButton" layoutX="797.0" layoutY="540.0" mnemonicParsing="false" text="Reports" />
         <Button fx:id="logoutButton" layoutX="903.0" layoutY="540.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
@@ -38,5 +38,6 @@
         <RadioButton fx:id="weekRadio" layoutX="330.0" layoutY="23.0" mnemonicParsing="false" text="Week View" />
         <RadioButton fx:id="monthRadio" layoutX="505.0" layoutY="23.0" mnemonicParsing="false" text="Month View" />
         <RadioButton fx:id="allRadio" layoutX="145.0" layoutY="23.0" mnemonicParsing="false" text="View All" />
+      <Button fx:id="addCustButton" layoutX="505.0" layoutY="365.0" mnemonicParsing="false" onAction="#toAddCust" text="Add Customer" />
     </children>
 </AnchorPane>

@@ -169,6 +169,10 @@ public class MainWinController implements Initializable {
          System.exit(0);
      }
 
+     public void toNewRepair(ActionEvent event) {
+
+     }
+
 
 
 }

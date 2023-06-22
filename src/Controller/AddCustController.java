@@ -28,6 +28,7 @@ public class AddCustController implements Initializable {
     private Button custCancel;
     @FXML
     private Label addCustLabel;
+    private int custID = -1;
 
 
     @Override
