@@ -6,10 +6,7 @@ import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
@@ -32,7 +29,7 @@ public abstract class RepairSQL {
                 String createBy = rs.getString(6);
                 LocalDateTime lastUpdate = rs.getTimestamp(7).toLocalDateTime();
                 String updateBy = rs.getString(8);
-                LocalDateTime dueDate = rs.getTimestamp(9).toLocalDateTime();
+                LocalDate dueDate = rs.getDate(9).toLocalDate();
                 String status = rs.getString(10);
                 String assgnEmpl = rs.getString(11);
                 String notes = rs.getString(12);
@@ -49,7 +46,7 @@ public abstract class RepairSQL {
         return allrepair;
     }
 
-    public static int addRepair(String device, int customerID, int partID, String notes, String updateBy, LocalDateTime dueDate, String status, String assgnEmpl, String createBy)  {
+    public static int addRepair(String device, int customerID, int partID, String notes, String updateBy, LocalDate dueDate, String status, String assgnEmpl, String createBy)  {
 
         try {
             String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee, Create_Date, Created_By) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, NOW(), ?)";
@@ -59,7 +56,7 @@ public abstract class RepairSQL {
             ps.setInt(3, partID);
             ps.setString(4, notes);
             ps.setString(5, updateBy);
-            ps.setTimestamp(6, Timestamp.valueOf(dueDate));
+            ps.setDate(6, Date.valueOf(dueDate));
             ps.setString(7, status);
             ps.setString(8, assgnEmpl);
             ps.setString(9, createBy);
@@ -72,7 +69,7 @@ public abstract class RepairSQL {
         return -1;
     }
 
-    public static int editRepair(String device, int customerID, int partID, String updateBy, LocalDateTime dueDate, String status, String assgnEmpl, String notes, int repairID) {
+    public static int editRepair(String device, int customerID, int partID, String updateBy, LocalDate dueDate, String status, String assgnEmpl, String notes, int repairID) {
 
         try {
             String sql = "UPDATE repairs SET Device = ?, Customer_ID = ?, Part_ID = ?, Last_Update = NOW(), Last_Updated_By = ?, Quoted_Due_Date = ?, Status = ?, Assigend_Employee = ?  Notes = ? WHERE Repair_ID = ?";
@@ -81,7 +78,7 @@ public abstract class RepairSQL {
             ps.setInt(2, customerID);
             ps.setInt(3, partID);
             ps.setString(4, updateBy);
-            ps.setTimestamp(5, Timestamp.valueOf(dueDate));
+            ps.setDate(5, Date.valueOf(dueDate));
             ps.setString(6, status);
             ps.setString(7, assgnEmpl);
             ps.setString(8, notes);
@@ -121,16 +118,14 @@ public abstract class RepairSQL {
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
 
-            //FIXME: Delete print
 
             while (rs.next()) {
                 String custName = rs.getString(1);
-                System.out.println("Name " + custName);
                 String custPhone = rs.getString(2);
                 LocalDateTime createDate = rs.getTimestamp(3).toLocalDateTime();
                 int repairID = rs.getInt(4);
                 String device = rs.getString(5);
-                LocalDateTime dueDate = rs.getTimestamp(6).toLocalDateTime();
+                LocalDate dueDate = rs.getDate(6).toLocalDate();
                 String status = rs.getString(7);
                 String assgnEmpl = rs.getString(8);
                 String repairNotes = rs.getString(9);

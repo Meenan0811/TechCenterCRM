@@ -4,6 +4,7 @@ import DBAccess.CustomerSQL;
 import DBAccess.EmployeeSQL;
 import DBAccess.PartsSQL;
 import DBAccess.RepairSQL;
+import Helper.Alerts;
 import Helper.Scenes;
 import Model.Customers;
 import Model.Employee;
@@ -51,6 +52,7 @@ public class AddRepairController implements Initializable {
     private String assgnEmpl;
     private int repairID = -1;
     private ObservableList<Repair> allRepair = FXCollections.observableArrayList();
+    private ObservableList<String> devices = FXCollections.observableArrayList("Personal Computer", "Tablet", "Phone");
     private ObservableList<String> repairStatus = FXCollections.observableArrayList("Awating Triage", "Awaiting Parts", "In Repair", "Completed");
     private ObservableList<Employee> allEmpl = EmployeeSQL.allEmployees();
     private ObservableList<Customers> allCust = FXCollections.observableArrayList();
@@ -74,6 +76,7 @@ public class AddRepairController implements Initializable {
         assgnEmplCombo.setItems(emplName);
         custNameCombo.setItems(custName);
         partCombo.setItems(partName);
+        deviceTypeCombo.setItems(devices);
 
 
 
@@ -84,7 +87,7 @@ public class AddRepairController implements Initializable {
             assgnEmplCombo.setValue(currRepair.getAssgnempl());
             deviceTypeCombo.setValue(currRepair.getDevice());
             repairNotesText.setText(currRepair.getNotes());
-            tatDatepicker.setValue(currRepair.getDueDate().toLocalDate());
+            tatDatepicker.setValue(currRepair.getDueDate());
             custNameCombo.setValue(getCustomer(currRepair.getCustomerId()));
             partCombo.setValue(getPart(currRepair.getPartId()));
             updatePartQty();
@@ -206,14 +209,37 @@ public class AddRepairController implements Initializable {
 
     @FXML
     private void saveRepair(ActionEvent event) {
+
         String device = deviceTypeCombo.getSelectionModel().toString();
         String status = statusCombo.getSelectionModel().toString();
-        String dueDate = tatDatepicker.getValue().toString();
+        LocalDate dueDate = tatDatepicker.getValue();
         String empl = assgnEmplCombo.getValue().toString();
         String custName = custNameCombo.getSelectionModel().toString(); // Need ID
+        int custID = 0;
         String part = partCombo.getSelectionModel().toString(); // Need ID
+        int partID = 0;
+        String notes = repairNotesText.getText();
 
-        if (repairID > 0) {
+        for (Customers c : allCust) {
+            if (c.getCustName().equals(custName)) {
+                custID = c.getCustId();
+            }
+        }
+
+        for (Parts p : allParts) {
+            if (p.getPartName().equals(part)){
+                partID = p.getPartID();
+            }
+        }
+
+        if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && notes.isEmpty() && dueDate != null) {
+            if (repairID > 0) {
+                RepairSQL.editRepair(device, custID, partID, LoginController.currUser, dueDate, status, empl, notes, repairID);
+            } else {
+                RepairSQL.addRepair(device, custID, partID, notes, LoginController.currUser, dueDate, status, empl, LoginController.currUser);
+            }
+        }else {
+            Alerts.alertMessage(3);
         }
     }
 }

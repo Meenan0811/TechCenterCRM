@@ -30,9 +30,9 @@ public class Customers {
         this.updateBy = updateBy;
     }
 
-    public int getCustId() {
-        return custId;
-    }
+
+
+    public int getCustId() { return custId; }
 
     public void setCustId(int custId) {
         this.custId = custId;

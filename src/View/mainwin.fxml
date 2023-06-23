@@ -4,6 +4,7 @@
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
 <AnchorPane fx:id="mainWindow" prefHeight="656.0" prefWidth="1067.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.MainWinController">
@@ -40,5 +41,6 @@
         <RadioButton fx:id="monthRadio" layoutX="505.0" layoutY="23.0" mnemonicParsing="false" text="Month View" />
         <RadioButton fx:id="allRadio" layoutX="145.0" layoutY="23.0" mnemonicParsing="false" text="View All" />
       <Button fx:id="addCustButton" layoutX="505.0" layoutY="365.0" mnemonicParsing="false" onAction="#toAddCust" text="Add Customer" />
+      <TextField fx:id="searchRepairTextField" layoutX="617.0" layoutY="19.0" prefHeight="25.0" prefWidth="340.0" promptText="Search for Repair" />
     </children>
 </AnchorPane>

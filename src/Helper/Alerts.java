@@ -31,6 +31,12 @@ public abstract class Alerts {
             alert.setContentText("Please select a customer to edit.");
             alert.showAndWait();
         }
+        if(code == 4) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Missing Fields");
+            alert.setContentText("Please ensure all fields are filled out");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {

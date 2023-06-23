@@ -13,13 +13,13 @@ public class Repair {
     private String custPhone;
     private LocalDateTime createDate;
     private LocalDateTime updateDate;
-    private LocalDateTime dueDate;
+    private LocalDate dueDate;
     private String createdBy;
     private String updateBy;
     private String status;
     private String assgnempl;
 
-    public Repair(int repairId, String device, int customerId, int partId, LocalDateTime createDate, String createdBy, LocalDateTime updateDate, String updateBy, LocalDateTime dueDate, String status, String assgnempl, String notes) {
+    public Repair(int repairId, String device, int customerId, int partId, LocalDateTime createDate, String createdBy, LocalDateTime updateDate, String updateBy, LocalDate dueDate, String status, String assgnempl, String notes) {
         this.repairId = repairId;
         this.device = device;
         this.customerId = customerId;
@@ -36,7 +36,7 @@ public class Repair {
 
 
 
-    public Repair(String device, String custName, String custPhone, LocalDateTime createDate, int repairId, LocalDateTime dueDate, String status, String assgnempl, String notes, int customerId ){
+    public Repair(String device, String custName, String custPhone, LocalDateTime createDate, int repairId, LocalDate dueDate, String status, String assgnempl, String notes, int customerId ){
         this.device = device;
         this.custName = custName;
         this.custPhone = custPhone;
@@ -121,11 +121,11 @@ public class Repair {
         this.updateDate = updateDate;
     }
 
-    public LocalDateTime getDueDate() {
+    public LocalDate getDueDate() {
         return dueDate;
     }
 
-    public void setDueDate(LocalDateTime dueDate) {
+    public void setDueDate(LocalDate dueDate) {
         this.dueDate = dueDate;
     }
 
