@@ -115,7 +115,7 @@ public abstract class RepairSQL {
 
         try {
             System.out.println("Try Block Entered");
-            String sql = "SELECT customers.Customer_Name, customers.Phone, customers.Create_Date, repairs.Repair_ID, repairs.Device, repairs.Quoted_Due_Date, repairs.Status, repairs.Assigned_Employee, repairs.Notes\n" +
+            String sql = "SELECT customers.Customer_Name, customers.Phone, customers.Create_Date, repairs.Repair_ID, repairs.Device, repairs.Quoted_Due_Date, repairs.Status, repairs.Assigned_Employee, repairs.Notes, customers.Customer_ID\n" +
                     "FROM repairs\n" +
                     "INNER JOIN customers on repairs.Customer_ID = customers.Customer_ID";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
@@ -134,9 +134,10 @@ public abstract class RepairSQL {
                 String status = rs.getString(7);
                 String assgnEmpl = rs.getString(8);
                 String repairNotes = rs.getString(9);
+                int customerID = rs.getInt(10);
                 System.out.println(status + " " + assgnEmpl + " " + repairID);
 
-                Repair repair = new Repair(device, custName, custPhone, createDate, repairID, dueDate, status, assgnEmpl, repairNotes);
+                Repair repair = new Repair(device, custName, custPhone, createDate, repairID, dueDate, status, assgnEmpl, repairNotes, customerID);
                 System.out.println(repair.getCustName() + " " + repair.getRepairId() + " Repair object created");
                 all.add(repair);
             }

@@ -36,7 +36,7 @@ public class Repair {
 
 
 
-    public Repair(String device, String custName, String custPhone, LocalDateTime createDate, int repairId, LocalDateTime dueDate, String status, String assgnempl, String notes ){
+    public Repair(String device, String custName, String custPhone, LocalDateTime createDate, int repairId, LocalDateTime dueDate, String status, String assgnempl, String notes, int customerId ){
         this.device = device;
         this.custName = custName;
         this.custPhone = custPhone;
@@ -46,6 +46,7 @@ public class Repair {
         this.status = status;
         this.assgnempl = assgnempl;
         this.notes = notes;
+        this.customerId = customerId;
     }
 
     public int getRepairId() {

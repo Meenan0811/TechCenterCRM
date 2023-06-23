@@ -29,6 +29,7 @@ import java.util.ResourceBundle;
 public class MainWinController implements Initializable {
 
 
+
     /**
      *MainWindow controller, populates Appointment and customer windows. Passes selected data from Main Controller to next screen
      *
@@ -85,6 +86,8 @@ public class MainWinController implements Initializable {
         private TableColumn emplNameCol;
         @FXML
         private TableColumn employeeLocCol;
+        @FXML
+        private TableColumn custIDCol;
 
 
         private LocalDate currDate = LocalDate.now();
@@ -122,6 +125,7 @@ public class MainWinController implements Initializable {
             assignedEmplCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("assgnempl"));
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("repairId"));
             statusCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("status"));
+            custIDCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("customerId"));
         }
         
         public void setEmployeeTable(ObservableList<Employee> allEmployee){

@@ -23,6 +23,7 @@
                 <TableColumn fx:id="dueDateCol" prefWidth="112.0" text="Quoted Due Date" />
                 <TableColumn fx:id="assignedEmplCol" prefWidth="140.0" text="Assigned Employee" />
                 <TableColumn fx:id="custRepairIdCol" prefWidth="89.0" text="Repair ID" />
+            <TableColumn fx:id="custIDCol" prefWidth="75.0" text="Customer ID" />
             </columns>
         </TableView>
         <TableView fx:id="emplTable" layoutX="137.0" layoutY="365.0" prefHeight="200.0" prefWidth="313.0">
