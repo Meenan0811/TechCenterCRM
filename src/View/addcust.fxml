@@ -8,8 +8,8 @@
 
 <AnchorPane prefHeight="418.0" prefWidth="485.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddCustController">
    <children>
-      <Button fx:id="custSave" layoutX="80.0" layoutY="373.0" mnemonicParsing="false" text="Save" />
-      <Button fx:id="custCancel" layoutX="314.0" layoutY="373.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="custSave" layoutX="80.0" layoutY="373.0" mnemonicParsing="false" onAction="#saveCust" text="Save" />
+      <Button fx:id="custCancel" layoutX="314.0" layoutY="373.0" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
       <Label fx:id="addCustLabel" layoutX="229.0" layoutY="28.0" text="Add Customer" />
       <Label layoutX="90.0" layoutY="74.0" text="Name" />
       <Label layoutX="90.0" layoutY="117.0" text="Phone" />

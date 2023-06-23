@@ -72,10 +72,10 @@ public abstract class RepairSQL {
         return -1;
     }
 
-    public static int editRepair(String device, int customerID, int partID, String updateBy, LocalDateTime dueDate, String status, String assgnEmpl, String notes) {
+    public static int editRepair(String device, int customerID, int partID, String updateBy, LocalDateTime dueDate, String status, String assgnEmpl, String notes, int repairID) {
 
         try {
-            String sql = "UPDATE repairs SET Device = ?, Customer_ID = ?, Part_ID = ?, Last_Update = NOW(), Last_Updated_By = ?, Quoted_Due_Date = ?, Status = ?, Assigend_Employee = ?  Notes = ?";
+            String sql = "UPDATE repairs SET Device = ?, Customer_ID = ?, Part_ID = ?, Last_Update = NOW(), Last_Updated_By = ?, Quoted_Due_Date = ?, Status = ?, Assigend_Employee = ?  Notes = ? WHERE Repair_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, device);
             ps.setInt(2, customerID);
@@ -85,6 +85,7 @@ public abstract class RepairSQL {
             ps.setString(6, status);
             ps.setString(7, assgnEmpl);
             ps.setString(8, notes);
+            ps.setInt(9, repairID);
 
             return ps.executeUpdate();
         }catch (SQLException se) {

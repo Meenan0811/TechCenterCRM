@@ -2,10 +2,12 @@ package Controller;
 
 import DBAccess.CustomerSQL;
 import DBAccess.EmployeeSQL;
+import DBAccess.PartsSQL;
 import DBAccess.RepairSQL;
 import Helper.Scenes;
 import Model.Customers;
 import Model.Employee;
+import Model.Parts;
 import Model.Repair;
 import javafx.beans.Observable;
 import javafx.collections.FXCollections;
@@ -13,17 +15,21 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AddRepairController implements Initializable {
+    @FXML
+    private Label partQtyLabel;
+    @FXML
+    private ComboBox custNameCombo;
+    @FXML
+    private ComboBox partCombo;
     @FXML
     private ComboBox statusCombo;
     @FXML
@@ -47,6 +53,10 @@ public class AddRepairController implements Initializable {
     private ObservableList<Repair> allRepair = FXCollections.observableArrayList();
     private ObservableList<String> repairStatus = FXCollections.observableArrayList("Awating Triage", "Awaiting Parts", "In Repair", "Completed");
     private ObservableList<Employee> allEmpl = EmployeeSQL.allEmployees();
+    private ObservableList<Customers> allCust = FXCollections.observableArrayList();
+    private ObservableList<Parts> allParts = FXCollections.observableArrayList();
+    private ObservableList<String> partName;
+    private ObservableList<String> custName;
     private ObservableList<String> emplName;
     private Repair currRepair;
     private Customers currCust;
@@ -54,10 +64,17 @@ public class AddRepairController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         emplName = getEmplNAme();
+        allParts = PartsSQL.getParts();
         allRepair = RepairSQL.getAllRepairs();
+        allCust = CustomerSQL.getAllCust();
+        custName = getCustName();
+        partName = getAllParts();
 
         statusCombo.setItems(repairStatus);
         assgnEmplCombo.setItems(emplName);
+        custNameCombo.setItems(custName);
+        partCombo.setItems(partName);
+
 
 
         if (MainWinController.passRepair != null) {
@@ -68,8 +85,10 @@ public class AddRepairController implements Initializable {
             deviceTypeCombo.setValue(currRepair.getDevice());
             repairNotesText.setText(currRepair.getNotes());
             tatDatepicker.setValue(currRepair.getDueDate().toLocalDate());
+            custNameCombo.setValue(getCustomer(currRepair.getCustomerId()));
+            partCombo.setValue(getPart(currRepair.getPartId()));
+            updatePartQty();
         }
-
     }
 
     /**
@@ -94,23 +113,23 @@ public class AddRepairController implements Initializable {
     }
 
     /**
-     * Method to retreive Customer Object based on passed customer ID
+     * Method to retreive Customer Name based on passed customer ID
      * @param customerID
-     * @return Customers
+     * @return String
      */
-    public Customers getCustomer(int customerID) {
+    public String getCustomer(int customerID) {
         ObservableList<Customers> allCust = CustomerSQL.getAllCust();
-        Customers cust = null;
+        String custName = null;
         try {
             for (Customers c : allCust) {
                 if (c.getCustId() == customerID) {
-                    cust = c;
+                    custName = c.getCustName();
                 }
             }
         }catch (NullPointerException e) {
             e.printStackTrace();
         }
-        return cust;
+        return custName;
     }
 
     /**
@@ -127,8 +146,74 @@ public class AddRepairController implements Initializable {
         return empl;
     }
 
+    /**
+     * Method to retrieve a list of Customer names for combo box
+     * @return
+     */
+    public ObservableList<String> getCustName() {
+        ObservableList<String> cust = FXCollections.observableArrayList();
+        String currName;
+        for (Customers c : allCust) {
+            currName = c.getCustName();
+            cust.add(currName);
+        }
+        return cust;
+    }
+
+    /**
+     * Method to reteive a List of Part Names for Combo box
+     * @return
+     */
+    public  ObservableList<String> getAllParts() {
+        ObservableList<String> partName = FXCollections.observableArrayList();
+        String currPart;
+        for (Parts p : allParts) {
+            currPart = p.getPartName();
+            partName.add(currPart);
+        }
+        return partName;
+    }
+
+    /**
+     * Method to retrieve Part Name based on Passed Part ID
+     * @param partID
+     * @return
+     */
+    public String getPart(int partID) {
+        String partName = null;
+        for (Parts p : allParts) {
+            if (p.getPartID() == partID) {
+                partName = p.getPartName();
+            }
+        }
+        return partName;
+    }
+
+    public void updatePartQty() {
+        String partName = partCombo.getSelectionModel().toString();
+        for (Parts p : allParts) {
+            if (p.getPartName().equals(partName)) {
+                partQtyLabel.setText(String.valueOf(p.getQty()));
+            }
+        }
+    }
+
     @FXML
     private void toMain(ActionEvent event) throws IOException {
+        MainWinController.passRepair = null;
         Scenes.toMain(event);
+    }
+
+    @FXML
+    private void saveRepair(ActionEvent event) {
+        String device = deviceTypeCombo.getSelectionModel().toString();
+        String status = statusCombo.getSelectionModel().toString();
+        String dueDate = tatDatepicker.getValue().toString();
+        String empl = assgnEmplCombo.getValue().toString();
+        String custName = custNameCombo.getSelectionModel().toString(); // Need ID
+        String part = partCombo.getSelectionModel().toString(); // Need ID
+
+        if (repairID > 0) {
+        }
     }
 }
