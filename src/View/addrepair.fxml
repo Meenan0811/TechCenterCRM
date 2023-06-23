@@ -11,7 +11,7 @@
 <AnchorPane prefHeight="604.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddRepairController">
    <children>
       <Button fx:id="saveRepairbutton" layoutX="110.0" layoutY="555.0" mnemonicParsing="false" text="Save" />
-      <Button fx:id="cancelRepairButton" layoutX="300.0" layoutY="555.0" mnemonicParsing="false" text="Cancel" />
+      <Button fx:id="cancelRepairButton" layoutX="300.0" layoutY="555.0" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
       <Label layoutX="214.0" layoutY="30.0" text="Repair Information" />
       <Label layoutX="96.0" layoutY="73.0" text="Device " />
       <Label layoutX="96.0" layoutY="122.0" text="Quoted Due Date" />
