@@ -72,7 +72,7 @@ public abstract class RepairSQL {
     public static int editRepair(String device, int customerID, int partID, String updateBy, LocalDate dueDate, String status, String assgnEmpl, String notes, int repairID) {
 
         try {
-            String sql = "UPDATE repairs SET Device = ?, Customer_ID = ?, Part_ID = ?, Last_Update = NOW(), Last_Updated_By = ?, Quoted_Due_Date = ?, Status = ?, Assigend_Employee = ?  Notes = ? WHERE Repair_ID = ?";
+            String sql = "UPDATE repairs SET Device = ?, Customer_ID = ?, Part_ID = ?, Last_Update = NOW(), Last_Updated_By = ?, Quoted_Due_Date = ?, Status = ?, Assigned_Employee = ?,  Notes = ? WHERE Repair_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, device);
             ps.setInt(2, customerID);

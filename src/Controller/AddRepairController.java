@@ -10,7 +10,6 @@ import Model.Customers;
 import Model.Employee;
 import Model.Parts;
 import Model.Repair;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -77,6 +76,7 @@ public class AddRepairController implements Initializable {
         custNameCombo.setItems(custName);
         partCombo.setItems(partName);
         deviceTypeCombo.setItems(devices);
+        tatDatepicker.setValue(LocalDate.now().plusDays(3));
 
 
 
@@ -207,18 +207,27 @@ public class AddRepairController implements Initializable {
         Scenes.toMain(event);
     }
 
+    /**
+     * Method to parse information from textFields and boxes and call either RepairSQL addRepair if npo repairID was passed, or edit Repair if existing repair ID passed
+     * @param event
+     */
     @FXML
     private void saveRepair(ActionEvent event) {
 
-        String device = deviceTypeCombo.getSelectionModel().toString();
-        String status = statusCombo.getSelectionModel().toString();
+        String device = deviceTypeCombo.getValue().toString();
+        String status = statusCombo.getValue().toString();
         LocalDate dueDate = tatDatepicker.getValue();
         String empl = assgnEmplCombo.getValue().toString();
-        String custName = custNameCombo.getSelectionModel().toString(); // Need ID
+        String custName = custNameCombo.getValue().toString();
         int custID = 0;
-        String part = partCombo.getSelectionModel().toString(); // Need ID
-        int partID = 0;
         String notes = repairNotesText.getText();
+        String currUser = LoginController.currUser;
+        int partID = -1;
+        String part = null;
+        if (partCombo.getValue() != null) {
+            part = partCombo.getValue().toString();
+            partID = 0;
+        }
 
         for (Customers c : allCust) {
             if (c.getCustName().equals(custName)) {
@@ -232,14 +241,15 @@ public class AddRepairController implements Initializable {
             }
         }
 
-        if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && notes.isEmpty() && dueDate != null) {
+        if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && !notes.isEmpty() && dueDate != null) {
             if (repairID > 0) {
-                RepairSQL.editRepair(device, custID, partID, LoginController.currUser, dueDate, status, empl, notes, repairID);
+                RepairSQL.editRepair(device, custID, partID, currUser, dueDate, status, empl, notes, repairID);
+                System.out.println("ReapirID: " + repairID);
             } else {
-                RepairSQL.addRepair(device, custID, partID, notes, LoginController.currUser, dueDate, status, empl, LoginController.currUser);
+                RepairSQL.addRepair(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser);
             }
         }else {
-            Alerts.alertMessage(3);
+            Alerts.alertMessage(4);
         }
     }
 }

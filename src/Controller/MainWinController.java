@@ -96,6 +96,7 @@ public class MainWinController implements Initializable {
 
         public static Employee passEmployee;
         public static Repair passRepair;
+        public static int passCustID;
 
 
     /**
@@ -131,7 +132,7 @@ public class MainWinController implements Initializable {
         public void setEmployeeTable(ObservableList<Employee> allEmployee){
             emplTable.setItems(allEmployee);
 
-            //emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
+            emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
             emplNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
             employeeLocCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLoc"));
         }
@@ -145,7 +146,7 @@ public class MainWinController implements Initializable {
     }
 
      public void toAddCust(ActionEvent event) throws IOException {
-         Scenes.toAddCust(event);
+            Scenes.toAddCust(event);
      }
 
      public void toAddEmpl(ActionEvent event) throws IOException {

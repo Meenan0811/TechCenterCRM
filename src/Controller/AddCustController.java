@@ -57,8 +57,6 @@ public class AddCustController implements Initializable {
         custCity = custCityText.getText();
         custState = custStateText.getText();
         custZip = Integer.valueOf(custZipText.getText());
-
-
     }
 
     public void toMain(ActionEvent event) throws IOException {
