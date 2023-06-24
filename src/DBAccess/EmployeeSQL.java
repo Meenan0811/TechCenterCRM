@@ -34,7 +34,7 @@ public abstract class EmployeeSQL {
                 String username = rs.getString("UserName");
                 String password = rs.getString("Password");
                 String location = rs.getString("Location");
-                Model.Employee employee = new Model.Employee(employeeID, employeeName, username, password, location);
+                Employee employee = new Employee(employeeID, employeeName, username, password, location);
                 userList.add(employee);
             }
 
@@ -73,12 +73,13 @@ public abstract class EmployeeSQL {
 
     public static int editEmployee(int employeeID, String employeeName, String userName, String passWord, String location) {
         try {
-            String sql = " UPDATE employees SET Employee_Name = ?, UserName = ?, Password = ?, Location = ?";
+            String sql = " UPDATE employees SET Employee_Name = ?, UserName = ?, Password = ?, Location = ? WHERE Employee_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, employeeName);
             ps.setString(2, userName);
             ps.setString(3, passWord);
             ps.setString(4, location);
+            ps.setInt(5, employeeID);
 
             return ps.executeUpdate();
         }catch(SQLException se) {

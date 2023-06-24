@@ -132,7 +132,7 @@ public class MainWinController implements Initializable {
         public void setEmployeeTable(ObservableList<Employee> allEmployee){
             emplTable.setItems(allEmployee);
 
-            emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
+            //emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
             emplNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
             employeeLocCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLoc"));
         }

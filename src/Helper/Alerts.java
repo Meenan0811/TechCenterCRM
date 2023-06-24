@@ -37,6 +37,12 @@ public abstract class Alerts {
             alert.setContentText("Please ensure all fields are filled out");
             alert.showAndWait();
         }
+        if(code == 5) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Missing Fields");
+            alert.setContentText("Please ensure all fields are filled out. Phone should be in the format of (123)456-7890 and Zip Code should be 5 digits");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {
