@@ -142,6 +142,52 @@ public abstract class RepairSQL {
 
         }
         return all;
+    }
 
+    public static int addDataTransfer(String device, int customerID, int partID, String notes, String updateBy, LocalDate dueDate, String status, String assgnEmpl, String createBy, String oldDevice)  {
+
+        try {
+            String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee, Create_Date, Created_By, Old_Device) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, NOW(), ?)";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, device );
+            ps.setInt(2, customerID);
+            ps.setInt(3, partID);
+            ps.setString(4, notes);
+            ps.setString(5, updateBy);
+            ps.setDate(6, Date.valueOf(dueDate));
+            ps.setString(7, status);
+            ps.setString(8, assgnEmpl);
+            ps.setString(9, createBy);
+            ps.setString(10,oldDevice);
+
+            return ps.executeUpdate();
+
+        }catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return -1;
+    }
+
+    public static int editDataTransfer(String device, int customerID, int partID, String updateBy, LocalDate dueDate, String status, String assgnEmpl, String notes, String oldDevice, int repairID) {
+
+        try {
+            String sql = "UPDATE repairs SET Device = ?, Customer_ID = ?, Part_ID = ?, Last_Update = NOW(), Last_Updated_By = ?, Quoted_Due_Date = ?, Status = ?, Assigned_Employee = ?,  Notes = ?, Old_Device = ? WHERE Repair_ID = ?";
+            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+            ps.setString(1, device);
+            ps.setInt(2, customerID);
+            ps.setInt(3, partID);
+            ps.setString(4, updateBy);
+            ps.setDate(5, Date.valueOf(dueDate));
+            ps.setString(6, status);
+            ps.setString(7, assgnEmpl);
+            ps.setString(8, notes);
+            ps.setString(9, oldDevice);
+            ps.setInt(9, repairID);
+
+            return ps.executeUpdate();
+        }catch (SQLException se) {
+            se.printStackTrace();
+        }
+        return -1;
     }
 }

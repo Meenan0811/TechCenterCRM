@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 public class AddRepairController implements Initializable {
+
     @FXML
     private Label partQtyLabel;
     @FXML
@@ -36,6 +37,10 @@ public class AddRepairController implements Initializable {
     private ComboBox assgnEmplCombo;
     @FXML
     private ComboBox deviceTypeCombo;
+    @FXML
+    private Label partsUsedLabel;
+    @FXML
+    private RadioButton dataTransferRadio;
     @FXML
     private TextField repairNotesText;
     @FXML
@@ -78,8 +83,6 @@ public class AddRepairController implements Initializable {
         deviceTypeCombo.setItems(devices);
         tatDatepicker.setValue(LocalDate.now().plusDays(3));
 
-
-
         if (MainWinController.passRepair != null) {
             repairID = MainWinController.passRepair.getRepairId();
             currRepair = getRepair(repairID);
@@ -92,6 +95,11 @@ public class AddRepairController implements Initializable {
             partCombo.setValue(getPart(currRepair.getPartId()));
             updatePartQty();
         }
+    }
+
+    public void dataTransferSelected() {
+        partsUsedLabel.setText("Old Device");
+        partCombo.setItems(devices);
     }
 
     /**
