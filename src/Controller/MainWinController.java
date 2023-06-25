@@ -7,6 +7,7 @@ import Helper.Alerts;
 import Helper.JDBC;
 import Helper.Scenes;
 import Model.Customers;
+import Model.DataTransfer;
 import Model.Employee;
 import Model.Repair;
 import javafx.collections.FXCollections;
@@ -64,6 +65,8 @@ public class MainWinController implements Initializable {
         private TableColumn dueDateCol;
         @FXML
         private TableColumn assignedEmplCol;
+        @FXML
+        private TableColumn typeCol;
         @FXML
         private TableView repairTable;
         @FXML
@@ -127,6 +130,7 @@ public class MainWinController implements Initializable {
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("repairId"));
             statusCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("status"));
             custIDCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("customerId"));
+            typeCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("type"));
         }
         
         public void setEmployeeTable(ObservableList<Employee> allEmployee){

@@ -18,8 +18,9 @@ public class Repair {
     private String updateBy;
     private String status;
     private String assgnempl;
+    private String type;
 
-    public Repair(int repairId, String device, int customerId, int partId, LocalDateTime createDate, String createdBy, LocalDateTime updateDate, String updateBy, LocalDate dueDate, String status, String assgnempl, String notes) {
+    public Repair(int repairId, String device, int customerId, int partId, LocalDateTime createDate, String createdBy, LocalDateTime updateDate, String updateBy, LocalDate dueDate, String status, String assgnempl, String notes, String type) {
         this.repairId = repairId;
         this.device = device;
         this.customerId = customerId;
@@ -32,11 +33,12 @@ public class Repair {
         this.status = status;
         this.assgnempl = assgnempl;
         this.notes = notes;
+        this.type = type;
     }
 
 
 
-    public Repair(String device, String custName, String custPhone, LocalDateTime createDate, int repairId, LocalDate dueDate, String status, String assgnempl, String notes, int customerId ){
+    public Repair(String device, String custName, String custPhone, LocalDateTime createDate, int repairId, LocalDate dueDate, String status, String assgnempl, String notes, int customerId, String type){
         this.device = device;
         this.custName = custName;
         this.custPhone = custPhone;
@@ -47,6 +49,7 @@ public class Repair {
         this.assgnempl = assgnempl;
         this.notes = notes;
         this.customerId = customerId;
+        this.type = type;
     }
 
     public int getRepairId() {
@@ -160,4 +163,8 @@ public class Repair {
     public void setAssgnempl(String assgnempl) {
         this.assgnempl = assgnempl;
     }
+
+    public String getType() { return type; }
+
+    public void setType(String type) { this.type = type; }
 }

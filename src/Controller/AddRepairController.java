@@ -6,10 +6,7 @@ import DBAccess.PartsSQL;
 import DBAccess.RepairSQL;
 import Helper.Alerts;
 import Helper.Scenes;
-import Model.Customers;
-import Model.Employee;
-import Model.Parts;
-import Model.Repair;
+import Model.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,6 +15,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
 import javax.swing.*;
+import javax.xml.crypto.Data;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
@@ -51,8 +49,6 @@ public class AddRepairController implements Initializable {
     private DatePicker tatDatepicker;
     @FXML
     private Button saveRepairbutton;
-    @FXML
-    private Button cancelRepairButton;
     private String device;
     private String notes;
     private String status;
@@ -65,6 +61,7 @@ public class AddRepairController implements Initializable {
     private ObservableList<Employee> allEmpl = EmployeeSQL.allEmployees();
     private ObservableList<Customers> allCust = FXCollections.observableArrayList();
     private ObservableList<Parts> allParts = FXCollections.observableArrayList();
+    private ObservableList<DataTransfer> allDt = FXCollections.observableArrayList();
     private ObservableList<String> partName;
     private ObservableList<String> custName;
     private ObservableList<String> emplName;
@@ -87,7 +84,7 @@ public class AddRepairController implements Initializable {
         deviceTypeCombo.setItems(devices);
         tatDatepicker.setValue(LocalDate.now().plusDays(3));
 
-        if (MainWinController.passRepair != null) {
+        if (MainWinController.passRepair != null && MainWinController.passRepair.getType().equals("Repair")) {
             repairID = MainWinController.passRepair.getRepairId();
             currRepair = getRepair(repairID);
             statusCombo.setValue(currRepair.getStatus());
@@ -96,8 +93,34 @@ public class AddRepairController implements Initializable {
             repairNotesText.setText(currRepair.getNotes());
             tatDatepicker.setValue(currRepair.getDueDate());
             custNameCombo.setValue(getCustomer(currRepair.getCustomerId()));
-            partCombo.setValue(getPart(currRepair.getPartId()));
-            updatePartQty();
+            if (currRepair.getType().equals("Repair")) {
+                partCombo.setValue(getPart(currRepair.getPartId()));
+                updatePartQty();
+            }
+        }
+
+        if (MainWinController.passRepair != null && MainWinController.passRepair.getType().equals("DT")) {
+            DataTransfer dt = null;
+            allDt = RepairSQL.getAllDt();
+            for (DataTransfer d : allDt) {
+                if (d.getRepairId() == MainWinController.passRepair.getRepairId()) {
+                    dt = d;
+                }
+            }
+            if (dt != null) {
+                repairID = MainWinController.passRepair.getRepairId();
+                currRepair = getRepair(repairID);
+                statusCombo.setValue(currRepair.getStatus());
+                assgnEmplCombo.setValue(currRepair.getAssgnempl());
+                deviceTypeCombo.setValue(currRepair.getDevice());
+                repairNotesText.setText(currRepair.getNotes());
+                tatDatepicker.setValue(currRepair.getDueDate());
+                custNameCombo.setValue(getCustomer(currRepair.getCustomerId()));
+                partCombo.setItems(devices);
+                partCombo.setValue(dt.getOldDevice());
+                dataTransferRadio.setSelected(true);
+            }
+
         }
     }
 
@@ -244,6 +267,7 @@ public class AddRepairController implements Initializable {
             String oldDevice = null;
             int partID = -1;
             String part = null;
+            String type = null;
             if (partCombo.getValue() != null) {
                 part = partCombo.getValue().toString();
                 partID = 0;
@@ -265,11 +289,13 @@ public class AddRepairController implements Initializable {
             if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && !notes.isEmpty() && dueDate != null) {
                 if (repairID > 0) {
                     if (!dataTransferRadio.isSelected()) {
-                        RepairSQL.editRepair(device, custID, partID, currUser, dueDate, status, empl, notes, repairID);
+                        type = "Repair";
+                        RepairSQL.editRepair(device, custID, partID, currUser, dueDate, status, empl, notes, type, repairID);
                         //Scenes.toMain(event);
                         System.out.println("EditRepair entered");
                     } else {
-                        RepairSQL.addRepair(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser);
+                        type = "Repair";
+                        RepairSQL.addRepair(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser, type);
                         //Scenes.toMain(event);
                         System.out.println("NewRepair entered");
                     }
@@ -296,6 +322,7 @@ public class AddRepairController implements Initializable {
             String notes = repairNotesText.getText();
             String currUser = LoginController.currUser;
             String oldDevice = partCombo.getValue().toString();
+            String type;
             int custID = 0;
             int partID = 1;
 
@@ -308,11 +335,13 @@ public class AddRepairController implements Initializable {
 
             if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && !notes.isEmpty() && dueDate != null) {
                 if (repairID > 0) {
-                    RepairSQL.editDataTransfer(device, custID, partID, currUser, dueDate, status, empl, notes, oldDevice, repairID);
+                    type = "DT";
+                    RepairSQL.editDataTransfer(device, custID, partID, currUser, dueDate, status, empl, notes, oldDevice, repairID, type);
                     //Scenes.toMain(event);
                     System.out.println("EditDT entered");
                 }else {
-                    RepairSQL.addDataTransfer(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser, oldDevice);
+                    type = "DT";
+                    RepairSQL.addDataTransfer(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser, oldDevice, type);
                     //Scenes.toMain(event);
                     System.out.println("NewDT entered");
                 }
