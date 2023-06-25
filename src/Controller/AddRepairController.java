@@ -17,7 +17,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
+import javax.swing.*;
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -25,6 +27,8 @@ import java.util.ResourceBundle;
 
 public class AddRepairController implements Initializable {
 
+    @FXML
+    private Button saveDtButton;
     @FXML
     private Label partQtyLabel;
     @FXML
@@ -97,9 +101,15 @@ public class AddRepairController implements Initializable {
         }
     }
 
+    /**
+     * Method to change Part Use label and combo box to Old device label and combo box for a Data Transfer
+     */
     public void dataTransferSelected() {
         partsUsedLabel.setText("Old Device");
         partCombo.setItems(devices);
+        partCombo.setValue("Personal Computer");
+        saveRepairbutton.setVisible(false);
+        saveDtButton.setVisible(true);
     }
 
     /**
@@ -220,44 +230,102 @@ public class AddRepairController implements Initializable {
      * @param event
      */
     @FXML
-    private void saveRepair(ActionEvent event) {
+    private void saveRepair(ActionEvent event) throws IOException{
 
-        String device = deviceTypeCombo.getValue().toString();
-        String status = statusCombo.getValue().toString();
-        LocalDate dueDate = tatDatepicker.getValue();
-        String empl = assgnEmplCombo.getValue().toString();
-        String custName = custNameCombo.getValue().toString();
-        int custID = 0;
-        String notes = repairNotesText.getText();
-        String currUser = LoginController.currUser;
-        int partID = -1;
-        String part = null;
-        if (partCombo.getValue() != null) {
-            part = partCombo.getValue().toString();
-            partID = 0;
-        }
-
-        for (Customers c : allCust) {
-            if (c.getCustName().equals(custName)) {
-                custID = c.getCustId();
+        try {
+            String device = deviceTypeCombo.getValue().toString();
+            String status = statusCombo.getValue().toString();
+            LocalDate dueDate = tatDatepicker.getValue();
+            String empl = assgnEmplCombo.getValue().toString();
+            String custName = custNameCombo.getValue().toString();
+            int custID = 0;
+            String notes = repairNotesText.getText();
+            String currUser = LoginController.currUser;
+            String oldDevice = null;
+            int partID = -1;
+            String part = null;
+            if (partCombo.getValue() != null) {
+                part = partCombo.getValue().toString();
+                partID = 0;
             }
-        }
 
-        for (Parts p : allParts) {
-            if (p.getPartName().equals(part)){
-                partID = p.getPartID();
+            for (Customers c : allCust) {
+                if (c.getCustName().equals(custName)) {
+                    custID = c.getCustId();
+                }
             }
-        }
 
-        if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && !notes.isEmpty() && dueDate != null) {
-            if (repairID > 0) {
-                RepairSQL.editRepair(device, custID, partID, currUser, dueDate, status, empl, notes, repairID);
-                System.out.println("ReapirID: " + repairID);
+            for (Parts p : allParts) {
+                if (p.getPartName().equals(part)) {
+                    partID = p.getPartID();
+                }
+            }
+            System.out.println("Data Transfer Radio: " + dataTransferRadio.isSelected() + " Repair ID: " + repairID);
+
+            if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && !notes.isEmpty() && dueDate != null) {
+                if (repairID > 0) {
+                    if (!dataTransferRadio.isSelected()) {
+                        RepairSQL.editRepair(device, custID, partID, currUser, dueDate, status, empl, notes, repairID);
+                        //Scenes.toMain(event);
+                        System.out.println("EditRepair entered");
+                    } else {
+                        RepairSQL.addRepair(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser);
+                        //Scenes.toMain(event);
+                        System.out.println("NewRepair entered");
+                    }
+                }
             } else {
-                RepairSQL.addRepair(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser);
+                Alerts.alertMessage(4);
             }
-        }else {
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+            Alerts.alertMessage(4);
+        }catch (NumberFormatException n) {
+            n.printStackTrace();
             Alerts.alertMessage(4);
         }
     }
+
+    public void saveDT(ActionEvent event) {
+        try {
+            String device = deviceTypeCombo.getValue().toString();
+            String status = statusCombo.getValue().toString();
+            LocalDate dueDate = tatDatepicker.getValue();
+            String empl = assgnEmplCombo.getValue().toString();
+            String custName = custNameCombo.getValue().toString();
+            String notes = repairNotesText.getText();
+            String currUser = LoginController.currUser;
+            String oldDevice = partCombo.getValue().toString();
+            int custID = 0;
+            int partID = 1;
+
+            for (Customers c : allCust) {
+                if (c.getCustName().equals(custName)) {
+                    custID = c.getCustId();
+                }
+            }
+            System.out.println("Data Transfer Radio: " + dataTransferRadio.isSelected() + " Repair ID: " + repairID);
+
+            if (!device.isEmpty() && !status.isEmpty() && !empl.isEmpty() && !custName.isEmpty() && !notes.isEmpty() && dueDate != null) {
+                if (repairID > 0) {
+                    RepairSQL.editDataTransfer(device, custID, partID, currUser, dueDate, status, empl, notes, oldDevice, repairID);
+                    //Scenes.toMain(event);
+                    System.out.println("EditDT entered");
+                }else {
+                    RepairSQL.addDataTransfer(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser, oldDevice);
+                    //Scenes.toMain(event);
+                    System.out.println("NewDT entered");
+                }
+            } else {
+                Alerts.alertMessage(4);
+            }
+        }catch (NullPointerException e) {
+            e.printStackTrace();
+            Alerts.alertMessage(4);
+        }catch (NumberFormatException n) {
+            n.printStackTrace();
+            Alerts.alertMessage(4);
+        }
+    }
+
 }

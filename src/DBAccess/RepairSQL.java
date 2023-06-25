@@ -147,7 +147,7 @@ public abstract class RepairSQL {
     public static int addDataTransfer(String device, int customerID, int partID, String notes, String updateBy, LocalDate dueDate, String status, String assgnEmpl, String createBy, String oldDevice)  {
 
         try {
-            String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee, Create_Date, Created_By, Old_Device) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, NOW(), ?)";
+            String sql = "INSERT INTO repairs(Device, Customer_ID, Part_ID, Notes, Last_Update, Last_Updated_By, Quoted_Due_Date, Status, Assigned_Employee, Create_Date, Created_By, Old_Device) VALUES (?, ?, ?, ?, NOW(), ?, ?, ?, ?, NOW(), ?, ?)";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, device );
             ps.setInt(2, customerID);
@@ -182,7 +182,7 @@ public abstract class RepairSQL {
             ps.setString(7, assgnEmpl);
             ps.setString(8, notes);
             ps.setString(9, oldDevice);
-            ps.setInt(9, repairID);
+            ps.setInt(10, repairID);
 
             return ps.executeUpdate();
         }catch (SQLException se) {

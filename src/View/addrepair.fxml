@@ -31,5 +31,6 @@
       <Label layoutX="399.0" layoutY="335.0" text="# Available" />
       <Label fx:id="partQtyLabel" layoutX="480.0" layoutY="335.0" />
       <RadioButton fx:id="dataTransferRadio" layoutX="219.0" layoutY="71.0" mnemonicParsing="false" onAction="#dataTransferSelected" text="Data transfer" />
+      <Button fx:id="saveDtButton" layoutX="116.0" layoutY="619.0" mnemonicParsing="false" onAction="#saveDT" text="Save DT" visible="false" />
    </children>
 </AnchorPane>

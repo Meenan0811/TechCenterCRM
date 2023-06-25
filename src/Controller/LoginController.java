@@ -2,6 +2,7 @@ package Controller;
 
 import DBAccess.CustomerSQL;
 import DBAccess.EmployeeSQL;
+import DBAccess.PartsSQL;
 import DBAccess.RepairSQL;
 import Model.Employee;
 import Helper.Alerts;
@@ -74,6 +75,7 @@ public class LoginController implements Initializable {
         //EmployeeSQL.addEmployee("Test Guy", "admin", "admin", "Ocean View");
         LocalDateTime date = LocalDateTime.now();
         //RepairSQL.addRepair("Tablet", 1, 0, "Test Notes, test Notes", "Employee", date,  "In repair", "Employee", "Employee");
+        PartsSQL.addPart("Labor", 1000);
 
 
 
