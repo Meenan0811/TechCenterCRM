@@ -229,8 +229,6 @@ public abstract class RepairSQL {
 
                 DataTransfer dt = new DataTransfer(repairID, device, custID, partID, createDate, createBy, lastUpdate, updateBy, dueDate, status, assgnEmpl, notes, oldDevice, type);
                 allDt.add(dt);
-
-
             }
         }catch (SQLException se) {
             se.printStackTrace();

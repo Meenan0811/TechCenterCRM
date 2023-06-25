@@ -28,7 +28,7 @@
       <Label layoutX="92.0" layoutY="335.0" text="Customer Name" />
       <Label fx:id="partsUsedLabel" layoutX="92.0" layoutY="389.0" text="Part Used" />
       <ComboBox fx:id="partCombo" layoutX="235.0" layoutY="385.0" onMouseReleased="#updatePartQty" prefWidth="150.0" />
-      <Label layoutX="399.0" layoutY="335.0" text="# Available" />
+      <Label fx:id="numPartsLabel" layoutX="399.0" layoutY="335.0" />
       <Label fx:id="partQtyLabel" layoutX="480.0" layoutY="335.0" />
       <RadioButton fx:id="dataTransferRadio" layoutX="219.0" layoutY="71.0" mnemonicParsing="false" onAction="#dataTransferSelected" text="Data transfer" />
       <Button fx:id="saveDtButton" layoutX="116.0" layoutY="619.0" mnemonicParsing="false" onAction="#saveDT" text="Save DT" visible="false" />

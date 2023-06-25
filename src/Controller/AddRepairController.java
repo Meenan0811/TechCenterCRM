@@ -26,6 +26,8 @@ import java.util.ResourceBundle;
 public class AddRepairController implements Initializable {
 
     @FXML
+    private Label numPartsLabel;
+    @FXML
     private Button saveDtButton;
     @FXML
     private Label partQtyLabel;
@@ -81,6 +83,7 @@ public class AddRepairController implements Initializable {
         assgnEmplCombo.setItems(emplName);
         custNameCombo.setItems(custName);
         partCombo.setItems(partName);
+        partCombo.setValue("Labor");
         deviceTypeCombo.setItems(devices);
         tatDatepicker.setValue(LocalDate.now().plusDays(3));
 
@@ -105,6 +108,7 @@ public class AddRepairController implements Initializable {
             for (DataTransfer d : allDt) {
                 if (d.getRepairId() == MainWinController.passRepair.getRepairId()) {
                     dt = d;
+                    System.out.println("For Loop: " + d.getOldDevice() + " Type: " + d.getType());
                 }
             }
             if (dt != null) {
@@ -116,9 +120,11 @@ public class AddRepairController implements Initializable {
                 repairNotesText.setText(currRepair.getNotes());
                 tatDatepicker.setValue(currRepair.getDueDate());
                 custNameCombo.setValue(getCustomer(currRepair.getCustomerId()));
-                partCombo.setItems(devices);
+                dataTransferSelected();
+                /*partCombo.setItems(devices);
                 partCombo.setValue(dt.getOldDevice());
                 dataTransferRadio.setSelected(true);
+                System.out.println("Old Device " + dt.getOldDevice());*/
             }
 
         }
