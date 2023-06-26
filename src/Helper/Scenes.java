@@ -74,4 +74,13 @@ public abstract class Scenes {
         stage.setScene(scene);
         stage.show();
     }
+
+    public static void toReports(ActionEvent event) throws IOException {
+        FXMLLoader reports = new FXMLLoader(AddRepairController.class.getResource("../View/reports.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(reports.load());
+        stage.setTitle("reports");
+        stage.setScene(scene);
+        stage.show();
+    }
 }

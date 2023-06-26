@@ -229,6 +229,10 @@ public class MainWinController implements Initializable {
          Scenes.toAddRepair(event);
      }
 
+     public void toReports(ActionEvent event) throws IOException {
+         Scenes.toReports(event);
+     }
+
 
 
 }
