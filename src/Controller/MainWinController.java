@@ -91,15 +91,22 @@ public class MainWinController implements Initializable {
         private TableColumn employeeLocCol;
         @FXML
         private TableColumn custIDCol;
+        @FXML
+        private TableView custTable;
+        @FXML
+        private TableColumn custIdCol2;
+        @FXML
+        private TableColumn custNameCol2;
 
 
         private LocalDate currDate = LocalDate.now();
         private ObservableList<Repair> allcustRepair = FXCollections.observableArrayList();
         private ObservableList<Employee> allEmployee = FXCollections.observableArrayList();
+        private ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
 
         public static Employee passEmployee;
         public static Repair passRepair;
-        public static int passCustID;
+        public static Customers passCust;
 
 
     /**
@@ -112,12 +119,14 @@ public class MainWinController implements Initializable {
 
             allEmployee = EmployeeSQL.allEmployees();
             allcustRepair = RepairSQL.allCustomerRepairs();
+            allCustomers = CustomerSQL.getAllCust();
             allSelected();
             setEmployeeTable(allEmployee);
+            setCustTable(allCustomers);
 
         }
 
-        public void setCustTable(ObservableList<Repair> all) {
+        public void setRepairTable(ObservableList<Repair> all) {
             repairTable.setItems(all);
             
             custNameCol.setCellValueFactory(new PropertyValueFactory<Customers, String>("custName"));
@@ -131,6 +140,13 @@ public class MainWinController implements Initializable {
             statusCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("status"));
             custIDCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("customerId"));
             typeCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("type"));
+        }
+
+        public void setCustTable(ObservableList<Customers> allCust) {
+            custTable.setItems(allCust);
+
+            custIdCol2.setCellValueFactory(new PropertyValueFactory<Customers, Integer>("custId"));
+            custNameCol2.setCellValueFactory(new PropertyValueFactory<Customers, String>("custName"));
         }
         
         public void setEmployeeTable(ObservableList<Employee> allEmployee){
@@ -146,11 +162,23 @@ public class MainWinController implements Initializable {
         weekRadio.setSelected(false);
         allRadio.setSelected(true);
 
-        setCustTable(allcustRepair);
+        setRepairTable(allcustRepair);
     }
 
      public void toAddCust(ActionEvent event) throws IOException {
             Scenes.toAddCust(event);
+     }
+
+     public void toEditCust(ActionEvent event) throws IOException {
+            passCust = Customers.class.cast(custTable.getSelectionModel().getSelectedItem());
+            Scenes.toAddCust(event);
+     }
+
+     public void deleteCust(ActionEvent event) throws IOException {
+            Customers cust = Customers.class.cast(custTable.getSelectionModel().getSelectedItem());
+            int custID = cust.getCustId();
+            CustomerSQL.deleteCust(custID);
+            Scenes.toMain(event);
      }
 
      public void toAddEmpl(ActionEvent event) throws IOException {
