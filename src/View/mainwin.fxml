@@ -12,7 +12,7 @@
         <Button fx:id="newRepairButton" layoutX="81.0" layoutY="291.0" mnemonicParsing="false" onAction="#toNewRepair" text="New Repair" />
         <Button fx:id="updateCustButton" layoutX="209.0" layoutY="291.0" mnemonicParsing="false" onAction="#toEditRepair" text="Update" />
         <Button fx:id="custDeleteButton" layoutX="319.0" layoutY="291.0" mnemonicParsing="false" onAction="#deleteRepair" text="Delete" />
-        <Button fx:id="reportButton" layoutX="900.0" layoutY="487.0" mnemonicParsing="false" text="Reports" />
+        <Button fx:id="reportButton" layoutX="900.0" layoutY="487.0" mnemonicParsing="false" onAction="#toReports" text="Reports" />
         <Button fx:id="logoutButton" layoutX="903.0" layoutY="540.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
         <TableView fx:id="repairTable" layoutX="81.0" layoutY="63.0" prefHeight="200.0" prefWidth="894.0">
             <columns>
