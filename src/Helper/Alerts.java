@@ -43,6 +43,24 @@ public abstract class Alerts {
             alert.setContentText("Please ensure all fields are filled out. Phone should be in the format of (123)456-7890 and Zip Code should be 5 digits");
             alert.showAndWait();
         }
+        if(code == 6) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Part not available");
+            alert.setContentText("Part is not available and will need to be ordered");
+            alert.showAndWait();
+        }
+        if(code == 7) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Select Part");
+            alert.setContentText("Please select a part to edit");
+            alert.showAndWait();
+        }
+        if(code == 8) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Missing Fields");
+            alert.setContentText("Please ensure all fields are filled out correctly");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {

@@ -51,5 +51,6 @@
           <TableColumn fx:id="custNameCol2" prefWidth="237.0" text="Name" />
         </columns>
       </TableView>
+      <Button fx:id="addPart" layoutX="903.0" layoutY="605.0" mnemonicParsing="false" onAction="#toParts" prefHeight="25.0" prefWidth="54.0" text="Parts" />
     </children>
 </AnchorPane>

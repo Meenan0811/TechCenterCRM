@@ -14,12 +14,9 @@ import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class AddCustController implements Initializable {
     @FXML
@@ -48,6 +45,7 @@ public class AddCustController implements Initializable {
     private int custZip;
     private String custState;
     private String currUser;
+    private ObservableList<Customers> allCust = FXCollections.observableArrayList();
     private ObservableList<String> allStates = FXCollections.observableArrayList("AL", "Ak", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WAS", "WV", "WI", "WY");
 
 
@@ -55,6 +53,25 @@ public class AddCustController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
         custStateCombo.setItems(allStates);
         custStateCombo.setValue("AL");
+        allCust = CustomerSQL.getAllCust();
+
+        if (MainWinController.passCust != null) {
+            Customers currCust = null;
+            custID = MainWinController.passCust.getCustId();
+            int customerId = MainWinController.passCust.getCustId();
+            for (Customers c : allCust) {
+                if (c.getCustId() == customerId) {
+                    currCust = c;
+                }
+            }
+
+            custNameText.setText(currCust.getCustName());
+            custPhoneText.setText(currCust.getCustPhone());
+            custStreetText.setText(currCust.getCustStreet());
+            custCityText.setText(currCust.getCustCity());
+            custStateCombo.setValue(currCust.getCustState());
+            custZipText.setText(String.valueOf(currCust.getCustZip()));
+        }
 
     }
 
@@ -64,22 +81,32 @@ public class AddCustController implements Initializable {
      * @throws IOException
      */
     public void saveCust(ActionEvent event) throws IOException {
-        custName = custNameText.getText();
-        custPhone = custPhoneText.getText();
-        custStreet = custStreetText.getText();
-        custCity = custCityText.getText();
-        custState = custStateCombo.getValue().toString();
-        currUser = LoginController.currUser;
+        System.out.println("Save Pressed");
+        try {
+            custName = custNameText.getText();
+            custPhone = custPhoneText.getText();
+            custStreet = custStreetText.getText();
+            custCity = custCityText.getText();
+            custState = custStateCombo.getValue().toString();
+            currUser = LoginController.currUser;
+            custZip = Integer.parseInt(custZipText.getText());
+            String customerZip = custZipText.getText();
 
-        if (!custZipText.getText().isBlank()) {
-            custZip = Integer.valueOf(custZipText.getText());
-        }
-
-        if (custName.isEmpty() || custPhone.isEmpty() || custStreet.isEmpty() || custCity.isEmpty() || !validateZip(String.valueOf(custZip)) || !validateNumber(custPhone)) {
+            if (custName.isEmpty() || custPhone.isEmpty() || custStreet.isEmpty() || custCity.isEmpty() || !validateZip(String.valueOf(customerZip)) || !validateNumber(custPhone)) {
+                Alerts.alertMessage(5);
+                System.out.println(custName + " " + custPhone + " " + custStreet + " " + custState + " " + custZip + " " + currUser + " " + customerZip + " " + custID);
+            } else {
+                if (custID < 0) {
+                    CustomerSQL.addCust(custName, custPhone, custStreet, custCity, custState, custZip, currUser, currUser);
+                    Scenes.toMain(event);
+                } else {
+                    CustomerSQL.editCust(custID, custName, custPhone, custStreet, custCity, custState, custZip, currUser);
+                    Scenes.toMain(event);
+                }
+            }
+        }catch(NullPointerException | NumberFormatException n) {
             Alerts.alertMessage(5);
-        } else {
-            CustomerSQL.addCust(custName, custPhone, custStreet, custCity, custState, custZip, currUser, currUser);
-            Scenes.toMain(event);
+            n.printStackTrace();
         }
     }
 
@@ -104,6 +131,7 @@ public class AddCustController implements Initializable {
     }
 
     public void toMain(ActionEvent event) throws IOException {
+        MainWinController.passCust = null;
         Scenes.toMain(event);
     }
 }

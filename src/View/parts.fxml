@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.PartsController">
+   <children>
+      <TableView fx:id="partTable" layoutX="26.0" layoutY="22.0" prefHeight="200.0" prefWidth="227.0">
+        <columns>
+          <TableColumn fx:id="partIdCol" prefWidth="75.0" text="ID" />
+          <TableColumn fx:id="partNameCol" prefWidth="75.0" text="Name" />
+            <TableColumn fx:id="partQtyCol" prefWidth="75.0" text="Quantity" />
+        </columns>
+      </TableView>
+      <Button fx:id="addPartButton" layoutX="422.0" layoutY="200.0" mnemonicParsing="false" onAction="#addPart" text="Add Part" />
+      <Button fx:id="cancelButton" layoutX="428.0" layoutY="354.0" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
+      <Button fx:id="updateQtyButton" layoutX="65.0" layoutY="310.0" mnemonicParsing="false" onAction="#updateQty" text="Update Part" />
+      <Button fx:id="editPartButton" layoutX="65.0" layoutY="354.0" mnemonicParsing="false" onAction="#editPart" prefHeight="25.0" prefWidth="80.0" text="Edit Part" />
+      <TextField fx:id="updatePartQtyText" layoutX="65.0" layoutY="272.0" />
+      <TextField fx:id="partNameText" layoutX="381.0" layoutY="65.0" />
+      <TextField fx:id="partQtyText" layoutX="381.0" layoutY="139.0" />
+      <Label layoutX="59.0" layoutY="242.0" text="Update Selected Part Quantity" />
+      <Label fx:id="partNameLabel" layoutX="313.0" layoutY="69.0" text="Part Name" />
+      <Label layoutX="313.0" layoutY="143.0" text="Quantity" />
+   </children>
+</AnchorPane>

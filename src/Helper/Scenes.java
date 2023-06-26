@@ -4,16 +4,12 @@ import Controller.AddCustController;
 import Controller.AddEmployeeController;
 import Controller.AddRepairController;
 import Controller.MainWinController;
-import Model.Customers;
-import Model.Repair;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
-
-import javax.swing.*;
 import java.io.IOException;
 
 public abstract class Scenes {
@@ -44,9 +40,9 @@ public abstract class Scenes {
 
 
     public static void toAddEmpl(ActionEvent event) throws IOException {
-        FXMLLoader addCust = new FXMLLoader(AddEmployeeController.class.getResource("../View/addemployee.fxml"));
+        FXMLLoader addEmpl = new FXMLLoader(AddEmployeeController.class.getResource("../View/addemployee.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(addCust.load());
+        Scene scene = new Scene(addEmpl.load());
         stage.setTitle("Customer Information");
         stage.setScene(scene);
         stage.show();
@@ -62,10 +58,19 @@ public abstract class Scenes {
     }
 
     public static void toAddRepair(ActionEvent event) throws IOException {
-        FXMLLoader addCust = new FXMLLoader(AddRepairController.class.getResource("../View/addrepair.fxml"));
+        FXMLLoader repair = new FXMLLoader(AddRepairController.class.getResource("../View/addrepair.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
-        Scene scene = new Scene(addCust.load());
+        Scene scene = new Scene(repair.load());
         stage.setTitle("Repair");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void toParts(ActionEvent event) throws IOException {
+        FXMLLoader parts = new FXMLLoader(AddRepairController.class.getResource("../View/parts.fxml"));
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        Scene scene = new Scene(parts.load());
+        stage.setTitle("Parts");
         stage.setScene(scene);
         stage.show();
     }

@@ -116,6 +116,9 @@ public class MainWinController implements Initializable {
          */
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
+            passCust = null;
+            passRepair = null;
+            passEmployee = null;
 
             allEmployee = EmployeeSQL.allEmployees();
             allcustRepair = RepairSQL.allCustomerRepairs();
@@ -170,8 +173,12 @@ public class MainWinController implements Initializable {
      }
 
      public void toEditCust(ActionEvent event) throws IOException {
-            passCust = Customers.class.cast(custTable.getSelectionModel().getSelectedItem());
-            Scenes.toAddCust(event);
+            if (custTable.getSelectionModel().getSelectedItem() != null) {
+                passCust = Customers.class.cast(custTable.getSelectionModel().getSelectedItem());
+                Scenes.toAddCust(event);
+            }else {
+                Alerts.alertMessage(3);
+            }
      }
 
      public void deleteCust(ActionEvent event) throws IOException {
@@ -194,6 +201,11 @@ public class MainWinController implements Initializable {
                 e.printStackTrace();
             }
         }
+
+        public void toParts(ActionEvent event) throws IOException {
+            Scenes.toParts(event);
+        }
+
 
 
      //FIXME: Delete if not needed

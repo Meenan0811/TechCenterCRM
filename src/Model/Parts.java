@@ -12,9 +12,7 @@ public class Parts {
         this.qty = qty;
     }
 
-    public int getPartID() {
-        return partID;
-    }
+    public int getPartID() { return partID; }
 
     public void setPartID(int partID) {
         this.partID = partID;
