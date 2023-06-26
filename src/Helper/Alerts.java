@@ -61,6 +61,12 @@ public abstract class Alerts {
             alert.setContentText("Please ensure all fields are filled out correctly");
             alert.showAndWait();
         }
+        if(code == 9) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Repair not found");
+            alert.setContentText("No repair matching the provided search terms found");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {

@@ -7,7 +7,6 @@ import Helper.Alerts;
 import Helper.JDBC;
 import Helper.Scenes;
 import Model.Customers;
-import Model.DataTransfer;
 import Model.Employee;
 import Model.Repair;
 import javafx.collections.FXCollections;
@@ -15,16 +14,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ResourceBundle;
 
 public class MainWinController implements Initializable {
@@ -97,6 +92,8 @@ public class MainWinController implements Initializable {
         private TableColumn custIdCol2;
         @FXML
         private TableColumn custNameCol2;
+        @FXML
+        private TextField searchRepairTextField;
 
 
         private LocalDate currDate = LocalDate.now();
@@ -232,6 +229,65 @@ public class MainWinController implements Initializable {
      public void toReports(ActionEvent event) throws IOException {
          Scenes.toReports(event);
      }
+
+    /**
+     * Method to Search Customer Repairs by Customer Name
+     * @param partialName
+     * @return
+     */
+    private ObservableList<Repair> customerSearchName(String partialName) {
+        ObservableList<Repair> searchName = FXCollections.observableArrayList();
+
+        for (Repair r : allcustRepair) {
+            if (r.getCustName().toLowerCase().contains(partialName.toLowerCase())) searchName.add(r);
+        }
+        return searchName;
+    }
+
+    /**
+     * Method to search repairs by status
+     * @param repairStatus
+     * @return
+     */
+    private ObservableList<Repair> repairStatusSearch(String repairStatus) {
+        ObservableList<Repair> searchStatus = FXCollections.observableArrayList();
+
+        for (Repair r : allcustRepair) {
+            if (r.getStatus().toLowerCase().contains(repairStatus.toLowerCase())) searchStatus.add(r);
+        }
+        return searchStatus;
+    }
+
+    /**
+     * Method to search repairs by device
+     * @param deviceSearch
+     * @return
+     */
+    private ObservableList<Repair> deviceSearch(String deviceSearch) {
+        ObservableList<Repair> searchDevice = FXCollections.observableArrayList();
+
+        for (Repair r : allcustRepair) {
+            if (r.getDevice().toLowerCase().contains(deviceSearch.toLowerCase())) searchDevice.add(r);
+        }
+        return searchDevice;
+    }
+
+    public void search(ActionEvent event) {
+        String search = searchRepairTextField.getText();
+        ObservableList<Repair> searchResults = customerSearchName(search);
+
+        if (searchResults.size() == 0) {
+            searchResults = repairStatusSearch(search);
+        }
+        if (searchResults.size() == 0) {
+            searchResults = deviceSearch(search);
+        }
+        if (searchResults.size() == 0) {
+            Alerts.alertMessage(9);
+        }
+
+        setRepairTable(searchResults);
+    }
 
 
 
