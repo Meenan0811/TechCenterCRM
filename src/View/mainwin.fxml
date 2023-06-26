@@ -35,8 +35,8 @@
                 <TableColumn fx:id="employeeLocCol" prefWidth="119.0" text="Location" />
             </columns>
         </TableView>
-        <Button fx:id="addEmployeeButton" layoutX="81.0" layoutY="605.0" mnemonicParsing="false" text="New Employee" />
-        <Button fx:id="updateEmployeeButton" layoutX="212.0" layoutY="605.0" mnemonicParsing="false" text="Update" />
+        <Button fx:id="addEmployeeButton" layoutX="81.0" layoutY="605.0" mnemonicParsing="false" onAction="#toAddEmpl" text="New Employee" />
+        <Button fx:id="updateEmployeeButton" layoutX="212.0" layoutY="605.0" mnemonicParsing="false" onAction="#toEditEmpl" text="Update" />
         <Button fx:id="employeeDeleteButton" layoutX="319.0" layoutY="605.0" mnemonicParsing="false" text="Delete" />
         <RadioButton fx:id="weekRadio" layoutX="330.0" layoutY="23.0" mnemonicParsing="false" text="Week View" />
         <RadioButton fx:id="monthRadio" layoutX="505.0" layoutY="23.0" mnemonicParsing="false" text="Month View" />

@@ -14,6 +14,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
@@ -101,6 +102,7 @@ public class MainWinController implements Initializable {
         private ObservableList<Employee> allEmployee = FXCollections.observableArrayList();
         private ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
 
+
         public static Employee passEmployee;
         public static Repair passRepair;
         public static Customers passCust;
@@ -155,6 +157,7 @@ public class MainWinController implements Initializable {
             //emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
             emplNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
             employeeLocCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLoc"));
+            System.out.println(allEmployee);
         }
 
     public void allSelected() {
@@ -186,7 +189,22 @@ public class MainWinController implements Initializable {
      }
 
      public void toAddEmpl(ActionEvent event) throws IOException {
-            Scenes.toAddEmpl(event);
+         for (Employee e : allEmployee) {
+             if (e.getemployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
+                 Scenes.toAddEmpl(event);
+             } else {
+                 Alerts.alertMessage(11);
+             }
+         }
+     }
+
+     public void toEditEmpl(ActionEvent event) throws IOException {
+            if (emplTable.getSelectionModel().getSelectedItem() != null) {
+                passEmployee = Employee.class.cast(emplTable.getSelectionModel().getSelectedItem());
+                Scenes.toAddEmpl(event);
+            }else {
+                Alerts.alertMessage(10);
+            }
      }
 
      public void deleteRepair(ActionEvent event) {

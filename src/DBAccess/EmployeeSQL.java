@@ -34,7 +34,8 @@ public abstract class EmployeeSQL {
                 String username = rs.getString("UserName");
                 String password = rs.getString("Password");
                 String location = rs.getString("Location");
-                Employee employee = new Employee(employeeID, employeeName, username, password, location);
+                String admin = rs.getString("Admin");
+                Employee employee = new Employee(employeeID, employeeName, username, password, location, admin);
                 userList.add(employee);
             }
 
@@ -45,7 +46,7 @@ public abstract class EmployeeSQL {
         return userList;
     }
 
-    public static void addEmployee(String employeeName, String userName, String passWord, String location) {
+    public static void addEmployee(String employeeName, String userName, String passWord, String location, String admin) {
         ObservableList<Employee> allEmp = allEmployees();
         int matchingId = 0;
         try {
@@ -53,12 +54,13 @@ public abstract class EmployeeSQL {
                 if (userName.equals(e.getUserName())) { matchingId = matchingId + 1; }
             }
             if (matchingId == 0) {
-                String sql = "INSERT INTO employees (Employee_Name, UserName, Password, Location) VALUES (?, ?, ?, ?)";
+                String sql = "INSERT INTO employees (Employee_Name, UserName, Password, Location, Admin) VALUES (?, ?, ?, ?, ?)";
                 PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
                 ps.setString(1, employeeName);
                 ps.setString(2, userName);
                 ps.setString(3, passWord);
                 ps.setString(4, location);
+                ps.setString(5, admin);
 
                 ps.executeUpdate();
             }
@@ -71,15 +73,16 @@ public abstract class EmployeeSQL {
 
     }
 
-    public static int editEmployee(int employeeID, String employeeName, String userName, String passWord, String location) {
+    public static int editEmployee(int employeeID, String employeeName, String userName, String passWord, String location, String admin) {
         try {
-            String sql = " UPDATE employees SET Employee_Name = ?, UserName = ?, Password = ?, Location = ? WHERE Employee_ID = ?";
+            String sql = " UPDATE employees SET Employee_Name = ?, UserName = ?, Password = ?, Location = ?, Admin = ? WHERE Employee_ID = ?";
             PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
             ps.setString(1, employeeName);
             ps.setString(2, userName);
             ps.setString(3, passWord);
             ps.setString(4, location);
-            ps.setInt(5, employeeID);
+            ps.setString(5, admin);
+            ps.setInt(6, employeeID);
 
             return ps.executeUpdate();
         }catch(SQLException se) {
@@ -100,4 +103,6 @@ public abstract class EmployeeSQL {
         }
         return -1;
     }
+
+
 }

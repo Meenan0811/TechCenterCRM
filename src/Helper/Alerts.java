@@ -67,6 +67,18 @@ public abstract class Alerts {
             alert.setContentText("No repair matching the provided search terms found");
             alert.showAndWait();
         }
+        if(code == 10) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Select Employee");
+            alert.setContentText("Please select a employee to edit.");
+            alert.showAndWait();
+        }
+        if(code == 11) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Insufficient Privileges");
+            alert.setContentText("Only administrators can add employees, please speak to a supervisor");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {

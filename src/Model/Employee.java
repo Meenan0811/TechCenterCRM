@@ -6,6 +6,7 @@ public class Employee {
     private String userName;
     private String passWord;
     private String employeeLoc;
+    private String admin;
 
 
 
@@ -15,12 +16,13 @@ public class Employee {
      * @param userName
      * @param passWord
      */
-    public Employee(int employeeID, String employeeName, String userName, String passWord, String employeeLoc) {
+    public Employee(int employeeID, String employeeName, String userName, String passWord, String employeeLoc, String admin) {
         this.employeeID = employeeID;
         this.employeeName = employeeName;
         this.userName = userName;
         this.passWord = passWord;
         this.employeeLoc = employeeLoc;
+        this.admin = admin;
     }
 
     /**
@@ -40,6 +42,10 @@ public class Employee {
     public String getEmployeeLoc() { return employeeLoc; }
 
     public void setEmployeeLoc(String employeeLoc) { this.employeeLoc = employeeLoc; }
+
+    public String getAdmin() { return admin; }
+
+    public void setAdmin(String admin) { this.admin = admin; }
 }
 
 

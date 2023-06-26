@@ -27,14 +27,15 @@
       <Label layoutX="56.0" layoutY="176.0" text="TimeFrame" />
       <ComboBox fx:id="repairStatusCombo" layoutX="157.0" layoutY="93.0" prefWidth="150.0" />
       <ComboBox fx:id="timeframeStatusCombo" layoutX="157.0" layoutY="172.0" prefWidth="150.0" />
-      <Button fx:id="repairsButton" layoutX="411.0" layoutY="134.0" mnemonicParsing="false" onAction="#callStatusSearch" text="Button" />
+      <Button fx:id="repairsButton" layoutX="411.0" layoutY="134.0" mnemonicParsing="false" onAction="#callStatusSearch" text="Run Report" />
       <Label layoutX="809.0" layoutY="27.0" text="Repairs Completed by Employee" />
       <Label layoutX="628.0" layoutY="97.0" text="Name" />
       <Label layoutX="628.0" layoutY="176.0" text="TimeFrame" />
       <ComboBox fx:id="emplloyeeNameCombo" layoutX="734.0" layoutY="93.0" prefWidth="150.0" />
       <ComboBox fx:id="timeFrameCombo" layoutX="734.0" layoutY="172.0" prefWidth="150.0" />
-      <Button fx:id="emplRepairSearch" layoutX="959.0" layoutY="134.0" mnemonicParsing="false" onAction="#emplRepairSearch" text="Button" />
-      <Label fx:id="numRepairsCompleteLabel" layoutX="795.0" layoutY="254.0" text="Label" />
+      <Button fx:id="emplRepairSearch" layoutX="959.0" layoutY="134.0" mnemonicParsing="false" onAction="#emplRepairSearch" text="Run Report" />
+      <Label fx:id="numRepairsCompleteLabel" layoutX="795.0" layoutY="254.0" />
       <Button fx:id="backButton" layoutX="1052.0" layoutY="282.0" mnemonicParsing="false" onAction="#toMain" text="Back" />
+      <Button layoutX="467.0" layoutY="282.0" mnemonicParsing="false" onAction="#setTable" text="Reset Table" />
    </children>
 </AnchorPane>

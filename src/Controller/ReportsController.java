@@ -1,12 +1,12 @@
 package Controller;
 
+import DBAccess.CustomerSQL;
 import DBAccess.EmployeeSQL;
 import DBAccess.RepairSQL;
 import Helper.Scenes;
 import Model.Customers;
 import Model.Employee;
 import Model.Repair;
-import javafx.beans.Observable;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,13 +18,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.Month;
 import java.util.ResourceBundle;
 
+/**
+ * Populates Repair table and includes methods to filter repairs based on repair status and timeframe as well as display about of repairs marked complete per employee based on a timeframe
+ * @param <Repairs>
+ *
+ * @author Matthew Meenan
+ */
 public class ReportsController<Repairs> implements Initializable {
 
     @FXML
@@ -83,26 +88,10 @@ public class ReportsController<Repairs> implements Initializable {
         timeframeStatusCombo.getSelectionModel().select(0);
         repairStatusCombo.setItems(repairStatus);
         repairStatusCombo.getSelectionModel().select(1);
-
-
-
-
-
     }
 
     public void toMain(ActionEvent event) throws IOException {
         Scenes.toMain(event);
-    }
-
-    private ObservableList<Repair> repairsComplete(ActionEvent event) {
-        ObservableList<Repair> searchRepairs = FXCollections.observableArrayList();
-        String status = repairStatusCombo.getValue().toString();
-
-        for (Repair r : joinedRepairs) {
-            //if (r.getStatus().equals(status) && r.get)
-        }
-        return searchRepairs;
-
     }
 
     /**
@@ -118,13 +107,10 @@ public class ReportsController<Repairs> implements Initializable {
         int year = currDate.getYear();
         Month tempMonth;
         int tempYear = 0;
-        System.out.println("Method entered emplRepairs");
-        System.out.println("timeFrame " + timeFrame);
 
         if (timeFrame.equals("Year"))
             for (Repair r : allRepairs) {
                 tempYear = r.getUpdateDate().getYear();
-                System.out.println("Repair Year" + tempYear + "Curr YEar " + year);
                 if (r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && tempYear == year) {
                     searchEmpl.add(r);
 
@@ -146,7 +132,6 @@ public class ReportsController<Repairs> implements Initializable {
             LocalDate date;
             for (Repair r : allRepairs) {
                 date = r.getUpdateDate().toLocalDate();
-                System.out.println("Repair date " + date + " CurrDate " + currDate);
                 if (r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && date.equals(currDate) || date.isAfter(currDate) && date.isBefore(currDate.plusDays(7))) {
                     searchEmpl.add(r);
 
@@ -170,6 +155,7 @@ public class ReportsController<Repairs> implements Initializable {
     private ObservableList<Repair> totalRepairsCompleted() {
         ObservableList<Repair> rep = FXCollections.observableArrayList();
         ObservableList<Repair> allRep = RepairSQL.getAllRepairs();
+        Customers cust = null;
         String timeFrame = timeframeStatusCombo.getValue().toString();
         String status = repairStatusCombo.getValue().toString();
         Month month = currDate.getMonth();
@@ -182,7 +168,8 @@ public class ReportsController<Repairs> implements Initializable {
             for (Repair r : allRep) {
                 date = r.getUpdateDate().toLocalDate();
                 if (r.getStatus().toLowerCase().contains(status.toLowerCase()) && date.equals(currDate) || date.isAfter(currDate) && date.isBefore(currDate.plusDays(7))) {
-                    Repair repair = new Repair(r.getDevice(), r.getCustName(), r.getCustPhone(), r.getCreateDate(), r.getRepairId(), r.getDueDate(), r.getStatus(), r.getAssgnempl(), r.getNotes(), r.getCustomerId(), r.getType());
+                    cust = getCustomerNamePhone(r.getCustomerId());
+                    Repair repair = new Repair(r.getDevice(), cust.getCustName(), cust.getCustPhone(), r.getCreateDate(), r.getRepairId(), r.getDueDate(), r.getStatus(), r.getAssgnempl(), r.getNotes(), r.getCustomerId(), r.getType());
                     rep.add(repair);
                 }
             }
@@ -192,9 +179,9 @@ public class ReportsController<Repairs> implements Initializable {
             for (Repair r : allRep) {
                 tempMonth = r.getUpdateDate().getMonth();
                 tempYear = r.getUpdateDate().getYear();
-                System.out.println(tempMonth + "/" + tempYear + "Curr Month/Year " + month + "/" + year );
                 if (r.getStatus().toLowerCase().contains(status.toLowerCase()) && tempMonth.equals(month) && tempYear == year) {
-                    Repair repair = new Repair(r.getDevice(), r.getCustName(), r.getCustPhone(), r.getCreateDate(), r.getRepairId(), r.getDueDate(), r.getStatus(), r.getAssgnempl(), r.getNotes(), r.getCustomerId(), r.getType());
+                    cust = getCustomerNamePhone(r.getCustomerId());
+                    Repair repair = new Repair(r.getDevice(), cust.getCustName(), cust.getCustPhone(), r.getCreateDate(), r.getRepairId(), r.getDueDate(), r.getStatus(), r.getAssgnempl(), r.getNotes(), r.getCustomerId(), r.getType());
                     rep.add(repair);
                 }
             }
@@ -203,14 +190,26 @@ public class ReportsController<Repairs> implements Initializable {
         if (timeFrame.equals("Year")) {
             for (Repair r : allRep) {
                 tempYear = r.getUpdateDate().getYear();
-                System.out.println("Repair Year" + tempYear + "Curr YEar " + year);
                 if (r.getStatus().toLowerCase().contains(status.toLowerCase()) && tempYear == year) {
-                    Repair repair = new Repair(r.getDevice(), r.getCustName(), r.getCustPhone(), r.getCreateDate(), r.getRepairId(), r.getDueDate(), r.getStatus(), r.getAssgnempl(), r.getNotes(), r.getCustomerId(), r.getType());
+                    cust = getCustomerNamePhone(r.getCustomerId());
+                    Repair repair = new Repair(r.getDevice(), cust.getCustName(), cust.getCustPhone(), r.getCreateDate(), r.getRepairId(), r.getDueDate(), r.getStatus(), r.getAssgnempl(), r.getNotes(), r.getCustomerId(), r.getType());
                     rep.add(repair);
                 }
             }
         }
         return rep;
+    }
+
+    private Customers getCustomerNamePhone(int custID) {
+        ObservableList<Customers> allCust = CustomerSQL.getAllCust();
+        Customers currCust = null;
+
+        for (Customers c : allCust) {
+            if (c.getCustId() == custID) {
+                currCust = c;
+            }
+        }
+        return currCust;
     }
 
     public void callStatusSearch(ActionEvent event) {
