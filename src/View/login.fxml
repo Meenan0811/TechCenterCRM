@@ -11,12 +11,12 @@
         <AnchorPane layoutX="14.0" layoutY="8.0" prefHeight="385.0" prefWidth="569.0">
             <children>
                 <TextField fx:id="userText" layoutX="210.0" layoutY="105.0" promptText="Enter Username" />
+                <PasswordField fx:id="passWordPassField" layoutX="213.0" layoutY="223.0" promptText="Enter Password" />
                 <Label fx:id="userNameLabel" layoutX="259.0" layoutY="63.0" text="Username" />
                 <Label fx:id="passLabel" layoutX="259.0" layoutY="176.0" text="Password" />
                 <Label fx:id="locLabel" layoutX="161.0" layoutY="335.0" text="Locale" />
                 <Label fx:id="locTagLabel" layoutX="344.0" layoutY="335.0" text="CurrentLocale" />
                 <Button fx:id="submitButton" layoutX="259.0" layoutY="282.0" mnemonicParsing="false" onAction="#setSubmitButton" text="Submit" />
-                <PasswordField fx:id="passWordPassField" layoutX="213.0" layoutY="223.0" promptText="Enter Password" />
             </children>
         </AnchorPane>
     </children>

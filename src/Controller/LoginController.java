@@ -72,7 +72,7 @@ public class LoginController implements Initializable {
         userText.setPromptText(rb.getString("userText"));
         passWordPassField.setPromptText(rb.getString("passField"));*/
         //CustomerSQL.addCust("Test Guy","(609)123-1234", "29 Black Oak Dr", "Ocean View", "NJ", 0, "Test Guy", "Test Guy");
-        EmployeeSQL.addEmployee("Test Guy", "admin", "admin", "Ocean View", "Yes");
+        //EmployeeSQL.addEmployee("Test Guy", "admin", "admin", "Ocean View", "Yes");
         LocalDateTime date = LocalDateTime.now();
         //RepairSQL.addRepair("Tablet", 1, 0, "Test Notes, test Notes", "Employee", date,  "In repair", "Employee", "Employee");
         //PartsSQL.addPart("Labor", 1000);
@@ -103,7 +103,7 @@ public class LoginController implements Initializable {
 
             if(userName.contains(tempU) && pass.contains(tempP)) {
                 valid = true;
-                this.currUserId = e.getemployeeID();
+                this.currUserId = e.getEmployeeID();
 
 
                 Scenes.toMain(actionEvent);

@@ -30,7 +30,7 @@
         </TableView>
         <TableView fx:id="emplTable" layoutX="83.0" layoutY="365.0" prefHeight="200.0" prefWidth="313.0">
             <columns>
-                <TableColumn fx:id="emplIdCol" prefWidth="55.0" text="ID" />
+                <TableColumn fx:id="idCol" prefWidth="55.0" text="ID" />
                 <TableColumn fx:id="emplNameCol" prefWidth="136.0" text="Name" />
                 <TableColumn fx:id="employeeLocCol" prefWidth="119.0" text="Location" />
             </columns>

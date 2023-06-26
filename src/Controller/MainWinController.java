@@ -80,7 +80,7 @@ public class MainWinController implements Initializable {
         @FXML
         private TableView emplTable;
         @FXML
-        private TableColumn emplIdCol;
+        private TableColumn idCol;
         @FXML
         private TableColumn emplNameCol;
         @FXML
@@ -154,10 +154,9 @@ public class MainWinController implements Initializable {
         public void setEmployeeTable(ObservableList<Employee> allEmployee){
             emplTable.setItems(allEmployee);
 
-            //emplIdCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
+            idCol.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("employeeID"));
             emplNameCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeName"));
             employeeLocCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLoc"));
-            System.out.println(allEmployee);
         }
 
     public void allSelected() {
@@ -189,22 +188,36 @@ public class MainWinController implements Initializable {
      }
 
      public void toAddEmpl(ActionEvent event) throws IOException {
-         for (Employee e : allEmployee) {
-             if (e.getemployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
+         Boolean admin = false;
+            for (Employee e : allEmployee) {
+             if (e.getEmployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
+                 admin = true;
+             }
+             if (admin == true) {
                  Scenes.toAddEmpl(event);
-             } else {
+             }else {
                  Alerts.alertMessage(11);
              }
          }
      }
 
      public void toEditEmpl(ActionEvent event) throws IOException {
-            if (emplTable.getSelectionModel().getSelectedItem() != null) {
-                passEmployee = Employee.class.cast(emplTable.getSelectionModel().getSelectedItem());
-                Scenes.toAddEmpl(event);
-            }else {
-                Alerts.alertMessage(10);
+
+            for (Employee e : allEmployee) {
+                if (e.getEmployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")){
+                    if (emplTable.getSelectionModel().getSelectedItem() != null) {
+                        passEmployee = Employee.class.cast(emplTable.getSelectionModel().getSelectedItem());
+                        Scenes.toAddEmpl(event);
+                    }else {
+                        Alerts.alertMessage(10);
+                    }
+                }else if (e.getEmployeeID() == LoginController.currUserId) {
+                    passEmployee = e;
+                    Scenes.toAddEmpl(event);
+                }
             }
+
+
      }
 
      public void deleteRepair(ActionEvent event) {

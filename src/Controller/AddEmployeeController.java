@@ -35,27 +35,40 @@ public class AddEmployeeController  implements Initializable {
     private String location;
     private int emplID = -1;
     private ObservableList<String> adminBox = FXCollections.observableArrayList("No", "Yes");
-    private Employee currEmpl = null;
+    private ObservableList<String> noAdmin = FXCollections.observableArrayList("No");
+    private ObservableList<Employee> allEmpl = FXCollections.observableArrayList();
+    private Employee currEmpl = MainWinController.passEmployee;
+    private Employee loggedInEmpl = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        allEmpl = EmployeeSQL.allEmployees();
         adminCombo.setItems(adminBox);
-        adminCombo.getSelectionModel().select(1);
+        adminCombo.getSelectionModel().select(0);
+        emplID = currEmpl.getEmployeeID();
+
+        for (Employee e : allEmpl) {
+            if (e.getEmployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
+                loggedInEmpl = e;
+            }
+        }
+
 
         if (emplID > 0) {
-            currEmpl = MainWinController.passEmployee;
+            emplID = currEmpl.getEmployeeID();
             employeeNametext.setText(currEmpl.getEmployeeName());
             employeeNametext.setEditable(false);
             locText.setText(currEmpl.getEmployeeLoc());
             locText.setEditable(false);
-            adminCombo.setValue(currEmpl.getAdmin());
+            adminCombo.setItems(noAdmin);
             adminCombo.setEditable(false);
             userNameText.setText(currEmpl.getUserName());
             pwText.setText(currEmpl.getPassWord());
 
-            if (currEmpl.getAdmin().equals("Yes")) {
+            if (loggedInEmpl != null && loggedInEmpl.getAdmin().equals("Yes")) {
                 employeeNametext.setEditable(true);
-                adminCombo.setEditable(true);
+                adminCombo.setItems(adminBox);
+                adminCombo.getSelectionModel().select(0);
                 locText.setEditable(true);
             }
         }

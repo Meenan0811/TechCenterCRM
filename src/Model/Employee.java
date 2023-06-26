@@ -29,7 +29,7 @@ public class Employee {
      * Get methods for User object
      * @return
      */
-    public int getemployeeID() { return this.employeeID; }
+    public int getEmployeeID() { return this.employeeID; }
 
     public String getUserName() { return this.userName; }
 
