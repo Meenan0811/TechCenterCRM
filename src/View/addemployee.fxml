@@ -21,6 +21,6 @@
       <Label layoutX="134.0" layoutY="368.0" text="Administrator Privileges" />
       <ComboBox fx:id="adminCombo" layoutX="292.0" layoutY="364.0" prefWidth="150.0" />
       <Label layoutX="134.0" layoutY="297.0" text="Location" />
-      <TextField fx:id="locText" layoutX="292.0" layoutY="293.0" />
+      <ComboBox fx:id="locCombo" layoutX="286.0" layoutY="293.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

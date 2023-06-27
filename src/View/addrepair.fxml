@@ -11,6 +11,7 @@
 
 <AnchorPane prefHeight="709.0" prefWidth="528.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Controller.AddRepairController">
    <children>
+      <ComboBox fx:id="deviceTypeCombo" layoutX="235.0" layoutY="123.0" prefWidth="150.0" />
       <Button fx:id="saveRepairbutton" layoutX="106.0" layoutY="609.0" mnemonicParsing="false" onAction="#saveRepair" text="Save" />
       <Button fx:id="cancelRepairButton" layoutX="296.0" layoutY="609.0" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
       <Label layoutX="214.0" layoutY="30.0" text="Repair Information" />
@@ -22,7 +23,6 @@
       <DatePicker fx:id="tatDatepicker" layoutX="235.0" layoutY="172.0" />
       <ComboBox fx:id="statusCombo" layoutX="235.0" layoutY="228.0" prefWidth="150.0" />
       <ComboBox fx:id="assgnEmplCombo" layoutX="235.0" layoutY="277.0" prefWidth="150.0" />
-      <ComboBox fx:id="deviceTypeCombo" layoutX="235.0" layoutY="123.0" prefWidth="150.0" />
       <TextField fx:id="repairNotesText" layoutX="222.0" layoutY="456.0" prefHeight="134.0" prefWidth="230.0" />
       <ComboBox fx:id="custNameCombo" layoutX="235.0" layoutY="331.0" prefWidth="150.0" />
       <Label layoutX="92.0" layoutY="335.0" text="Customer Name" />
@@ -30,7 +30,8 @@
       <ComboBox fx:id="partCombo" layoutX="235.0" layoutY="385.0" onMouseReleased="#updatePartQty" prefWidth="150.0" />
       <Label fx:id="numPartsLabel" layoutX="399.0" layoutY="335.0" />
       <Label fx:id="partQtyLabel" layoutX="480.0" layoutY="335.0" />
-      <RadioButton fx:id="dataTransferRadio" layoutX="219.0" layoutY="71.0" mnemonicParsing="false" onAction="#dataTransferSelected" text="Data transfer" />
-      <Button fx:id="saveDtButton" layoutX="116.0" layoutY="619.0" mnemonicParsing="false" onAction="#saveDT" text="Save DT" visible="false" />
+      <RadioButton fx:id="dataTransferRadio" layoutX="101.0" layoutY="71.0" mnemonicParsing="false" onAction="#dataTransferSelected" text="Data transfer" />
+      <Button fx:id="saveDtButton" layoutX="105.0" layoutY="609.0" mnemonicParsing="false" onAction="#saveDT" text="Save" visible="false" />
+      <RadioButton fx:id="repairRadio" layoutX="267.0" layoutY="71.0" mnemonicParsing="false" onAction="#repairSelected" text="Repair" />
    </children>
 </AnchorPane>

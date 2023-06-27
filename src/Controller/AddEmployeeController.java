@@ -4,6 +4,7 @@ import DBAccess.EmployeeSQL;
 import Helper.Alerts;
 import Helper.Scenes;
 import Model.Employee;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -25,7 +26,7 @@ public class AddEmployeeController  implements Initializable {
     @FXML
     private TextField pwText;
     @FXML
-    private TextField locText;
+    private ComboBox locCombo;
     @FXML
     private ComboBox adminCombo;
     private String admin;
@@ -36,6 +37,8 @@ public class AddEmployeeController  implements Initializable {
     private int emplID = -1;
     private ObservableList<String> adminBox = FXCollections.observableArrayList("No", "Yes");
     private ObservableList<String> noAdmin = FXCollections.observableArrayList("No");
+    private ObservableList<String> loc = FXCollections.observableArrayList("001", "002");
+    private ObservableList<String> locNonAdmin = FXCollections.observableArrayList();
     private ObservableList<Employee> allEmpl = FXCollections.observableArrayList();
     private Employee currEmpl = MainWinController.passEmployee;
     private Employee loggedInEmpl = null;
@@ -46,6 +49,8 @@ public class AddEmployeeController  implements Initializable {
         adminCombo.setItems(adminBox);
         adminCombo.getSelectionModel().select(0);
         emplID = currEmpl.getEmployeeID();
+        locCombo.setItems(loc);
+        locCombo.getSelectionModel().select(0);
 
         for (Employee e : allEmpl) {
             if (e.getEmployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
@@ -55,11 +60,11 @@ public class AddEmployeeController  implements Initializable {
 
 
         if (emplID > 0) {
+            locNonAdmin.add(loggedInEmpl.getEmployeeLoc());
             emplID = currEmpl.getEmployeeID();
             employeeNametext.setText(currEmpl.getEmployeeName());
             employeeNametext.setEditable(false);
-            locText.setText(currEmpl.getEmployeeLoc());
-            locText.setEditable(false);
+            locCombo.setItems(locNonAdmin);
             adminCombo.setItems(noAdmin);
             adminCombo.setEditable(false);
             userNameText.setText(currEmpl.getUserName());
@@ -69,7 +74,8 @@ public class AddEmployeeController  implements Initializable {
                 employeeNametext.setEditable(true);
                 adminCombo.setItems(adminBox);
                 adminCombo.getSelectionModel().select(0);
-                locText.setEditable(true);
+                locCombo.setItems(loc);
+                locCombo.getSelectionModel().select(0);
             }
         }
     }
@@ -80,7 +86,7 @@ public class AddEmployeeController  implements Initializable {
             emplName = employeeNametext.getText();
             userName = userNameText.getText();
             pw = pwText.getText();
-            location = locText.getText();
+            location = locCombo.getValue().toString();
             admin = adminCombo.getValue().toString();
 
             if (emplID > 0) {
