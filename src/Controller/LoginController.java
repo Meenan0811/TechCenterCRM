@@ -89,7 +89,7 @@ public class LoginController implements Initializable {
 
     /**
      * Verify's that information provided in Username and Password fields match a Username and Password in database. If match found call's toMain and provides user access to main screen. If no match found alerts user.
-     * All login attempts are logged with Username, date, and time in a .txt file
+     * All login attempts are logged with Username, UserId, date, and time in a .txt file
      * @param actionEvent
      * @throws IOException
      */
@@ -113,7 +113,6 @@ public class LoginController implements Initializable {
 
 
                 Scenes.toMain(actionEvent);
-                //Appt.immediateAppt();
 
                 try {
                     PrintWriter pw = new PrintWriter(new FileOutputStream(

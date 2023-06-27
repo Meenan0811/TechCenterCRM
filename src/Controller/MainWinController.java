@@ -30,11 +30,11 @@ public class MainWinController implements Initializable {
 
 
     /**
-     *MainWindow controller, populates Appointment and customer windows. Passes selected data from Main Controller to next screen
+     *MainWindow controller, populates Repair, Employee and customer tables. Passes selected data from Main Controller to next screen
      *
      *
      *
-     * @author Matt Meenan
+     * @author Matthew Meenan
      */
 
         @FXML
@@ -110,12 +110,6 @@ public class MainWinController implements Initializable {
         public static Repair passRepair;
         public static Customers passCust;
 
-
-    /**
-         * OverRides initialize method of Initializable class
-         * @param url
-         * @param resourceBundle
-         */
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
             passCust = null;

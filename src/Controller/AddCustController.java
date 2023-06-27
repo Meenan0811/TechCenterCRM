@@ -48,6 +48,13 @@ public class AddCustController implements Initializable {
     private ObservableList<Customers> allCust = FXCollections.observableArrayList();
     private ObservableList<String> allStates = FXCollections.observableArrayList("AL", "Ak", "AZ", "AR", "CA", "CO", "CT", "DE", "FL", "GA", "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", "SD", "TN", "TX", "UT", "VT", "VA", "WAS", "WV", "WI", "WY");
 
+    /**
+     * Class to add and edit customers
+     *
+     * @author Matthew Meenan
+     * @param url
+     * @param resourceBundle
+     */
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {

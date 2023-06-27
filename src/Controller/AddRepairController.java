@@ -14,16 +14,17 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 
-import javax.swing.*;
-import javax.xml.crypto.Data;
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.Month;
 import java.util.ResourceBundle;
 
+/**
+ * Class to add and edit repairs.
+ *
+ * @author Matthew Meenan
+ */
 public class AddRepairController implements Initializable {
 
     @FXML
@@ -122,10 +123,6 @@ public class AddRepairController implements Initializable {
                 tatDatepicker.setValue(currRepair.getDueDate());
                 custNameCombo.setValue(getCustomer(currRepair.getCustomerId()));
                 dataTransferSelected();
-                /*partCombo.setItems(devices);
-                partCombo.setValue(dt.getOldDevice());
-                dataTransferRadio.setSelected(true);
-                System.out.println("Old Device " + dt.getOldDevice());*/
             }
 
         }

@@ -4,7 +4,6 @@ import DBAccess.EmployeeSQL;
 import Helper.Alerts;
 import Helper.Scenes;
 import Model.Employee;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -16,6 +15,12 @@ import javafx.scene.control.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+
+/**
+ * Class to add and edit employees based on Admin privileges.
+ *
+ * @author Matthew Meenan
+ */
 
 public class AddEmployeeController  implements Initializable {
 
@@ -40,17 +45,19 @@ public class AddEmployeeController  implements Initializable {
     private ObservableList<String> loc = FXCollections.observableArrayList("001", "002");
     private ObservableList<String> locNonAdmin = FXCollections.observableArrayList();
     private ObservableList<Employee> allEmpl = FXCollections.observableArrayList();
-    private Employee currEmpl = MainWinController.passEmployee;
+    private Employee currEmpl = null;
     private Employee loggedInEmpl = null;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        currEmpl = MainWinController.passEmployee;
         allEmpl = EmployeeSQL.allEmployees();
         adminCombo.setItems(adminBox);
         adminCombo.getSelectionModel().select(0);
         emplID = currEmpl.getEmployeeID();
         locCombo.setItems(loc);
         locCombo.getSelectionModel().select(0);
+
 
         for (Employee e : allEmpl) {
             if (e.getEmployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
@@ -60,7 +67,7 @@ public class AddEmployeeController  implements Initializable {
 
 
         if (emplID > 0) {
-            locNonAdmin.add(loggedInEmpl.getEmployeeLoc());
+            locNonAdmin.add(currEmpl.getEmployeeLoc());
             emplID = currEmpl.getEmployeeID();
             employeeNametext.setText(currEmpl.getEmployeeName());
             employeeNametext.setEditable(false);
@@ -69,12 +76,14 @@ public class AddEmployeeController  implements Initializable {
             adminCombo.setEditable(false);
             userNameText.setText(currEmpl.getUserName());
             pwText.setText(currEmpl.getPassWord());
+            System.out.println(loggedInEmpl.getEmployeeName() + " " + loggedInEmpl.getAdmin());
 
             if (loggedInEmpl != null && loggedInEmpl.getAdmin().equals("Yes")) {
                 employeeNametext.setEditable(true);
                 adminCombo.setItems(adminBox);
-                adminCombo.getSelectionModel().select(0);
+                adminCombo.setValue(currEmpl.getAdmin());
                 locCombo.setItems(loc);
+                locCombo.setValue(currEmpl.getEmployeeLoc());
                 locCombo.getSelectionModel().select(0);
             }
         }

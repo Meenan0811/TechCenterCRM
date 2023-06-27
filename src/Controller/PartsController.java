@@ -16,6 +16,11 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ * Allows user to add and edit parts
+ *
+ * @author Matthew Meenan
+ */
 public class PartsController implements Initializable {
 
     @FXML
