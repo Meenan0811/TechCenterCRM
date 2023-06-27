@@ -79,6 +79,12 @@ public abstract class Alerts {
             alert.setContentText("Only administrators can add employees, please speak to a supervisor");
             alert.showAndWait();
         }
+        if(code == 12) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Location Code");
+            alert.setContentText("Location Code must be either 001 or 002, please check your entry");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {

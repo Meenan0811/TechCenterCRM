@@ -72,10 +72,6 @@ public class AddEmployeeController  implements Initializable {
                 locText.setEditable(true);
             }
         }
-
-
-
-
     }
 
     public void saveEmpl(ActionEvent event) {
@@ -89,15 +85,33 @@ public class AddEmployeeController  implements Initializable {
 
             if (emplID > 0) {
                 EmployeeSQL.editEmployee(emplID, emplName, userName, pw, location, admin);
+                Scenes.toMain(event);
             }else {
                 EmployeeSQL.addEmployee(emplName, userName, pw, location, admin);
+                Scenes.toMain(event);
             }
-        }catch (NullPointerException | NumberFormatException e) {
+        }catch (NullPointerException | NumberFormatException | IOException e) {
             Alerts.alertMessage(4);
             e.printStackTrace();
         }
 
     }
+
+    /*private Boolean validateLocation(String loc) {
+        Boolean validate = false;
+        try {
+            int location = Integer.parseInt(loc);
+            if (location == 001 || location == 002) {
+                validate = true;
+            }else {
+                Alerts.alertMessage(12);
+            }
+        }catch(NumberFormatException | NullPointerException e) {
+            Alerts.alertMessage(12);
+            e.printStackTrace();
+        }
+        return validate;
+    }*/
 
     public void toMain(ActionEvent event) throws IOException {
         Scenes.toMain(event);
