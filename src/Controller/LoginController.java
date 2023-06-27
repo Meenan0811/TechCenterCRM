@@ -74,8 +74,14 @@ public class LoginController implements Initializable {
         //CustomerSQL.addCust("Test Guy","(609)123-1234", "29 Black Oak Dr", "Ocean View", "NJ", 0, "Test Guy", "Test Guy");
         //EmployeeSQL.addEmployee("Test Guy", "admin", "admin", "Ocean View", "Yes");
         LocalDateTime date = LocalDateTime.now();
+        LocalDate minusYear = LocalDate.now().withYear(2020);
+        LocalDate minusMonth = LocalDate.now().minusMonths(2);
+        LocalDate minusWeeks = LocalDate.now().minusWeeks(2);
         //RepairSQL.addRepair("Tablet", 1, 0, "Test Notes, test Notes", "Employee", date,  "In repair", "Employee", "Employee");
         //PartsSQL.addPart("Labor", 1000);
+        //RepairSQL.addRepair("Personal Computer", 2, 1, "Testy TEsty `123", "admin", minusMonth, "In Repair", "Test Guy", "admin", "Repair");
+        //RepairSQL.addRepair("Personal Computer", 2, 1, "Number 2", "admin", minusYear, "Completed", "admin", "admin", "DT");
+        //RepairSQL.addRepair("Phone", 2, 1, "Number 3", "Test Guy", minusWeeks, "In Repair", "Test Guy", "admin", "Repair");
 
 
 
@@ -113,7 +119,7 @@ public class LoginController implements Initializable {
                     PrintWriter pw = new PrintWriter(new FileOutputStream(
                             "login_activty.txt",
                             true ));
-                    pw.append("Login Attempt: " + curDate.format(DateTimeFormatter.ofPattern(dateTimeFormat)) + "\nBy:" + userName + " Succesfull.\n");
+                    pw.append("Login Attempt: " + curDate.format(DateTimeFormatter.ofPattern(dateTimeFormat)) + "\nBy:" + userName + " UserId: " + currUserId + " Successful.\n");
                     pw.close();
                 }
                 catch(FileNotFoundException ex) {
@@ -129,7 +135,7 @@ public class LoginController implements Initializable {
                 PrintWriter pw = new PrintWriter(new FileOutputStream(
                         "login_activty.txt",
                         true ));
-                pw.append("Login Attempt: " + curDate.format(DateTimeFormatter.ofPattern(dateTimeFormat)) + "\nBy:" + userName + " Failed.\n");
+                pw.append("Login Attempt: " + curDate.format(DateTimeFormatter.ofPattern(dateTimeFormat)) + "\nBy:" + userName + " UserId: " + currUserId + " Failed.\n");
                 pw.close();
             }
             catch(FileNotFoundException e) {

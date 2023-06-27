@@ -36,6 +36,6 @@
       <Button fx:id="emplRepairSearch" layoutX="959.0" layoutY="134.0" mnemonicParsing="false" onAction="#emplRepairSearch" text="Run Report" />
       <Label fx:id="numRepairsCompleteLabel" layoutX="795.0" layoutY="254.0" />
       <Button fx:id="backButton" layoutX="1052.0" layoutY="282.0" mnemonicParsing="false" onAction="#toMain" text="Back" />
-      <Button layoutX="467.0" layoutY="282.0" mnemonicParsing="false" onAction="#setTable" text="Reset Table" />
+      <Button layoutX="467.0" layoutY="282.0" mnemonicParsing="false" onAction="#resetTable" text="Reset Table" />
    </children>
 </AnchorPane>

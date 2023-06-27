@@ -18,9 +18,11 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.time.Month;
 import java.util.ResourceBundle;
 
 public class MainWinController implements Initializable {
@@ -101,6 +103,7 @@ public class MainWinController implements Initializable {
         private ObservableList<Repair> allcustRepair = FXCollections.observableArrayList();
         private ObservableList<Employee> allEmployee = FXCollections.observableArrayList();
         private ObservableList<Customers> allCustomers = FXCollections.observableArrayList();
+        private ObservableList<Repair> tempRepair = FXCollections.observableArrayList();
 
 
         public static Employee passEmployee;
@@ -303,6 +306,10 @@ public class MainWinController implements Initializable {
         return searchDevice;
     }
 
+    /**
+     * Calls deviceSearch, repairStatusSearch methods, and customerNameSearch methods and then passes results to setRepairTable method
+     * @param event
+     */
     public void search(ActionEvent event) {
         String search = searchRepairTextField.getText();
         ObservableList<Repair> searchResults = customerSearchName(search);
@@ -320,6 +327,56 @@ public class MainWinController implements Initializable {
         setRepairTable(searchResults);
     }
 
+    /**
+     * Populates repairTable with results bsed on which radio button is selected
+     * @param event
+     * @return
+     */
+    public void monthSelected(ActionEvent event) throws IOException {
+        tempRepair.clear();
+        Month month = currDate.getMonth();
+        int year = currDate.getYear();
+        Month tempMonth;
+        int tempYear;
+        weekRadio.setSelected(false);
+        allRadio.setSelected(false);
+        monthRadio.setSelected(true);
+
+        for (Repair r : allcustRepair) {
+            tempMonth = r.getDueDate().getMonth();
+            tempYear = r.getDueDate().getYear();
+            System.out.println("Month Selected");
+            if (tempMonth.equals(month) && tempYear == year) {
+                tempRepair.add(r);
+            }
+            setRepairTable(tempRepair);
+        }
+    }
+
+    public void weekSelected(ActionEvent event) {
+        LocalDate date;
+        tempRepair.clear();
+        monthRadio.setSelected(false);
+        allRadio.setSelected(false);
+        weekRadio.setSelected(true);
+
+        for (Repair r : allcustRepair) {
+            date = r.getDueDate();
+            System.out.println("Week Selected");
+            if (date.equals(currDate) || date.isAfter(currDate) && date.isBefore(currDate.plusDays(7))) {
+                tempRepair.add(r);
+            }
+        }
+        setRepairTable(tempRepair);
+    }
+
+    public void allSeleceted() {
+        monthRadio.setSelected(false);
+        weekRadio.setSelected(false);
+        allRadio.setSelected(true);
+
+        setRepairTable(allcustRepair);
+    }
 
 
 }

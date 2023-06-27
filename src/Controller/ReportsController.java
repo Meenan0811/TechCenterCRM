@@ -99,7 +99,6 @@ public class ReportsController<Repairs> implements Initializable {
      * @return
      */
     private String  emplRepairsComplete() {
-        ObservableList<Repair> searchEmpl = FXCollections.observableArrayList();
         ObservableList<Repair> allRepairs = RepairSQL.getAllRepairs();
         String empl = emplloyeeNameCombo.getValue().toString();
         String timeFrame = timeFrameCombo.getValue().toString();
@@ -107,38 +106,40 @@ public class ReportsController<Repairs> implements Initializable {
         int year = currDate.getYear();
         Month tempMonth;
         int tempYear = 0;
+        int repairComplete = 0;
 
         if (timeFrame.equals("Year"))
+            repairComplete = 0;
             for (Repair r : allRepairs) {
                 tempYear = r.getUpdateDate().getYear();
-                if (r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && tempYear == year) {
-                    searchEmpl.add(r);
-
+                if (r.getStatus().equals("Completed") && r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && tempYear == year) {
+                    repairComplete = repairComplete + 1;
                 }
             }
 
         if (timeFrame.equals("Month")) {
+            repairComplete = 0;
             for (Repair r : allRepairs) {
                 tempMonth = r.getUpdateDate().getMonth();
                 tempYear = r.getUpdateDate().getYear();
-                System.out.println(tempMonth + "/" + tempYear + "Curr Month/Year " + month + "/" + year );
-                if (r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && tempMonth.equals(month) && tempYear == year) {
-                    searchEmpl.add(r);
+
+                if (r.getStatus().equals("Completed") && r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && tempMonth.equals(month) && tempYear == year) {
+                    repairComplete = repairComplete + 1;
                 }
             }
         }
 
         if (timeFrame.equals("Week")) {
             LocalDate date;
+            repairComplete = 0;
             for (Repair r : allRepairs) {
                 date = r.getUpdateDate().toLocalDate();
-                if (r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && date.equals(currDate) || date.isAfter(currDate) && date.isBefore(currDate.plusDays(7))) {
-                    searchEmpl.add(r);
-
+                if (r.getStatus().equals("Completed") && r.getAssgnempl().toLowerCase().contains(empl.toLowerCase()) && date.equals(currDate) || date.isAfter(currDate) && date.isBefore(currDate.plusDays(7))) {
+                    repairComplete = repairComplete + 1;
                 }
             }
         }
-        return String.valueOf(searchEmpl.size());
+        return String.valueOf(repairComplete);
     }
 
     /**
@@ -149,7 +150,6 @@ public class ReportsController<Repairs> implements Initializable {
     public void emplRepairSearch(ActionEvent event) {
         String numRepairs = emplRepairsComplete();
         numRepairsCompleteLabel.setText(numRepairs);
-        System.out.println("Button Pressed");
     }
 
     private ObservableList<Repair> totalRepairsCompleted() {
@@ -227,5 +227,9 @@ public class ReportsController<Repairs> implements Initializable {
         statusCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("status"));
         typeCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("type"));
         assgnEmployeeCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("assgnempl"));
+    }
+
+    public void resetTable(ActionEvent event) {
+        setTable(joinedRepairs);
     }
 }
