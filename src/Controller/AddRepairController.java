@@ -354,20 +354,4 @@ public class AddRepairController implements Initializable {
             e.printStackTrace();
         }
     }
-
-    public Boolean validateDate(LocalDate tat) {
-       /* Month month = LocalDate.now().getMonth();
-        int year = LocalDate.now().getYear();
-        int day = LocalDate.now().getDayOfYear(); */
-        LocalDate currDate = LocalDate.now();
-        Boolean validate = false;
-
-        if (currDate.isBefore(tat)) {
-            Alerts.alertMessage(13);
-        }else {
-            validate = true;
-        }
-        return validate;
-    }
-
 }
