@@ -11,7 +11,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
- * Contains methods to pass SQL commands to database and retrieve information from Users table
+ * Contains methods to pass SQL commands to database and retrieve information from Employees table
+ *
  * @author Matthew Meenan
  */
 public abstract class EmployeeSQL {

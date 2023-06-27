@@ -9,6 +9,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+/**
+ * Passes SQL Commands to database and adds, updates, retrieves, and deletes information from Parts table
+ */
 public abstract class PartsSQL {
 
     public static ObservableList<Parts> getParts(){
