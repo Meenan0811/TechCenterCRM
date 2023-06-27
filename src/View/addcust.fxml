@@ -18,11 +18,11 @@
       <Label layoutX="90.0" layoutY="217.0" text="City" />
       <Label layoutX="84.0" layoutY="263.0" text="State" />
       <Label layoutX="84.0" layoutY="319.0" text="Zip Code" />
-      <TextField fx:id="custNameText" layoutX="217.0" layoutY="70.0" />
-      <TextField fx:id="custPhoneText" layoutX="217.0" layoutY="113.0" />
-      <TextField fx:id="custStreetText" layoutX="217.0" layoutY="163.0" />
-      <TextField fx:id="custCityText" layoutX="217.0" layoutY="213.0" />
-      <TextField fx:id="custZipText" layoutX="217.0" layoutY="315.0" />
+      <TextField fx:id="custNameText" layoutX="217.0" layoutY="70.0" promptText="Customer Name" />
+      <TextField fx:id="custPhoneText" layoutX="217.0" layoutY="113.0" promptText="(000)123-4567" />
+      <TextField fx:id="custStreetText" layoutX="217.0" layoutY="163.0" promptText="Street" />
+      <TextField fx:id="custCityText" layoutX="217.0" layoutY="213.0" promptText="City" />
+      <TextField fx:id="custZipText" layoutX="217.0" layoutY="315.0" promptText="12345" />
       <ComboBox fx:id="custStateCombo" layoutX="217.0" layoutY="259.0" prefWidth="150.0" />
    </children>
 </AnchorPane>

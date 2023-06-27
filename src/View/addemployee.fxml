@@ -13,11 +13,11 @@
       <Button fx:id="employeeCancel" layoutX="367.0" layoutY="448.0" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
       <Label fx:id="addEmployeeHead" layoutX="272.0" layoutY="38.0" text="Add Employee" />
       <Label layoutX="132.0" layoutY="93.0" text="Name" />
-      <Label layoutX="132.0" layoutY="165.0" text="UserName" />
+      <Label layoutX="132.0" layoutY="165.0" text="Username" />
       <Label layoutX="132.0" layoutY="234.0" text="Password" />
-      <TextField fx:id="employeeNametext" layoutX="286.0" layoutY="89.0" />
-      <TextField fx:id="userNameText" layoutX="286.0" layoutY="161.0" />
-      <TextField fx:id="pwText" layoutX="292.0" layoutY="230.0" />
+      <TextField fx:id="employeeNametext" layoutX="286.0" layoutY="89.0" promptText="Employee Name" />
+      <TextField fx:id="userNameText" layoutX="286.0" layoutY="161.0" promptText="Username" />
+      <TextField fx:id="pwText" layoutX="292.0" layoutY="230.0" promptText="Password" />
       <Label layoutX="134.0" layoutY="368.0" text="Administrator Privileges" />
       <ComboBox fx:id="adminCombo" layoutX="292.0" layoutY="364.0" prefWidth="150.0" />
       <Label layoutX="134.0" layoutY="297.0" text="Location" />

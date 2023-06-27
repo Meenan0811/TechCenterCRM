@@ -21,9 +21,9 @@
       <Button fx:id="cancelButton" layoutX="428.0" layoutY="354.0" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
       <Button fx:id="updateQtyButton" layoutX="65.0" layoutY="310.0" mnemonicParsing="false" onAction="#updateQty" text="Update Part" />
       <Button fx:id="editPartButton" layoutX="65.0" layoutY="354.0" mnemonicParsing="false" onAction="#editPart" prefHeight="25.0" prefWidth="80.0" text="Edit Part" />
-      <TextField fx:id="updatePartQtyText" layoutX="65.0" layoutY="272.0" />
-      <TextField fx:id="partNameText" layoutX="381.0" layoutY="65.0" />
-      <TextField fx:id="partQtyText" layoutX="381.0" layoutY="139.0" />
+      <TextField fx:id="updatePartQtyText" layoutX="65.0" layoutY="272.0" promptText="Number of Selected Parts" />
+      <TextField fx:id="partNameText" layoutX="381.0" layoutY="65.0" promptText="Part Name" />
+      <TextField fx:id="partQtyText" layoutX="381.0" layoutY="139.0" promptText="Quantity of Part" />
       <Label layoutX="59.0" layoutY="242.0" text="Update Selected Part Quantity" />
       <Label fx:id="partNameLabel" layoutX="313.0" layoutY="69.0" text="Part Name" />
       <Label layoutX="313.0" layoutY="143.0" text="Quantity" />

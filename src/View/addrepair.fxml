@@ -23,7 +23,7 @@
       <DatePicker fx:id="tatDatepicker" layoutX="235.0" layoutY="172.0" />
       <ComboBox fx:id="statusCombo" layoutX="235.0" layoutY="228.0" prefWidth="150.0" />
       <ComboBox fx:id="assgnEmplCombo" layoutX="235.0" layoutY="277.0" prefWidth="150.0" />
-      <TextField fx:id="repairNotesText" layoutX="222.0" layoutY="456.0" prefHeight="134.0" prefWidth="230.0" />
+      <TextField fx:id="repairNotesText" layoutX="222.0" layoutY="456.0" prefHeight="134.0" prefWidth="230.0" promptText="Repair Notes" />
       <ComboBox fx:id="custNameCombo" layoutX="235.0" layoutY="331.0" prefWidth="150.0" />
       <Label layoutX="92.0" layoutY="335.0" text="Customer Name" />
       <Label fx:id="partsUsedLabel" layoutX="92.0" layoutY="389.0" text="Part Used" />
@@ -32,6 +32,5 @@
       <Label fx:id="partQtyLabel" layoutX="480.0" layoutY="335.0" />
       <RadioButton fx:id="dataTransferRadio" layoutX="101.0" layoutY="71.0" mnemonicParsing="false" onAction="#dataTransferSelected" text="Data transfer" />
       <Button fx:id="saveDtButton" layoutX="105.0" layoutY="609.0" mnemonicParsing="false" onAction="#saveDT" text="Save" visible="false" />
-      <RadioButton fx:id="repairRadio" layoutX="267.0" layoutY="71.0" mnemonicParsing="false" onAction="#repairSelected" text="Repair" />
    </children>
 </AnchorPane>
