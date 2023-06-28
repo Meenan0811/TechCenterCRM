@@ -12,8 +12,8 @@
         <Button fx:id="newRepairButton" layoutX="81.0" layoutY="291.0" mnemonicParsing="false" onAction="#toNewRepair" text="New Repair" />
         <Button fx:id="updateCustButton" layoutX="209.0" layoutY="291.0" mnemonicParsing="false" onAction="#toEditRepair" text="Update" />
         <Button fx:id="custDeleteButton" layoutX="319.0" layoutY="291.0" mnemonicParsing="false" onAction="#deleteRepair" text="Delete" />
-        <Button fx:id="reportButton" layoutX="900.0" layoutY="487.0" mnemonicParsing="false" onAction="#toReports" text="Reports" />
-        <Button fx:id="logoutButton" layoutX="903.0" layoutY="540.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
+        <Button fx:id="reportButton" layoutX="911.0" layoutY="440.0" mnemonicParsing="false" onAction="#toReports" text="Reports" />
+        <Button fx:id="logoutButton" layoutX="981.0" layoutY="605.0" mnemonicParsing="false" onAction="#logout" text="Logout" />
         <TableView fx:id="repairTable" layoutX="81.0" layoutY="63.0" prefHeight="200.0" prefWidth="894.0">
             <columns>
                 <TableColumn fx:id="custNameCol" prefWidth="117.0" text="Name" />
@@ -51,6 +51,6 @@
           <TableColumn fx:id="custNameCol2" prefWidth="237.0" text="Name" />
         </columns>
       </TableView>
-      <Button fx:id="addPart" layoutX="903.0" layoutY="605.0" mnemonicParsing="false" onAction="#toParts" prefHeight="25.0" prefWidth="54.0" text="Parts" />
+      <Button fx:id="addPart" layoutX="912.0" layoutY="373.0" mnemonicParsing="false" onAction="#toParts" prefHeight="25.0" prefWidth="54.0" text="Parts" />
     </children>
 </AnchorPane>

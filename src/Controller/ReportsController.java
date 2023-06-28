@@ -149,7 +149,7 @@ public class ReportsController<Repairs> implements Initializable {
 
     public void emplRepairSearch(ActionEvent event) {
         String numRepairs = emplRepairsComplete();
-        numRepairsCompleteLabel.setText(numRepairs);
+        numRepairsCompleteLabel.setText("Total Repairs completed: " + numRepairs);
     }
 
     private ObservableList<Repair> totalRepairsCompleted() {

@@ -71,6 +71,7 @@ public class AddRepairController implements Initializable {
     private ObservableList<String> emplName;
     private Repair currRepair;
     private Customers currCust;
+    private int partNum = 0;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -93,6 +94,9 @@ public class AddRepairController implements Initializable {
         deviceTypeCombo.getSelectionModel().select(0);
         tatDatepicker.setValue(LocalDate.now().plusDays(3));
 
+
+
+
         if (MainWinController.passRepair != null && MainWinController.passRepair.getType().equals("Repair")) {
             String assgnEmpl;
             repairID = MainWinController.passRepair.getRepairId();
@@ -103,10 +107,7 @@ public class AddRepairController implements Initializable {
             repairNotesText.setText(currRepair.getNotes());
             tatDatepicker.setValue(currRepair.getDueDate());
             custNameCombo.setValue(getCustomer(currRepair.getCustomerId()));
-            if (currRepair.getType().equals("Repair")) {
-                partCombo.setValue(getPart(currRepair.getPartId()));
-                updatePartQty();
-            }
+
         }
 
         if (MainWinController.passRepair != null && MainWinController.passRepair.getType().equals("DT")) {
@@ -138,6 +139,7 @@ public class AddRepairController implements Initializable {
      */
     public void dataTransferSelected() {
         partsUsedLabel.setText("Old Device");
+        partCombo.setId("deviceCombo");
         partCombo.setItems(devices);
         partCombo.setValue("Personal Computer");
         saveRepairbutton.setVisible(false);
@@ -314,7 +316,6 @@ public class AddRepairController implements Initializable {
     }
 
     public void saveDT(ActionEvent event) {
-        System.out.println("Save DT pressed");
         try {
             String device = deviceTypeCombo.getValue().toString();
             String status = statusCombo.getValue().toString();
