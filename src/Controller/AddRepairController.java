@@ -82,11 +82,15 @@ public class AddRepairController implements Initializable {
         partName = getAllParts();
 
         statusCombo.setItems(repairStatus);
+        statusCombo.getSelectionModel().select(0);
         assgnEmplCombo.setItems(emplName);
+        assgnEmplCombo.getSelectionModel().select(0);
         custNameCombo.setItems(custName);
+        custNameCombo.getSelectionModel().select(0);
         partCombo.setItems(partName);
-        partCombo.setValue("Labor");
+        partCombo.getSelectionModel().select(0);
         deviceTypeCombo.setItems(devices);
+        deviceTypeCombo.getSelectionModel().select(0);
         tatDatepicker.setValue(LocalDate.now().plusDays(3));
 
         if (MainWinController.passRepair != null && MainWinController.passRepair.getType().equals("Repair")) {

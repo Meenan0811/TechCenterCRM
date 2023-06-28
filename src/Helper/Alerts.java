@@ -91,7 +91,7 @@ public abstract class Alerts {
             alert.setContentText("Employee name already exists, if two employees share the same name try using a nickname or adding a number at the end");
             alert.showAndWait();
         }
-        if(code == 13) {
+        if(code == 14) {
             alert.setAlertType(Alert.AlertType.WARNING);
             alert.setHeaderText("Select Repair");
             alert.setContentText("Please select a repair to edit.");
@@ -103,7 +103,7 @@ public abstract class Alerts {
         try {
             if (repair != null) {
                 Alert alert = new Alert(Alert.AlertType.WARNING);
-                alert.setContentText("Are you Sure you want to proceed, this will permanently delete the selected Customer and Repair");
+                alert.setContentText("Are you Sure you want to proceed, this will permanently delete the selected Repair");
                 alert.setHeaderText("Delete customer");
                 Optional<ButtonType> confirm = alert.showAndWait();
                 if (confirm.isPresent() && confirm.get() == ButtonType.OK) {

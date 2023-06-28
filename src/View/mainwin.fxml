@@ -41,9 +41,9 @@
         <RadioButton fx:id="weekRadio" layoutX="330.0" layoutY="23.0" mnemonicParsing="false" onAction="#weekSelected" text="Week View" />
         <RadioButton fx:id="monthRadio" layoutX="505.0" layoutY="23.0" mnemonicParsing="false" onAction="#monthSelected" text="Month View" />
         <RadioButton fx:id="allRadio" layoutX="145.0" layoutY="23.0" mnemonicParsing="false" onAction="#allSelected" text="View All" />
-      <Button fx:id="addCustButton" layoutX="459.0" layoutY="605.0" mnemonicParsing="false" onAction="#toAddCust" text="Add" />
+      <Button fx:id="addCustButton" layoutX="478.0" layoutY="605.0" mnemonicParsing="false" onAction="#toAddCust" text="Add Customer" />
       <TextField fx:id="searchRepairTextField" layoutX="617.0" layoutY="19.0" onAction="#search" prefHeight="25.0" prefWidth="340.0" promptText="Search for Repair by Customer Name, Device and Status" />
-      <Button fx:id="editCustButton" layoutX="578.0" layoutY="605.0" mnemonicParsing="false" onAction="#toEditCust" text="Update" />
+      <Button fx:id="editCustButton" layoutX="600.0" layoutY="605.0" mnemonicParsing="false" onAction="#toEditCust" text="Update" />
       <Button fx:id="deleteCustButton" layoutX="692.0" layoutY="605.0" mnemonicParsing="false" onAction="#deleteCust" text="Delete" />
       <TableView fx:id="custTable" layoutX="478.0" layoutY="365.0" prefHeight="200.0" prefWidth="313.0">
         <columns>
