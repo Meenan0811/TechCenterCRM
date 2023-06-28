@@ -1,6 +1,7 @@
 package Controller;
 
 import DBAccess.EmployeeSQL;
+import DBAccess.RepairSQL;
 import Helper.Alerts;
 import Helper.Scenes;
 import Model.Employee;
@@ -39,6 +40,7 @@ public class AddEmployeeController  implements Initializable {
     private String userName;
     private String pw;
     private String location;
+    private String currEmplName;
     private int emplID = -1;
     private ObservableList<String> adminBox = FXCollections.observableArrayList("No", "Yes");
     private ObservableList<String> noAdmin = FXCollections.observableArrayList("No");
@@ -61,11 +63,13 @@ public class AddEmployeeController  implements Initializable {
 
         if (currEmpl != null) {
             emplID = currEmpl.getEmployeeID();
+            currEmplName = currEmpl.getEmployeeName();
         }else if (currEmpl == null && MainWinController.newEmpl == false) {
             for (Employee e : allEmpl) {
                 if (e.getEmployeeID() == LoginController.currUserId) {
                     currEmpl = e;
                     emplID = currEmpl.getEmployeeID();
+                    currEmplName = currEmpl.getEmployeeName();
                 }
             }
         }
@@ -126,6 +130,7 @@ public class AddEmployeeController  implements Initializable {
             } else {
                 if (newEmpl == false) {
                     EmployeeSQL.editEmployee(emplID, emplName, userName, pw, location, admin);
+                    RepairSQL.updateAssignedEmployeeName(emplName, currEmplName);
                     Scenes.toMain(event);
                 } else {
                     EmployeeSQL.addEmployee(emplName, userName, pw, location, admin);

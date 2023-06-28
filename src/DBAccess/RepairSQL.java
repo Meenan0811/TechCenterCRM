@@ -235,4 +235,18 @@ public abstract class RepairSQL {
         }
         return allDt;
     }
+
+    public static int updateAssignedEmployeeName(String updatedName, String oldName) {
+       try {
+           String sql = "UPDATE repairs SET Assigned_Employee = ? WHERE Assigned_Employee = ?";
+           PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+           ps.setString(1, updatedName);
+           ps.setString(2,oldName);
+
+           return ps.executeUpdate();
+       }catch (SQLException se) {
+           se.printStackTrace();
+       }
+        return -1;
+    }
 }

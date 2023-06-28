@@ -136,7 +136,7 @@ public class MainWinController implements Initializable {
             createDateCol.setCellValueFactory(new PropertyValueFactory<Repair, LocalDate>("createDate"));
             deviceCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("device"));
             dueDateCol.setCellValueFactory(new PropertyValueFactory<Repair, LocalDate>("dueDate"));
-            assignedEmplCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("assgnempl"));
+            assignedEmplCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("assgnempl"));
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("repairId"));
             statusCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("status"));
             custIDCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("customerId"));

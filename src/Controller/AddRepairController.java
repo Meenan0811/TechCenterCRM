@@ -270,7 +270,6 @@ public class AddRepairController implements Initializable {
             int custID = 0;
             String notes = repairNotesText.getText();
             String currUser = LoginController.currUser;
-            String oldDevice = null;
             int partID = -1;
             String part = null;
             String type = null;
@@ -289,9 +288,6 @@ public class AddRepairController implements Initializable {
                 }
             }
 
-            for (Employee e : allEmpl) {
-
-            }
 
             if (device.isEmpty() || status.isEmpty() || empl.isEmpty() || custName.isEmpty() || notes.isEmpty() || dueDate == null) {
                 Alerts.alertMessage(4);
@@ -327,17 +323,10 @@ public class AddRepairController implements Initializable {
             String type;
             int custID = 0;
             int partID = 1;
-            int assgnEmplId = 0;
 
             for (Customers c : allCust) {
                 if (c.getCustName().equals(custName)) {
                     custID = c.getCustId();
-                }
-            }
-
-            for (Employee e : allEmpl) {
-                if (empl.equals(e.getEmployeeName())) {
-                    assgnEmplId = e.getEmployeeID();
                 }
             }
 
@@ -347,12 +336,13 @@ public class AddRepairController implements Initializable {
                     type = "DT";
                     RepairSQL.editDataTransfer(device, custID, partID, currUser, dueDate, status, empl, notes, oldDevice, repairID, type);
                     Scenes.toMain(event);
-                    System.out.println("EditDT entered");
+
                 }else {
                     type = "DT";
                     RepairSQL.addDataTransfer(device, custID, partID, notes, currUser, dueDate, status, empl, LoginController.currUser, oldDevice, type);
+
                     Scenes.toMain(event);
-                    System.out.println("NewDT entered");
+
                 }
             } else {
                 Alerts.alertMessage(4);

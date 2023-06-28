@@ -18,7 +18,7 @@
         </columns>
       </TableView>
       <Button fx:id="addPartButton" layoutX="422.0" layoutY="200.0" mnemonicParsing="false" onAction="#addPart" text="Add Part" />
-      <Button fx:id="cancelButton" layoutX="428.0" layoutY="354.0" mnemonicParsing="false" onAction="#toMain" text="Cancel" />
+      <Button fx:id="cancelButton" layoutX="428.0" layoutY="354.0" mnemonicParsing="false" onAction="#toMain" text="Back" />
       <Button fx:id="updateQtyButton" layoutX="65.0" layoutY="310.0" mnemonicParsing="false" onAction="#updateQty" text="Update Part" />
       <Button fx:id="editPartButton" layoutX="65.0" layoutY="354.0" mnemonicParsing="false" onAction="#editPart" prefHeight="25.0" prefWidth="80.0" text="Edit Part" />
       <TextField fx:id="updatePartQtyText" layoutX="65.0" layoutY="272.0" promptText="Number of Selected Parts" />
