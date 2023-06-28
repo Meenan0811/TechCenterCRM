@@ -79,7 +79,7 @@ public abstract class EmployeeSQL {
         int matchingId = 0;
         try {
             for (Employee e : allEmp) {
-                if (userName.equals(e.getUserName())) { matchingId = matchingId + 1; }
+                if (userName.equals(e.getUserName()) && employeeID != e.getEmployeeID()) { matchingId = matchingId + 1; }
             }
 
             if (matchingId == 0) {

@@ -85,6 +85,12 @@ public abstract class Alerts {
             alert.setContentText("Location Code must be either 001 or 002, please check your entry");
             alert.showAndWait();
         }
+        if(code == 13) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Existing employee");
+            alert.setContentText("Employee name already exists, if two employees share the same name try using a nickname or adding a number at the end");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {

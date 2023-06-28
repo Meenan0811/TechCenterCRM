@@ -100,7 +100,7 @@ public class PartsController implements Initializable {
     public void editPart(ActionEvent event) {
         if (partTable.getSelectionModel().getSelectedItem() != null) {
             part = Parts.class.cast(partTable.getSelectionModel().getSelectedItem());
-            addPartButton.setText("Edit Part");
+            addPartButton.setText("Save Edited Part");
             partNameText.setText(part.getPartName());
             partQtyText.setText(String.valueOf(part.getQty()));
         }else {

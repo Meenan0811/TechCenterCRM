@@ -136,7 +136,7 @@ public class MainWinController implements Initializable {
             createDateCol.setCellValueFactory(new PropertyValueFactory<Repair, LocalDate>("createDate"));
             deviceCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("device"));
             dueDateCol.setCellValueFactory(new PropertyValueFactory<Repair, LocalDate>("dueDate"));
-            assignedEmplCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("assgnempl"));
+            assignedEmplCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("assgnempl"));
             custRepairIdCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("repairId"));
             statusCol.setCellValueFactory(new PropertyValueFactory<Repair, String>("status"));
             custIDCol.setCellValueFactory(new PropertyValueFactory<Repair, Integer>("customerId"));
@@ -210,9 +210,8 @@ public class MainWinController implements Initializable {
                     Scenes.toAddEmpl(event);
                 }
             }
+        }
 
-
-     }
 
      public void deleteRepair(ActionEvent event) {
             Repair repair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
@@ -359,6 +358,17 @@ public class MainWinController implements Initializable {
         allRadio.setSelected(true);
 
         setRepairTable(allcustRepair);
+    }
+
+    public static String getEmployeeName(int id) {
+        ObservableList<Employee> allEmpl = EmployeeSQL.allEmployees();
+        String name = "Not Found";
+        for (Employee e : allEmpl) {
+            if (e.getEmployeeID() == id) {
+                name = e.getEmployeeName();
+            }
+        }
+        return name;
     }
 
 

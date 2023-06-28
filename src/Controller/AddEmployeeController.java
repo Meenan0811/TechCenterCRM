@@ -58,8 +58,16 @@ public class AddEmployeeController  implements Initializable {
         locCombo.setItems(loc);
         locCombo.getSelectionModel().select(0);
 
+
         if (currEmpl != null) {
             emplID = currEmpl.getEmployeeID();
+        }else if (currEmpl == null && MainWinController.newEmpl == false) {
+            for (Employee e : allEmpl) {
+                if (e.getEmployeeID() == LoginController.currUserId) {
+                    currEmpl = e;
+                    emplID = currEmpl.getEmployeeID();
+                }
+            }
         }
 
 
@@ -71,12 +79,14 @@ public class AddEmployeeController  implements Initializable {
 
 
         if (emplID > 0 && newEmpl == false) {
+            locNonAdmin.clear();
             locNonAdmin.add(currEmpl.getEmployeeLoc());
-            System.out.println(currEmpl.getEmployeeLoc());
+            System.out.println(locNonAdmin + " Current employee Location within if block");
             emplID = currEmpl.getEmployeeID();
             employeeNametext.setText(currEmpl.getEmployeeName());
             employeeNametext.setEditable(false);
             locCombo.setItems(locNonAdmin);
+            locCombo.getSelectionModel().select(0);
             adminCombo.setItems(noAdmin);
             adminCombo.setEditable(false);
             userNameText.setText(currEmpl.getUserName());
@@ -94,6 +104,7 @@ public class AddEmployeeController  implements Initializable {
     }
 
     public void saveEmpl(ActionEvent event) {
+        Boolean match = false;
 
         try {
             emplName = employeeNametext.getText();
@@ -102,9 +113,17 @@ public class AddEmployeeController  implements Initializable {
             location = locCombo.getValue().toString();
             admin = adminCombo.getValue().toString();
 
+            for (Employee e : allEmpl) {
+                if (emplName.equals(e.getEmployeeName())) {
+                    match = true;
+                }
+            }
+
             if (emplName.isBlank() || userName.isBlank() || pw.isBlank() || location.isBlank() || admin.isBlank()) {
                 Alerts.alertMessage(4);
-            }else {
+            }else if (match == true) {
+                Alerts.alertMessage(13);
+            } else {
                 if (newEmpl == false) {
                     EmployeeSQL.editEmployee(emplID, emplName, userName, pw, location, admin);
                     Scenes.toMain(event);

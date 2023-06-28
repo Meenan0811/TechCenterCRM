@@ -90,6 +90,7 @@ public class AddRepairController implements Initializable {
         tatDatepicker.setValue(LocalDate.now().plusDays(3));
 
         if (MainWinController.passRepair != null && MainWinController.passRepair.getType().equals("Repair")) {
+            String assgnEmpl;
             repairID = MainWinController.passRepair.getRepairId();
             currRepair = getRepair(repairID);
             statusCombo.setValue(currRepair.getStatus());
@@ -288,6 +289,10 @@ public class AddRepairController implements Initializable {
                 }
             }
 
+            for (Employee e : allEmpl) {
+
+            }
+
             if (device.isEmpty() || status.isEmpty() || empl.isEmpty() || custName.isEmpty() || notes.isEmpty() || dueDate == null) {
                 Alerts.alertMessage(4);
             }else {
@@ -322,10 +327,17 @@ public class AddRepairController implements Initializable {
             String type;
             int custID = 0;
             int partID = 1;
+            int assgnEmplId = 0;
 
             for (Customers c : allCust) {
                 if (c.getCustName().equals(custName)) {
                     custID = c.getCustId();
+                }
+            }
+
+            for (Employee e : allEmpl) {
+                if (empl.equals(e.getEmployeeName())) {
+                    assgnEmplId = e.getEmployeeID();
                 }
             }
 
