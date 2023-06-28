@@ -238,8 +238,12 @@ public class MainWinController implements Initializable {
      }
 
      public void toEditRepair(ActionEvent event) throws IOException {
-         passRepair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
-         Scenes.toAddRepair(event);
+            if (repairTable.getSelectionModel().getSelectedItem() != null) {
+                passRepair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
+                Scenes.toAddRepair(event);
+            }else {
+                Alerts.alertMessage(14);
+            }
      }
 
      public void toReports(ActionEvent event) throws IOException {

@@ -24,7 +24,7 @@ public abstract class Scenes {
         FXMLLoader mainWin = new FXMLLoader(MainWinController.class.getResource("../View/mainWin.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(mainWin.load(), 1067, 656);
-        stage.setTitle("Appointment Schedule");
+        stage.setTitle("TechCenter");
         stage.setScene(scene);
         stage.show();
     }

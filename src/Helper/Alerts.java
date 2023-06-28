@@ -91,6 +91,12 @@ public abstract class Alerts {
             alert.setContentText("Employee name already exists, if two employees share the same name try using a nickname or adding a number at the end");
             alert.showAndWait();
         }
+        if(code == 13) {
+            alert.setAlertType(Alert.AlertType.WARNING);
+            alert.setHeaderText("Select Repair");
+            alert.setContentText("Please select a repair to edit.");
+            alert.showAndWait();
+        }
     }
 //FIXME: Not showing warning message when no item is selected
     public static void deleteRepair(Repair repair) {
