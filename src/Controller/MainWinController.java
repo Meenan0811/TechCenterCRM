@@ -109,12 +109,14 @@ public class MainWinController implements Initializable {
         public static Employee passEmployee;
         public static Repair passRepair;
         public static Customers passCust;
+        public static Boolean newEmpl;
 
         @Override
         public void initialize(URL url, ResourceBundle resourceBundle) {
             passCust = null;
             passRepair = null;
             passEmployee = null;
+            newEmpl = false;
 
             allEmployee = EmployeeSQL.allEmployees();
             allcustRepair = RepairSQL.allCustomerRepairs();
@@ -156,14 +158,6 @@ public class MainWinController implements Initializable {
             employeeLocCol.setCellValueFactory(new PropertyValueFactory<Employee, String>("employeeLoc"));
         }
 
-    public void allSelected() {
-        monthRadio.setSelected(false);
-        weekRadio.setSelected(false);
-        allRadio.setSelected(true);
-
-        setRepairTable(allcustRepair);
-    }
-
      public void toAddCust(ActionEvent event) throws IOException {
             Scenes.toAddCust(event);
      }
@@ -187,15 +181,18 @@ public class MainWinController implements Initializable {
      public void toAddEmpl(ActionEvent event) throws IOException {
          Boolean admin = false;
             for (Employee e : allEmployee) {
-             if (e.getEmployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
-                 admin = true;
-             }
+                if (e.getEmployeeID() == LoginController.currUserId && e.getAdmin().equals("Yes")) {
+                    admin = true;
+                    passEmployee = e;
+                    newEmpl = true;
+                }
+            }
              if (admin == true) {
                  Scenes.toAddEmpl(event);
              }else {
                  Alerts.alertMessage(11);
              }
-         }
+
      }
 
      public void toEditEmpl(ActionEvent event) throws IOException {
@@ -209,7 +206,7 @@ public class MainWinController implements Initializable {
                         Alerts.alertMessage(10);
                     }
                 }else if (e.getEmployeeID() == LoginController.currUserId) {
-                    passEmployee = e;
+                    //passEmployee = e;
                     Scenes.toAddEmpl(event);
                 }
             }
@@ -230,14 +227,6 @@ public class MainWinController implements Initializable {
         public void toParts(ActionEvent event) throws IOException {
             Scenes.toParts(event);
         }
-
-
-
-     //FIXME: Delete if not needed
-        /*public void editRepair(ActionEvent event) throws IOException {
-            passRepair = Repair.class.cast(repairTable.getSelectionModel().getSelectedItem());
-            Scenes.toAddCust(event);
-     }*/
 
 
      public void logout(ActionEvent event) {
@@ -364,7 +353,7 @@ public class MainWinController implements Initializable {
         setRepairTable(tempRepair);
     }
 
-    public void allSeleceted() {
+    public void allSelected() {
         monthRadio.setSelected(false);
         weekRadio.setSelected(false);
         allRadio.setSelected(true);

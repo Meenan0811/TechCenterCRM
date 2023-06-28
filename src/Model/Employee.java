@@ -46,6 +46,14 @@ public class Employee {
     public String getAdmin() { return admin; }
 
     public void setAdmin(String admin) { this.admin = admin; }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
+    public void setPassWord(String passWord) {
+        this.passWord = passWord;
+    }
 }
 
 

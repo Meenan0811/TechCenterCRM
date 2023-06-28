@@ -56,10 +56,6 @@ public class Repair {
         return repairId;
     }
 
-    public void setRepairId(int repairId) {
-        this.repairId = repairId;
-    }
-
     public String getDevice() {
         return device;
     }

@@ -47,6 +47,7 @@ public class AddEmployeeController  implements Initializable {
     private ObservableList<Employee> allEmpl = FXCollections.observableArrayList();
     private Employee currEmpl = null;
     private Employee loggedInEmpl = null;
+    private Boolean newEmpl = MainWinController.newEmpl;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -54,9 +55,12 @@ public class AddEmployeeController  implements Initializable {
         allEmpl = EmployeeSQL.allEmployees();
         adminCombo.setItems(adminBox);
         adminCombo.getSelectionModel().select(0);
-        emplID = currEmpl.getEmployeeID();
         locCombo.setItems(loc);
         locCombo.getSelectionModel().select(0);
+
+        if (currEmpl != null) {
+            emplID = currEmpl.getEmployeeID();
+        }
 
 
         for (Employee e : allEmpl) {
@@ -66,8 +70,9 @@ public class AddEmployeeController  implements Initializable {
         }
 
 
-        if (emplID > 0) {
+        if (emplID > 0 && newEmpl == false) {
             locNonAdmin.add(currEmpl.getEmployeeLoc());
+            System.out.println(currEmpl.getEmployeeLoc());
             emplID = currEmpl.getEmployeeID();
             employeeNametext.setText(currEmpl.getEmployeeName());
             employeeNametext.setEditable(false);
@@ -76,7 +81,6 @@ public class AddEmployeeController  implements Initializable {
             adminCombo.setEditable(false);
             userNameText.setText(currEmpl.getUserName());
             pwText.setText(currEmpl.getPassWord());
-            System.out.println(loggedInEmpl.getEmployeeName() + " " + loggedInEmpl.getAdmin());
 
             if (loggedInEmpl != null && loggedInEmpl.getAdmin().equals("Yes")) {
                 employeeNametext.setEditable(true);
@@ -98,12 +102,16 @@ public class AddEmployeeController  implements Initializable {
             location = locCombo.getValue().toString();
             admin = adminCombo.getValue().toString();
 
-            if (emplID > 0) {
-                EmployeeSQL.editEmployee(emplID, emplName, userName, pw, location, admin);
-                Scenes.toMain(event);
+            if (emplName.isBlank() || userName.isBlank() || pw.isBlank() || location.isBlank() || admin.isBlank()) {
+                Alerts.alertMessage(4);
             }else {
-                EmployeeSQL.addEmployee(emplName, userName, pw, location, admin);
-                Scenes.toMain(event);
+                if (newEmpl == false) {
+                    EmployeeSQL.editEmployee(emplID, emplName, userName, pw, location, admin);
+                    Scenes.toMain(event);
+                } else {
+                    EmployeeSQL.addEmployee(emplName, userName, pw, location, admin);
+                    Scenes.toMain(event);
+                }
             }
         }catch (NullPointerException | NumberFormatException | IOException e) {
             Alerts.alertMessage(4);

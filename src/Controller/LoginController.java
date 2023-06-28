@@ -72,7 +72,7 @@ public class LoginController implements Initializable {
         userText.setPromptText(rb.getString("userText"));
         passWordPassField.setPromptText(rb.getString("passField"));*/
         //CustomerSQL.addCust("Test Guy","(609)123-1234", "29 Black Oak Dr", "Ocean View", "NJ", 0, "Test Guy", "Test Guy");
-        //EmployeeSQL.addEmployee("Test Guy", "admin", "admin", "Ocean View", "Yes");
+        //EmployeeSQL.addEmployee("Administrator", "admin", "admin", "Ocean View", "Yes");
         LocalDateTime date = LocalDateTime.now();
         LocalDate minusYear = LocalDate.now().withYear(2020);
         LocalDate minusMonth = LocalDate.now().minusMonths(2);

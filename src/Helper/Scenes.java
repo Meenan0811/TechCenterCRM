@@ -43,7 +43,7 @@ public abstract class Scenes {
         FXMLLoader addEmpl = new FXMLLoader(AddEmployeeController.class.getResource("../View/addemployee.fxml"));
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         Scene scene = new Scene(addEmpl.load());
-        stage.setTitle("Customer Information");
+        stage.setTitle("Employee Information");
         stage.setScene(scene);
         stage.show();
     }

@@ -75,17 +75,27 @@ public abstract class EmployeeSQL {
     }
 
     public static int editEmployee(int employeeID, String employeeName, String userName, String passWord, String location, String admin) {
+        ObservableList<Employee> allEmp = allEmployees();
+        int matchingId = 0;
         try {
-            String sql = " UPDATE employees SET Employee_Name = ?, UserName = ?, Password = ?, Location = ?, Admin = ? WHERE Employee_ID = ?";
-            PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
-            ps.setString(1, employeeName);
-            ps.setString(2, userName);
-            ps.setString(3, passWord);
-            ps.setString(4, location);
-            ps.setString(5, admin);
-            ps.setInt(6, employeeID);
+            for (Employee e : allEmp) {
+                if (userName.equals(e.getUserName())) { matchingId = matchingId + 1; }
+            }
 
-            return ps.executeUpdate();
+            if (matchingId == 0) {
+                String sql = " UPDATE employees SET Employee_Name = ?, UserName = ?, Password = ?, Location = ?, Admin = ? WHERE Employee_ID = ?";
+                PreparedStatement ps = JDBC.getConnection().prepareStatement(sql);
+                ps.setString(1, employeeName);
+                ps.setString(2, userName);
+                ps.setString(3, passWord);
+                ps.setString(4, location);
+                ps.setString(5, admin);
+                ps.setInt(6, employeeID);
+
+                return ps.executeUpdate();
+            }else {
+                Alerts.alertMessage(2);
+            }
         }catch(SQLException se) {
             se.printStackTrace();
         }
