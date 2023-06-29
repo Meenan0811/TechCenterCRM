@@ -88,7 +88,6 @@ public class AddCustController implements Initializable {
      * @throws IOException
      */
     public void saveCust(ActionEvent event) throws IOException {
-        System.out.println("Save Pressed");
         try {
             custName = custNameText.getText();
             custPhone = custPhoneText.getText();
@@ -101,7 +100,6 @@ public class AddCustController implements Initializable {
 
             if (custName.isEmpty() || custPhone.isEmpty() || custStreet.isEmpty() || custCity.isEmpty() || !validateZip(String.valueOf(customerZip)) || !validateNumber(custPhone)) {
                 Alerts.alertMessage(5);
-                System.out.println(custName + " " + custPhone + " " + custStreet + " " + custState + " " + custZip + " " + currUser + " " + customerZip + " " + custID);
             } else {
                 if (custID < 0) {
                     CustomerSQL.addCust(custName, custPhone, custStreet, custCity, custState, custZip, currUser, currUser);

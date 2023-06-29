@@ -115,10 +115,10 @@ public abstract class RepairSQL {
 
     public static ObservableList<Repair> allCustomerRepairs() {
         ObservableList<Repair> all = FXCollections.observableArrayList();
-        System.out.println("CustomerRepair Called");
+
 
         try {
-            System.out.println("Try Block Entered");
+
             String sql = "SELECT customers.Customer_Name, customers.Phone, customers.Create_Date, repairs.Repair_ID, repairs.Device, repairs.Quoted_Due_Date, repairs.Status, repairs.Assigned_Employee, repairs.Notes, customers.Customer_ID, repairs.Type\n" +
                     "FROM repairs\n" +
                     "INNER JOIN customers on repairs.Customer_ID = customers.Customer_ID";
@@ -138,16 +138,13 @@ public abstract class RepairSQL {
                 String repairNotes = rs.getString(9);
                 int customerID = rs.getInt(10);
                 String type = rs.getString(11);
-                System.out.println(status + " " + assgnEmpl + " " + repairID);
+
 
                 Repair repair = new Repair(device, custName, custPhone, createDate, repairID, dueDate, status, assgnEmpl, repairNotes, customerID, type);
-                System.out.println(repair.getCustName() + " " + repair.getRepairId() + " Repair object created");
                 all.add(repair);
             }
         }catch (SQLException se) {
             se.printStackTrace();
-            System.out.println("Catch Block");
-
         }
         return all;
     }

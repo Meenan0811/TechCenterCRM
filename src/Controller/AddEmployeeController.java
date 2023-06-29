@@ -85,7 +85,7 @@ public class AddEmployeeController  implements Initializable {
         if (emplID > 0 && newEmpl == false) {
             locNonAdmin.clear();
             locNonAdmin.add(currEmpl.getEmployeeLoc());
-            System.out.println(locNonAdmin + " Current employee Location within if block");
+
             emplID = currEmpl.getEmployeeID();
             employeeNametext.setText(currEmpl.getEmployeeName());
             employeeNametext.setEditable(false);
@@ -109,6 +109,7 @@ public class AddEmployeeController  implements Initializable {
 
     public void saveEmpl(ActionEvent event) {
         Boolean match = false;
+        Boolean userNameMatch = false;
 
         try {
             emplName = employeeNametext.getText();
@@ -118,8 +119,10 @@ public class AddEmployeeController  implements Initializable {
             admin = adminCombo.getValue().toString();
 
             for (Employee e : allEmpl) {
-                if (emplName.equals(e.getEmployeeName())) {
+                if (emplName.equals(e.getEmployeeName()) && emplID != e.getEmployeeID()) {
                     match = true;
+                }if (userName.equals(e.getUserName()) && emplID != e.getEmployeeID()) {
+                    userNameMatch = true;
                 }
             }
 
@@ -127,7 +130,9 @@ public class AddEmployeeController  implements Initializable {
                 Alerts.alertMessage(4);
             }else if (match == true) {
                 Alerts.alertMessage(13);
-            } else {
+            }else if (userNameMatch == true) {
+                Alerts.alertMessage(2);
+            }else {
                 if (newEmpl == false) {
                     EmployeeSQL.editEmployee(emplID, emplName, userName, pw, location, admin);
                     RepairSQL.updateAssignedEmployeeName(emplName, currEmplName);

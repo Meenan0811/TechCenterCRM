@@ -116,7 +116,7 @@ public class AddRepairController implements Initializable {
             for (DataTransfer d : allDt) {
                 if (d.getRepairId() == MainWinController.passRepair.getRepairId()) {
                     dt = d;
-                    System.out.println("For Loop: " + d.getOldDevice() + " Type: " + d.getType());
+
                 }
             }
             if (dt != null) {
@@ -265,7 +265,7 @@ public class AddRepairController implements Initializable {
      */
     @FXML
     private void saveRepair(ActionEvent event) {
-        System.out.println("Save Repair Pressed");
+
 
         try {
             String device = deviceTypeCombo.getValue().toString();

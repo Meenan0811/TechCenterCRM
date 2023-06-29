@@ -331,7 +331,7 @@ public class MainWinController implements Initializable {
         for (Repair r : allcustRepair) {
             tempMonth = r.getDueDate().getMonth();
             tempYear = r.getDueDate().getYear();
-            System.out.println("Month Selected");
+
             if (tempMonth.equals(month) && tempYear == year) {
                 tempRepair.add(r);
             }
@@ -348,7 +348,7 @@ public class MainWinController implements Initializable {
 
         for (Repair r : allcustRepair) {
             date = r.getDueDate();
-            System.out.println("Week Selected");
+
             if (date.equals(currDate) || date.isAfter(currDate) && date.isBefore(currDate.plusDays(7))) {
                 tempRepair.add(r);
             }
